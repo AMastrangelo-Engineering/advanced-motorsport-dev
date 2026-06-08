@@ -889,34 +889,23 @@
       <div class="timeline-year">
         <div class="timeline-year-label">2025</div>
         <div class="timeline-entries">
-		
+
           <div class="timeline-entry">
             <div class="te-pilot">Agustin Sepulveda</div>
             <div class="te-category">OK</div>
             <div class="te-event">Sudamericano de Karting FIA</div>
             <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/agustin_sepulveda_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <img class="te-popup-img" src="fotos/logros/agustin_sepulveda_trophy_1.jpg" alt="Agustin Sepulveda" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
               <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
               <div class="te-popup-bar"><span class="te-popup-date">27-07-2025</span></div>
             </div>
           </div>
-		  
-        </div>
-      </div>
 
-          <!--
-            ===== EJEMPLO COMPLETO CON FOTO: Valentino Manta =====
-            Esta entrada usa la imagen real que subiste.
-            Estructura para cuando tengas el archivo en el repo:
-            - src="fotos/logros/manta_gran_final_argentina.jpg"
-            - La fecha exacta va en .te-popup-date
-          -->
           <div class="timeline-entry">
             <div class="te-pilot">Valentino Manta</div>
             <div class="te-category">Junior Max</div>
             <div class="te-event">Gran Final Argentina</div>
             <div class="te-popup">
-              <!-- Reemplazá este src por la ruta real en tu repo: fotos/logros/manta_gran_final_argentina.jpg -->
               <img class="te-popup-img" src="fotos/logros/valentino_manta_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
               <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
               <div class="te-popup-bar"><span class="te-popup-date">12-10-2025</span></div>
@@ -1565,19 +1554,26 @@
       <div class="green-line"></div>
     </div>
     <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:2rem;">
-      <!-- Embed con ID de canal UCp1KTSMxd6370OcEO-50Mxg — muestra el último video subido automáticamente -->
-      <div style="width:100%; max-width:800px; aspect-ratio:16/9; border:1px solid rgba(57,255,20,0.2); background:var(--dark2); overflow:hidden;">
-        <iframe
-          id="yt-embed"
-          src="https://www.youtube.com/embed?listType=playlist&list=UUCp1KTSMxd6370OcEO-50Mxg&index=1&autoplay=0&rel=0&modestbranding=1"
-          title="Último video de Advanced Motorsport Engineering"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          style="width:100%; height:100%; display:block;"
-          loading="lazy">
-        </iframe>
+
+      <!-- El iframe se inyecta dinámicamente por JS usando el RSS público del canal -->
+      <div id="yt-container" style="width:100%; max-width:800px; aspect-ratio:16/9; border:1px solid rgba(57,255,20,0.2); background:var(--dark2); overflow:hidden; display:flex; align-items:center; justify-content:center;">
+        <div id="yt-loading" style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="10" stroke="rgba(57,255,20,0.2)" stroke-width="2"/>
+            <path d="M12 2a10 10 0 0 1 10 10" stroke="#39FF14" stroke-width="2" stroke-linecap="round">
+              <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/>
+            </path>
+          </svg>
+          <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.2em; color:rgba(57,255,20,0.5); text-transform:uppercase;">Cargando video...</span>
+        </div>
       </div>
+
+      <!-- Título y fecha del último video (se completan por JS) -->
+      <div id="yt-meta" style="text-align:center; display:none; max-width:600px;">
+        <div id="yt-title" style="font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; font-weight:600; letter-spacing:0.06em; color:var(--white); margin-bottom:4px;"></div>
+        <div id="yt-date" style="font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.2em; color:var(--gray); text-transform:uppercase;"></div>
+      </div>
+
       <a href="https://www.youtube.com/@advancedmotorsportengineering"
          target="_blank" rel="noopener"
          class="btn-primary"
@@ -1590,6 +1586,120 @@
     </div>
   </div>
 </section>
+
+<script>
+/* ============================================================
+   YOUTUBE — carga dinámica del último video via RSS público.
+   No requiere API key. Funciona en GitHub Pages.
+
+   Flujo:
+   1. Pide el RSS del canal via proxy CORS público.
+   2. Extrae videoId, título y fecha del último video.
+   3. Muestra el THUMBNAIL oficial del video con un botón de play
+      que abre YouTube en una pestaña nueva.
+      → Evita el error 153 (embed desactivado por el canal) para siempre,
+        ya que nunca intentamos embeber el video: solo mostramos su imagen.
+   4. Fallback al canal si el proxy no responde.
+   ============================================================ */
+(function () {
+  var CHANNEL_ID = 'UCp1KTSMxd6370OcEO-50Mxg';
+  var RSS_URL    = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + CHANNEL_ID;
+  var PROXY      = 'https://api.allorigins.win/get?url=' + encodeURIComponent(RSS_URL);
+
+  /* Thumbnail de YouTube en máxima resolución disponible.
+     YouTube siempre sirve estas imágenes públicamente sin restricciones. */
+  function thumbUrl(id) {
+    return 'https://img.youtube.com/vi/' + id + '/maxresdefault.jpg';
+  }
+  function thumbUrlFallback(id) {
+    /* hqdefault es la resolución más segura si maxres no existe */
+    return 'https://img.youtube.com/vi/' + id + '/hqdefault.jpg';
+  }
+
+  function showVideoCard(videoId, title, pubRaw) {
+    var watchUrl = 'https://www.youtube.com/watch?v=' + videoId;
+    var c = document.getElementById('yt-container');
+
+    /* Construir la tarjeta: thumbnail + overlay de play centrado */
+    c.style.cursor = 'pointer';
+    c.style.position = 'relative';
+    c.innerHTML =
+      /* Thumbnail como fondo — intenta maxres, cae a hqdefault */
+      '<img id="yt-thumb" src="' + thumbUrl(videoId) + '" '
+      + 'onerror="this.src=\'' + thumbUrlFallback(videoId) + '\'" '
+      + 'style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" alt="' + title.replace(/"/g, '&quot;') + '">'
+
+      /* Overlay oscuro suave */
+      + '<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.1) 60%);transition:background 0.25s;" id="yt-overlay"></div>'
+
+      /* Botón de play centrado */
+      + '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">'
+      +   '<div id="yt-play-btn" style="width:72px;height:72px;border-radius:50%;background:rgba(10,10,10,0.75);border:2px solid #39FF14;display:flex;align-items:center;justify-content:center;transition:transform 0.2s,background 0.2s;">'
+      +     '<svg width="28" height="28" viewBox="0 0 24 24" fill="#39FF14"><path d="M8 5v14l11-7z"/></svg>'
+      +   '</div>'
+      + '</div>';
+
+    /* Hover: aclarar play button */
+    c.addEventListener('mouseenter', function () {
+      var btn = document.getElementById('yt-play-btn');
+      if (btn) { btn.style.background = 'rgba(57,255,20,0.18)'; btn.style.transform = 'scale(1.1)'; }
+    });
+    c.addEventListener('mouseleave', function () {
+      var btn = document.getElementById('yt-play-btn');
+      if (btn) { btn.style.background = 'rgba(10,10,10,0.75)'; btn.style.transform = 'scale(1)'; }
+    });
+
+    /* Click → abrir en YouTube */
+    c.addEventListener('click', function () {
+      window.open(watchUrl, '_blank', 'noopener');
+    });
+
+    /* Meta: título y fecha */
+    if (title) document.getElementById('yt-title').textContent = title;
+    if (pubRaw) {
+      var fecha = new Date(pubRaw);
+      document.getElementById('yt-date').textContent =
+        fecha.toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' });
+    }
+    document.getElementById('yt-meta').style.display = 'block';
+  }
+
+  function showFallback() {
+    var c = document.getElementById('yt-container');
+    c.innerHTML =
+      '<a href="https://www.youtube.com/@advancedmotorsportengineering" target="_blank" rel="noopener" '
+      + 'style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;width:100%;height:100%;text-decoration:none;">'
+      + '<svg width="64" height="64" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(255,0,0,0.12)" stroke="rgba(255,0,0,0.3)" stroke-width="1"/><path d="M8 5v14l11-7z" fill="#39FF14"/></svg>'
+      + '<span style="font-family:\'Barlow Condensed\',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:#39FF14;text-transform:uppercase;">Ver canal en YouTube</span>'
+      + '</a>';
+  }
+
+  fetch(PROXY)
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var parser = new DOMParser();
+      var xml    = parser.parseFromString(data.contents, 'text/xml');
+      var entry  = xml.querySelector('entry');
+      if (!entry) throw new Error('feed vacío');
+
+      var videoId = (entry.querySelector('videoId') || {}).textContent;
+      if (!videoId) {
+        var link = entry.querySelector('link') && entry.querySelector('link').getAttribute('href');
+        if (link) videoId = new URL(link).searchParams.get('v');
+      }
+      if (!videoId) throw new Error('videoId no encontrado');
+
+      var title  = (entry.querySelector('title') || {}).textContent || '';
+      var pubRaw = (entry.querySelector('published') || {}).textContent || '';
+
+      showVideoCard(videoId, title, pubRaw);
+    })
+    .catch(function (err) {
+      console.warn('YouTube RSS error:', err);
+      showFallback();
+    });
+})();
+</script>
 
 <div class="green-strip"></div>
 <footer>
