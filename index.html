@@ -22,7 +22,31 @@
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; font-size: 16px; }
+  
+  html { 
+    scroll-behavior: smooth; 
+    font-size: 16px; 
+    /* Soporte Firefox para Scrollbar */
+    scrollbar-width: thin;
+    scrollbar-color: #717171 var(--black);
+  }
+
+  /* ============ YOUTUBE SCROLLBAR (CHROME, EDGE, SAFARI) ============ */
+  ::-webkit-scrollbar {
+    width: 16px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--black);
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #717171;
+    border-radius: 8px;
+    border: 4px solid var(--black); /* El borde del mismo color que el fondo simula que la barra es más fina */
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #a0a0a0;
+  }
+  /* ==================================================================== */
 
   body {
     background: var(--black);
@@ -1158,6 +1182,13 @@
         <div class="piloto-card-name"><span>Giuliano<br>Trani</span></div>
         <div class="piloto-card-years">2025 — 2026</div>
       </div>
+
+      <div class="piloto-card" data-logros="0">
+        <img class="piloto-card-photo" src="fotos/pilotos/lautaro_garcia.jpg" alt="Lautaro Garcia" onerror="this.style.display='none'">
+        <div class="piloto-card-overlay"></div>
+        <div class="piloto-card-name"><span>Lautaro<br>Garcia</span></div>
+        <div class="piloto-card-years">2025 — 2026</div>
+      </div>
       
       <div class="piloto-card" data-logros="0">
         <img class="piloto-card-photo" src="fotos/pilotos/nicolas_forconi.jpg" alt="Nicolas Forconi" onerror="this.style.display='none'">
@@ -1206,6 +1237,14 @@
         <div class="piloto-card-overlay"></div>
         <div class="piloto-card-name"><span>Tomas<br>Cordone</span></div>
         <div class="piloto-card-years">2023 — 2026</div>
+      </div>
+
+      <div class="piloto-card" data-logros="1">
+        <img class="piloto-card-photo" src="fotos/pilotos/valentino_manta.jpg" alt="Valentino Manta" onerror="this.style.display='none'">
+        <div class="piloto-card-overlay"></div>
+        <div class="piloto-card-name"><span>Valentino<br>Manta</span></div>
+        <div class="piloto-card-years">2023 — 2026</div>
+        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
       </div>
 
     </div>
@@ -1510,14 +1549,6 @@
         <div class="piloto-card-overlay"></div>
         <div class="piloto-card-name"><span>Valentin<br>Maschio</span></div>
         <div class="piloto-card-years">2023</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/valentino_manta.jpg" alt="Valentino Manta" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Valentino<br>Manta</span></div>
-        <div class="piloto-card-years">2023 — 2025</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
       </div>
       
       <div class="piloto-card" data-logros="0">
