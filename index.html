@@ -54,10 +54,7 @@
   nav.scrolled { height: 58px; background: rgba(10,10,10,0.98); }
 
   .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 1.4rem; letter-spacing: 0.12em;
-    color: var(--white); text-decoration: none;
-    display: flex; align-items: center; gap: 10px;
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
   }
 
   /* ===== LOGO DEL ENCABEZADO ===== */
@@ -318,14 +315,27 @@
   .valor-item { background: var(--dark2); padding: 2rem 1.8rem; text-align: center; }
   .valor-item h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 0.6rem; }
   .valor-item p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; font-weight: 300; }
+  
+  /* Cursos Grid - Soporte de colores personalizados */
   .cursos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
   .curso-card { background: var(--dark2); border: 1px solid rgba(57,255,20,0.15); padding: 2.5rem; position: relative; overflow: hidden; transition: all 0.3s; }
   .curso-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--green); transform: scaleX(0); transition: transform 0.3s ease; }
   .curso-card:hover { border-color: rgba(57,255,20,0.4); }
   .curso-card:hover::after { transform: scaleX(1); }
+  
+  /* Colores para tarjeta Alfano */
+  .curso-card.alfano-card { border-color: rgba(255,215,0,0.15); }
+  .curso-card.alfano-card::after { background: #FFD700; }
+  .curso-card.alfano-card:hover { border-color: rgba(255,215,0,0.5); }
+  
+  /* Colores para tarjeta AiM */
+  .curso-card.aim-card { border-color: rgba(255,0,0,0.15); }
+  .curso-card.aim-card::after { background: #FF0000; }
+  .curso-card.aim-card:hover { border-color: rgba(255,0,0,0.5); }
+
   .curso-device { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--green); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
   .curso-card p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; font-weight: 300; margin-bottom: 1.2rem; }
-  .curso-badge { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); border: 1px solid rgba(57,255,20,0.3); padding: 4px 12px; }
+  .curso-badge { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid rgba(57,255,20,0.3); padding: 4px 12px; }
 
   /* ============ MEDIA ============ */
   #media { background: var(--black); }
@@ -376,15 +386,16 @@
     cursor: pointer;
   }
 
-  /* La foto del piloto: oculta por defecto, aparece en hover/tap */
+  /* La foto del piloto visible en grises por defecto, revela color on hover/tap */
   .piloto-card-photo {
     position: absolute;
     inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
     object-position: center top;
-    opacity: 0;
-    transition: opacity 0.4s ease;
+    opacity: 1;
+    filter: grayscale(100%);
+    transition: filter 0.4s ease, opacity 0.4s ease;
     z-index: 1;
   }
 
@@ -393,7 +404,7 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(to top, rgba(0,0,0,0.85) 30%, rgba(0,0,0,0.2) 100%);
-    opacity: 0;
+    opacity: 0.8;
     transition: opacity 0.4s ease;
     z-index: 2;
   }
@@ -446,6 +457,7 @@
   /* Estado hover (desktop) y active (mobile) */
   .piloto-card:hover .piloto-card-photo,
   .piloto-card.active .piloto-card-photo {
+    filter: grayscale(0%);
     opacity: 1;
   }
   .piloto-card:hover .piloto-card-overlay,
@@ -608,10 +620,7 @@
 
 <nav id="mainNav">
   <a href="#hero" class="nav-logo">
-
     <img class="am-logo-img" src="fotos/logos/am_logo.png" alt="Advanced Motorsport">
-
-    ADVANCED MOTORSPORT
   </a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#historia">Historia</a></li>
@@ -955,66 +964,66 @@
       <div class="section-label">AM Engineering</div>
       <h2 class="section-title">CAPACITACIONES<br><span class="green">ONLINE</span></h2>
       <div class="green-line"></div>
-      <p style="max-width:640px; color:var(--gray); font-size:0.95rem; line-height:1.8; font-weight:300; margin-bottom:3.5rem;">
+      <p style="width:100%; color:var(--gray); font-size:0.95rem; line-height:1.8; font-weight:300; margin-bottom:3.5rem;">
         Clases en vivo por videollamada, personalizadas según tu nivel y el sistema que usás. Aprendé a leer tus datos y a convertirlos en decisiones de set-up concretas.
       </p>
     </div>
 
     <div class="cursos-grid reveal">
 
-      <div class="curso-card">
+      <div class="curso-card alfano-card">
         <div style="display:flex; align-items:center; gap:14px; margin-bottom:1rem;">
-          <div style="width:44px; height:44px; background:rgba(57,255,20,0.08); border:1px solid rgba(57,255,20,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:4px;">
+          <div style="width:44px; height:44px; background:rgba(255,215,0,0.08); border:1px solid rgba(255,215,0,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:4px;">
             <img src="fotos/logos/alfano.png" alt="Logo Alfano" style="max-width:100%; max-height:100%; object-fit:contain;">
           </div>
-          <div class="curso-device" style="margin-bottom:0;">Alfano / ADA</div>
+          <div class="curso-device" style="margin-bottom:0; color:#FFD700;">Alfano / ADA</div>
         </div>
         <p>Capacitación en vivo para el uso profesional del software ADA de Alfano. Aprendé a configurar el dispositivo, interpretar los canales de datos, analizar trazados y aplicar los resultados directamente al set-up del kart.</p>
         <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.6rem;">
           <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:var(--green); font-size:0.9rem;">›</span> Configuración inicial del dispositivo
+            <span style="color:#FFD700; font-size:0.9rem;">›</span> Configuración inicial del dispositivo
           </div>
           <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:var(--green); font-size:0.9rem;">›</span> Lectura e interpretación de canales
+            <span style="color:#FFD700; font-size:0.9rem;">›</span> Lectura e interpretación de canales
           </div>
           <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:var(--green); font-size:0.9rem;">›</span> Análisis de trazado y comparación de vueltas
+            <span style="color:#FFD700; font-size:0.9rem;">›</span> Análisis de trazado y comparación de vueltas
           </div>
           <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:var(--green); font-size:0.9rem;">›</span> Aplicación de datos al set-up
+            <span style="color:#FFD700; font-size:0.9rem;">›</span> Aplicación de datos al set-up
           </div>
         </div>
         <div style="margin-top:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
-          <span class="curso-badge">Videollamada en vivo</span>
-          <a href="#contacto" style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--green); text-decoration:none; font-weight:600;">Consultar →</a>
+          <span class="curso-badge" style="color:#FFD700; border-color:rgba(255,215,0,0.3);">Videollamada en vivo</span>
+          <a href="#contacto" style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#FFD700; text-decoration:none; font-weight:600;">Consultar →</a>
         </div>
       </div>
 
-      <div class="curso-card">
+      <div class="curso-card aim-card">
         <div style="display:flex; align-items:center; gap:14px; margin-bottom:1rem;">
-          <div style="width:44px; height:44px; background:rgba(57,255,20,0.08); border:1px solid rgba(57,255,20,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:4px;">
+          <div style="width:44px; height:44px; background:rgba(255,0,0,0.08); border:1px solid rgba(255,0,0,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:4px;">
              <img src="fotos/logos/aim.png" alt="Logo AiM" style="max-width:100%; max-height:100%; object-fit:contain;">
           </div>
-          <div class="curso-device" style="margin-bottom:0;">AiM / RS3</div>
+          <div class="curso-device" style="margin-bottom:0; color:#FF0000;">AiM / RS3</div>
         </div>
         <p>Formación especializada en el sistema MyChron y el software RS3 Analysis de AiM. Desde la descarga de datos hasta el análisis avanzado: aprendé a sacar conclusiones accionables de cada sesión en pista.</p>
         <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.6rem;">
           <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:var(--green); font-size:0.9rem;">›</span> Descarga y gestión de sesiones
+            <span style="color:#FF0000; font-size:0.9rem;">›</span> Descarga y gestión de sesiones
           </div>
           <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:var(--green); font-size:0.9rem;">›</span> Análisis de velocidad y aceleración
+            <span style="color:#FF0000; font-size:0.9rem;">›</span> Análisis de velocidad y aceleración
           </div>
           <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:var(--green); font-size:0.9rem;">›</span> Comparación piloto vs referencia
+            <span style="color:#FF0000; font-size:0.9rem;">›</span> Comparación piloto vs referencia
           </div>
           <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:var(--green); font-size:0.9rem;">›</span> Identificación de zonas de mejora
+            <span style="color:#FF0000; font-size:0.9rem;">›</span> Identificación de zonas de mejora
           </div>
         </div>
         <div style="margin-top:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
-          <span class="curso-badge">Videollamada en vivo</span>
-          <a href="#contacto" style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--green); text-decoration:none; font-weight:600;">Consultar →</a>
+          <span class="curso-badge" style="color:#FF0000; border-color:rgba(255,0,0,0.3);">Videollamada en vivo</span>
+          <a href="#contacto" style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#FF0000; text-decoration:none; font-weight:600;">Consultar →</a>
         </div>
       </div>
 
@@ -1149,13 +1158,6 @@
         <div class="piloto-card-name"><span>Giuliano<br>Trani</span></div>
         <div class="piloto-card-years">2025 — 2026</div>
       </div>
-
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/lautaro_garcia.jpg" alt="Lautaro Garcia" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Lautaro<br>Garcia</span></div>
-        <div class="piloto-card-years">2026</div>
-      </div>
       
       <div class="piloto-card" data-logros="0">
         <img class="piloto-card-photo" src="fotos/pilotos/nicolas_forconi.jpg" alt="Nicolas Forconi" onerror="this.style.display='none'">
@@ -1204,14 +1206,6 @@
         <div class="piloto-card-overlay"></div>
         <div class="piloto-card-name"><span>Tomas<br>Cordone</span></div>
         <div class="piloto-card-years">2023 — 2026</div>
-      </div>
-
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/valentino_manta.jpg" alt="Valentino Manta" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Valentino<br>Manta</span></div>
-        <div class="piloto-card-years">2023 — 2026</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
       </div>
 
     </div>
@@ -1516,6 +1510,14 @@
         <div class="piloto-card-overlay"></div>
         <div class="piloto-card-name"><span>Valentin<br>Maschio</span></div>
         <div class="piloto-card-years">2023</div>
+      </div>
+      
+      <div class="piloto-card" data-logros="1">
+        <img class="piloto-card-photo" src="fotos/pilotos/valentino_manta.jpg" alt="Valentino Manta" onerror="this.style.display='none'">
+        <div class="piloto-card-overlay"></div>
+        <div class="piloto-card-name"><span>Valentino<br>Manta</span></div>
+        <div class="piloto-card-years">2023 — 2025</div>
+        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
       </div>
       
       <div class="piloto-card" data-logros="0">
