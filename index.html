@@ -129,9 +129,11 @@
   nav.scrolled { height: 58px; background: var(--nav-scroll); }
 
   .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .am-logo-img { height: 38px; width: auto; display: block; transition: filter 0.3s; }
   
-  html.light-mode .am-logo-img { filter: invert(1); }
+  /* ============ CORRECCIÓN LOGO AM ============ */
+  /* Se eliminó la regla que aplicaba filter: invert(1) en html.light-mode */
+  .am-logo-img { height: 38px; width: auto; display: block; }
+  /* ============================================ */
 
   .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
   .nav-links a {
@@ -156,7 +158,7 @@
 
   .nav-actions { display: flex; align-items: center; gap: 20px; }
 
-  /* ============ BOTÓN DE THEME TOGGLE ACTUALIZADO ============ */
+  /* ============ BOTÓN DE THEME TOGGLE ============ */
   .theme-toggle {
     background: transparent;
     color: #ffffff; /* Luna blanca por defecto */
@@ -657,6 +659,669 @@
 
           <div class="timeline-entry">
             <div class="te-pilot">Francesco Grimaldi</div>
+            <div class="te-category">Senior Max```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Motorsport — Taking You to the First Place</title>
+<link rel="preconnect" href="[https://fonts.googleapis.com](https://fonts.googleapis.com)">
+<link rel="preconnect" href="[https://fonts.gstatic.com](https://fonts.gstatic.com)" crossorigin>
+<link href="[https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900;1,700&family=Barlow:wght@300;400;500;600&family=Bebas+Neue&display=swap](https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,300;0,400;0,600;0,700;0,900;1,700&family=Barlow:wght@300;400;500;600&family=Bebas+Neue&display=swap)" rel="stylesheet">
+<style>
+  :root {
+    --green: #39FF14;
+    --green-dim: #22cc08;
+    --green-glow: rgba(57,255,20,0.15);
+    
+    /* MODO OSCURO (Default) */
+    --black: #0a0a0a;
+    --dark: #111111;
+    --dark2: #161616;
+    --dark3: #1c1c1c;
+    --gray: #888888;
+    --light: #e8e8e8;
+    --white: #ffffff;
+    
+    --hero-end: #0d1a0d;
+    --nav-bg: rgba(10,10,10,0.92);
+    --nav-scroll: rgba(10,10,10,0.98);
+    --carbon-line: rgba(255,255,255,0.015);
+    --overlay-grad: rgba(0,0,0,0.85);
+    --overlay-light: rgba(0,0,0,0.2);
+    --yt-play: rgba(10,10,10,0.75);
+
+    /* Alphas de texto para bordes y fondos sutiles */
+    --text-alpha-015: rgba(255,255,255,0.015);
+    --text-alpha-05: rgba(255,255,255,0.05);
+    --text-alpha-06: rgba(255,255,255,0.06);
+    --text-alpha-08: rgba(255,255,255,0.08);
+    --text-alpha-2: rgba(255,255,255,0.2);
+    --text-alpha-3: rgba(255,255,255,0.3);
+  }
+
+  /* MODO CLARO */
+  html.light-mode {
+    --black: #ffffff;
+    --dark: #f8f9fa;
+    --dark2: #f0f0f0;
+    --dark3: #e4e4e4;
+    --gray: #666666;
+    --light: #222222;
+    --white: #0a0a0a;
+
+    --hero-end: #e6f5e6;
+    --nav-bg: rgba(255,255,255,0.92);
+    --nav-scroll: rgba(255,255,255,0.98);
+    --carbon-line: rgba(0,0,0,0.03);
+    --overlay-grad: rgba(255,255,255,0.85);
+    --overlay-light: rgba(255,255,255,0.2);
+    --yt-play: rgba(255,255,255,0.75);
+
+    --text-alpha-015: rgba(0,0,0,0.03);
+    --text-alpha-05: rgba(0,0,0,0.05);
+    --text-alpha-06: rgba(0,0,0,0.06);
+    --text-alpha-08: rgba(0,0,0,0.1);
+    --text-alpha-2: rgba(0,0,0,0.15);
+    --text-alpha-3: rgba(0,0,0,0.25);
+  }
+
+  /* ============ TRANSICIÓN DE TEMA (VIEW TRANSITIONS API) ============ */
+  ::view-transition-group(root) {
+    animation-duration: 0.7s;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  ::view-transition-new(root) {
+    animation-name: reveal-polygon;
+  }
+  ::view-transition-old(root) {
+    animation: none;
+    z-index: -1;
+  }
+  @keyframes reveal-polygon {
+    from { clip-path: polygon(50% -71%, -50% 71%, -50% 71%, 50% -71%); }
+    to { clip-path: polygon(50% -71%, -50% 71%, 50% 171%, 171% 50%); }
+  }
+  /* ==================================================================== */
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  html { 
+    scroll-behavior: smooth; 
+    font-size: 16px; 
+    scrollbar-width: thin;
+    scrollbar-color: #717171 var(--black);
+  }
+
+  ::-webkit-scrollbar { width: 16px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb {
+    background-color: #717171; border-radius: 8px; border: 4px solid var(--black);
+  }
+  ::-webkit-scrollbar-thumb:hover { background-color: #a0a0a0; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 400;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  .carbon {
+    background-color: var(--dark);
+    background-image:
+      repeating-linear-gradient(45deg, transparent, transparent 2px, var(--carbon-line) 2px, var(--carbon-line) 4px),
+      repeating-linear-gradient(-45deg, transparent, transparent 2px, var(--carbon-line) 2px, var(--carbon-line) 4px);
+  }
+
+  /* ============ NAV ============ */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem; height: 70px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(57,255,20,0.15);
+    transition: all 0.3s ease;
+  }
+  nav.scrolled { height: 58px; background: var(--nav-scroll); }
+
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  
+  /* ============ CORRECCIÓN LOGO AM ============ */
+  /* Se eliminó la regla que aplicaba filter: invert(1) en html.light-mode */
+  .am-logo-img { height: 38px; width: auto; display: block; }
+  /* ============================================ */
+
+  .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 600; font-size: 0.8rem;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--light); text-decoration: none;
+    transition: color 0.2s; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px;
+    background: var(--green); transition: width 0.25s ease;
+  }
+  .nav-links a:hover { color: var(--green); }
+  .nav-links a:hover::after { width: 100%; }
+
+  .nav-cta {
+    font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.78rem;
+    letter-spacing: 0.18em; text-transform: uppercase; color: #0a0a0a !important; background: var(--green);
+    padding: 8px 20px; border: none; text-decoration: none; transition: background 0.2s, transform 0.15s;
+  }
+  .nav-cta:hover { background: var(--green-dim) !important; transform: scale(1.02); }
+  .nav-cta::after { display: none !important; }
+
+  .nav-actions { display: flex; align-items: center; gap: 20px; }
+
+  /* ============ BOTÓN DE THEME TOGGLE ============ */
+  .theme-toggle {
+    background: transparent;
+    color: #ffffff; /* Luna blanca por defecto */
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%; width: 38px; height: 38px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; outline: none; transition: all 0.3s ease;
+    position: relative; /* Clave para superponer los iconos */
+  }
+
+  html.light-mode .theme-toggle {
+    color: #000000; /* Sol negro en modo claro */
+    border: 1px solid rgba(0,0,0,0.15);
+  }
+
+  /* Efecto hover: Cambia a verde en ambos modos */
+  .theme-toggle:hover {
+    color: var(--green);
+    border-color: var(--green);
+  }
+
+  .theme-toggle svg {
+    width: 18px; height: 18px; 
+    fill: none;
+    stroke: currentColor;
+    position: absolute;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Modo Oscuro (Luna visible, Sol oculto y rotado) */
+  .icon-moon { opacity: 1; transform: rotate(0deg) scale(1); }
+  .icon-sun { opacity: 0; transform: rotate(90deg) scale(0); }
+
+  /* Modo Claro (Luna oculta, Sol visible y en su lugar) */
+  html.light-mode .icon-moon { opacity: 0; transform: rotate(-90deg) scale(0); }
+  html.light-mode .icon-sun { opacity: 1; transform: rotate(0deg) scale(1); }
+  /* ========================================================== */
+
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s; }
+
+  /* ============ HERO ============ */
+  #hero { position: relative; width: 100%; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, var(--black) 0%, var(--dark) 40%, var(--hero-end) 100%); z-index: 0; transition: background 0.5s;}
+  .hero-grid { position: absolute; inset: 0; z-index: 1; background-image: linear-gradient(rgba(57,255,20,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(57,255,20,0.04) 1px, transparent 1px); background-size: 60px 60px; animation: gridMove 20s linear infinite; }
+  @keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 60px 60px; } }
+  .hero-lines { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+  .hero-lines::before { content: ''; position: absolute; top: 35%; left: -10%; width: 130%; height: 2px; background: linear-gradient(90deg, transparent, rgba(57,255,20,0.5), transparent); animation: speedLine 3s ease-in-out infinite; }
+  .hero-lines::after { content: ''; position: absolute; top: 55%; left: -10%; width: 130%; height: 1px; background: linear-gradient(90deg, transparent, rgba(57,255,20,0.3), transparent); animation: speedLine 3s ease-in-out infinite 0.8s; }
+  @keyframes speedLine { 0% { transform: translateX(-100%); opacity: 0; } 20% { opacity: 1; } 80% { opacity: 1; } 100% { transform: translateX(100%); opacity: 0; } }
+  .hero-diagonal { position: absolute; bottom: 0; right: 0; width: 55%; height: 100%; z-index: 2; background: linear-gradient(135deg, transparent 40%, rgba(57,255,20,0.04) 100%); clip-path: polygon(20% 0%, 100% 0%, 100% 100%, 0% 100%); }
+  .hero-accent-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 4px; background: var(--green); z-index: 10; }
+  .hero-content { position: relative; z-index: 5; text-align: center; padding: 0 2rem; animation: heroReveal 1.2s ease forwards; }
+  @keyframes heroReveal { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.4em; text-transform: uppercase; color: var(--green); margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 12px; }
+  .hero-eyebrow::before, .hero-eyebrow::after { content: ''; display: block; width: 40px; height: 1px; background: var(--green); }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 9vw, 8rem); line-height: 0.9; letter-spacing: 0.03em; color: var(--white); margin-bottom: 0.3rem; }
+  .hero-title .green { color: var(--green); }
+  .hero-subtitle-bar { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(1rem, 2.5vw, 1.6rem); font-weight: 300; letter-spacing: 0.25em; text-transform: uppercase; color: var(--light); margin-bottom: 2.5rem; }
+  .hero-tagline { font-family: 'Barlow', sans-serif; font-size: clamp(0.85rem, 1.5vw, 1rem); font-weight: 300; color: var(--gray); letter-spacing: 0.08em; margin-bottom: 3rem; max-width: 560px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+  .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: #0a0a0a; background: var(--green); padding: 14px 32px; text-decoration: none; border: 2px solid var(--green); transition: all 0.25s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); }
+  .btn-primary:hover { background: transparent; color: var(--green); }
+  .btn-secondary { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white); background: transparent; padding: 14px 32px; text-decoration: none; border: 1px solid var(--text-alpha-3); transition: all 0.25s; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); }
+  .btn-secondary:hover { border-color: var(--green); color: var(--green); }
+  .scroll-indicator { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 6px; animation: bounce 2s ease infinite; }
+  .scroll-indicator span { font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gray); }
+  .scroll-arrow { width: 16px; height: 16px; border-right: 1px solid var(--green); border-bottom: 1px solid var(--green); transform: rotate(45deg); }
+  @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+  /* ============ COMMON ============ */
+  section { padding: 100px 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.4em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; display: flex; align-items: center; gap: 12px; }
+  .section-label::before { content: ''; display: block; width: 3px; height: 16px; background: var(--green); flex-shrink: 0; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.04em; line-height: 1; margin-bottom: 1.5rem; }
+  .section-title .green { color: var(--green); }
+  .green-line { width: 100%; height: 2px; background: linear-gradient(90deg, var(--green), rgba(57,255,20,0.1)); margin-bottom: 3rem; }
+  .services-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gray); margin-bottom: 1.5rem; }
+
+  /* ============ HISTORIA ============ */
+  #historia { background: var(--dark); }
+  .historia-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .historia-text p { color: var(--light); line-height: 1.8; margin-bottom: 1.2rem; font-size: 1rem; font-weight: 300; }
+  .historia-text p strong { color: var(--white); font-weight: 600; }
+  .historia-quote { margin-top: 2rem; padding-left: 1.5rem; border-left: 3px solid var(--green); }
+  .historia-quote p { font-style: italic; color: var(--light) !important; font-size: 1.05rem !important; }
+  .historia-quote .author { font-style: normal; color: var(--green) !important; font-size: 0.85rem !important; font-weight: 600; letter-spacing: 0.1em; margin-top: 0.5rem !important; margin-bottom: 0 !important; }
+  .historia-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: rgba(57,255,20,0.2); }
+  .h-stat { background: var(--dark2); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background 0.3s; }
+  .h-stat::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--green); transition: width 0.4s ease; }
+  .h-stat:hover { background: var(--dark3); }
+  .h-stat:hover::before { width: 100%; }
+  .h-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--green); line-height: 1; margin-bottom: 0.3rem; }
+  .h-stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
+
+  /* ============ TRAYECTORIA ============ */
+  #trayectoria { background: var(--black); }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--green), rgba(57,255,20,0.1)); }
+  .timeline-year { margin-bottom: 3rem; position: relative; }
+  .timeline-year-label { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--green); letter-spacing: 0.1em; margin-bottom: 1rem; position: relative; }
+  .timeline-year-label::before { content: ''; position: absolute; left: -2.55rem; top: 50%; transform: translateY(-50%); width: 10px; height: 10px; background: var(--green); border-radius: 50%; box-shadow: 0 0 12px var(--green); }
+  .timeline-entries { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; padding-left: 0.5rem; }
+
+  .timeline-entry { background: var(--dark2); border: 1px solid rgba(57,255,20,0.1); padding: 1rem 1.2rem; transition: border-color 0.25s, background 0.25s; position: relative; overflow: visible; cursor: pointer; }
+  .timeline-entry::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--green); transition: height 0.3s ease; }
+  .timeline-entry:hover, .timeline-entry.active { border-color: rgba(57,255,20,0.35); background: var(--dark3); }
+  .timeline-entry:hover::before, .timeline-entry.active::before { height: 100%; }
+
+  .te-pilot { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); letter-spacing: 0.05em; text-transform: uppercase; }
+  .te-category { font-family: 'Barlow', sans-serif; font-size: 0.78rem; color: var(--green); margin: 2px 0 4px; }
+  .te-event { font-family: 'Barlow', sans-serif; font-size: 0.78rem; color: var(--gray); font-weight: 300; }
+
+  .te-popup { position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(6px); width: 300px; background: var(--black); border: 1px solid rgba(57,255,20,0.4); z-index: 500; opacity: 0; pointer-events: none; transition: opacity 0.22s ease, transform 0.22s ease; box-shadow: 0 8px 32px rgba(0,0,0,0.7), 0 0 0 1px rgba(57,255,20,0.1); }
+  .timeline-entry:nth-child(3n) .te-popup, .timeline-entry:last-child .te-popup { left: auto; right: 0; transform: translateY(6px); }
+  .timeline-entry:hover .te-popup, .timeline-entry.active .te-popup { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+  .timeline-entry:nth-child(3n):hover .te-popup, .timeline-entry:nth-child(3n).active .te-popup, .timeline-entry:last-child:hover .te-popup, .timeline-entry:last-child.active .te-popup { transform: translateY(0); }
+
+  .te-popup-img { width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; }
+  .te-popup-no-img { width: 100%; aspect-ratio: 3/2; background: var(--dark3); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; }
+  .te-popup-no-img span { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(57,255,20,0.3); }
+
+  .te-popup-bar { padding: 8px 12px; display: flex; align-items: center; justify-content: flex-end; }
+  .te-popup-date { font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; color: var(--green); text-transform: uppercase; }
+
+  .te-popup::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid rgba(57,255,20,0.4); }
+  .timeline-entry:nth-child(3n) .te-popup::after, .timeline-entry:last-child .te-popup::after { left: auto; right: 20px; transform: none; }
+
+  /* ============ INGENIERIA ============ */
+  #ingenieria { background: var(--dark); }
+  .metodo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: rgba(57,255,20,0.15); margin-bottom: 4rem; }
+  .metodo-card { background: var(--dark2); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background 0.3s; }
+  .metodo-card:hover { background: var(--dark3); }
+  .metodo-number { font-family: 'Bebas Neue', sans-serif; font-size: 4rem; color: rgba(57,255,20,0.12); position: absolute; top: 1rem; right: 1.5rem; line-height: 1; pointer-events: none; }
+  .metodo-icon { width: 40px; height: 40px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 1.2rem; font-size: 1.1rem; }
+  .metodo-card h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--white); margin-bottom: 0.7rem; }
+  .metodo-card p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; font-weight: 300; }
+  .tech-section { background: var(--black); border: 1px solid rgba(57,255,20,0.15); padding: 2.5rem; margin-top: 3rem; }
+  .tech-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--green); margin-bottom: 1.5rem; }
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tech-tag { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; letter-spacing: 0.12em; padding: 6px 14px; background: rgba(57,255,20,0.07); border: 1px solid rgba(57,255,20,0.25); color: var(--light); transition: all 0.2s; }
+  .tech-tag:hover { background: rgba(57,255,20,0.15); border-color: var(--green); color: var(--green); }
+  .valor-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(57,255,20,0.15); margin-top: 3rem; }
+  .valor-grid.metodo-card.metodo-card.metodo-card { grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(57,255,20,0.15); margin-top: 3rem; }
+  .valor-item { background: var(--dark2); padding: 2rem 1.8rem; text-align: center; }
+  .valor-item h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 0.6rem; }
+  .valor-item p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; font-weight: 300; }
+  
+  /* Cursos Grid */
+  .cursos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+  .curso-card { background: var(--dark2); border: 1px solid rgba(57,255,20,0.15); padding: 2.5rem; position: relative; overflow: hidden; transition: all 0.3s; }
+  .curso-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--green); transform: scaleX(0); transition: transform 0.3s ease; }
+  .curso-card:hover { border-color: rgba(57,255,20,0.4); }
+  .curso-card:hover::after { transform: scaleX(1); }
+  
+  .curso-card.alfano-card { border-color: rgba(255,215,0,0.15); }
+  .curso-card.alfano-card::after { background: #FFD700; }
+  .curso-card.alfano-card:hover { border-color: rgba(255,215,0,0.5); }
+  
+  .curso-card.aim-card { border-color: rgba(255,0,0,0.15); }
+  .curso-card.aim-card::after { background: #FF0000; }
+  .curso-card.aim-card:hover { border-color: rgba(255,0,0,0.5); }
+
+  .curso-device { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--green); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+  .curso-card p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; font-weight: 300; margin-bottom: 1.2rem; }
+  .curso-badge { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid rgba(57,255,20,0.3); padding: 4px 12px; }
+
+  /* ============ MEDIA ============ */
+  #media { background: var(--black); }
+  .media-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; margin-bottom: 5rem; }
+  .media-intro-text p { font-size: 1rem; color: var(--light); line-height: 1.8; font-weight: 300; margin-bottom: 1rem; }
+  .service-list { display: flex; flex-direction: column; gap: 1px; background: rgba(57,255,20,0.12); }
+  .service-item { background: var(--dark2); padding: 1.4rem 1.8rem; display: flex; align-items: flex-start; gap: 1.2rem; cursor: default; transition: background 0.2s; position: relative; overflow: hidden; }
+  .service-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: rgba(57,255,20,0.06); transition: width 0.3s ease; }
+  .service-item:hover { background: var(--dark3); }
+  .service-item:hover::before { width: 100%; }
+  .service-dot { width: 8px; height: 8px; background: var(--green); flex-shrink: 0; margin-top: 5px; clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+  .service-item h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--white); margin-bottom: 0.3rem; }
+  .service-item p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; font-weight: 300; }
+  .packs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5px; background: rgba(57,255,20,0.2); margin-top: 4rem; }
+  .pack-card { background: var(--dark2); padding: 2.5rem 2rem; position: relative; overflow: hidden; transition: background 0.3s; }
+  .pack-card.featured { background: var(--dark3); border-top: 3px solid var(--green); }
+  .pack-badge { position: absolute; top: 1rem; right: 1rem; font-family: 'Barlow Condensed', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; background: var(--green); color: #0a0a0a; padding: 3px 10px; }
+  .pack-card:hover { background: var(--dark3); }
+  .pack-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 300; font-size: 0.85rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gray); margin-bottom: 0; }
+  .pack-tier { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; letter-spacing: 0.08em; margin-bottom: 0.3rem; line-height: 1; }
+  .pack-tier.rookie { color: var(--light); }
+  .pack-tier.pole { color: var(--green); }
+  .pack-tier.champion { color: var(--light); }
+  .pack-tagline { font-size: 0.78rem; color: var(--gray); margin-bottom: 2rem; font-style: italic; }
+  .pack-divider { width: 100%; height: 1px; background: rgba(57,255,20,0.15); margin-bottom: 1.5rem; }
+  .pack-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .pack-features li { font-size: 0.82rem; color: var(--light); display: flex; align-items: flex-start; gap: 10px; font-weight: 300; line-height: 1.4; }
+  .pack-features li::before { content: '›'; color: var(--green); font-size: 1rem; font-weight: 700; flex-shrink: 0; margin-top: -1px; }
+
+  /* ============ PUNTO 2: GRILLA DE PILOTOS ESTILO LN ============ */
+  #pilotos { background: var(--dark); padding: 80px 0; }
+
+  .pilotos-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    background: rgba(57,255,20,0.15); margin: 2rem 0 2.5rem;
+  }
+  .piloto-card { position: relative; aspect-ratio: 1/1; background: var(--dark2); overflow: hidden; cursor: pointer; }
+  .piloto-card-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center top; opacity: 1; filter: grayscale(100%); transition: filter 0.4s ease, opacity 0.4s ease; z-index: 1; }
+  
+  .piloto-card-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--overlay-grad) 30%, var(--overlay-light) 100%); opacity: 0.8; transition: opacity 0.4s ease; z-index: 2; }
+  .piloto-card-name { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 3; padding: 1rem; text-align: center; }
+  .piloto-card-name span { font-family: 'Bebas Neue', sans-serif; font-size: clamp(0.9rem, 2vw, 1.3rem); letter-spacing: 0.08em; color: var(--white); line-height: 1.1; transition: color 0.3s, transform 0.3s; }
+  .piloto-card-years { position: absolute; bottom: 10px; right: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem; letter-spacing: 0.15em; color: rgba(57,255,20,0.7); z-index: 4; transition: color 0.3s; }
+  .piloto-card::before { content: ''; position: absolute; inset: 0; border: 1px solid rgba(57,255,20,0.1); z-index: 5; transition: border-color 0.3s; pointer-events: none; }
+
+  .piloto-card:hover .piloto-card-photo, .piloto-card.active .piloto-card-photo { filter: grayscale(0%); opacity: 1; }
+  .piloto-card:hover .piloto-card-overlay, .piloto-card.active .piloto-card-overlay { opacity: 1; }
+  .piloto-card:hover .piloto-card-name span, .piloto-card.active .piloto-card-name span { color: var(--green); transform: translateY(-8px); }
+  .piloto-card:hover .piloto-card-years, .piloto-card.active .piloto-card-years { color: var(--green); }
+  .piloto-card:hover::before, .piloto-card.active::before { border-color: rgba(57,255,20,0.5); }
+
+  .piloto-card.no-photo { background: var(--dark2); }
+  .piloto-card.no-photo::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(57,255,20,0.025) 3px, rgba(57,255,20,0.025) 4px); z-index: 0; }
+
+  .piloto-stars { position: absolute; top: 8px; right: 8px; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; z-index: 5; }
+  .star-icon { font-size: 11px; color: #777; line-height: 1; transition: color 0.35s ease; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+  .piloto-card:hover .star-icon, .piloto-card.active .star-icon { color: #DAA520; }
+
+  /* ============ CONTACTO ============ */
+  #contacto { background: var(--black); position: relative; overflow: hidden; }
+  #contacto::before { display: none; }
+  .contacto-am-watermark {position: absolute; right: -4vw; bottom: -4vw; width: 50vw; max-width: 600px; pointer-events: none; z-index: 0; filter: invert(1) sepia(1) saturate(10) hue-rotate(80deg) brightness(0.4); opacity: 0.15; user-select: none; }
+  html.light-mode .contacto-am-watermark { opacity: 0.05; filter: none; }
+  
+  .contacto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; position: relative; z-index: 1; }
+  .contacto-left h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); line-height: 0.95; color: var(--white); margin-bottom: 1.5rem; }
+  .contacto-left h2 .green { color: var(--green); }
+  .contacto-left p { font-size: 0.95rem; color: var(--gray); line-height: 1.7; font-weight: 300; margin-bottom: 2.5rem; }
+  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item { display: flex; align-items: center; gap: 1rem; text-decoration: none; padding: 1rem 1.2rem; background: var(--dark2); border: 1px solid var(--text-alpha-06); transition: all 0.25s; color: var(--light); }
+  .contact-item:hover { border-color: rgba(57,255,20,0.3); background: var(--dark3); color: var(--green); }
+  .contact-icon { width: 36px; height: 36px; background: rgba(57,255,20,0.1); border: 1px solid rgba(57,255,20,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .contact-icon svg { width: 16px; height: 16px; fill: var(--green); }
+  .contact-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); display: block; margin-bottom: 1px; }
+  .contact-value { font-size: 0.92rem; font-weight: 500; }
+  .contacto-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gray); }
+  .form-group input, .form-group select, .form-group textarea { background: var(--dark2); border: 1px solid var(--text-alpha-08); color: var(--white); padding: 12px 14px; font-family: 'Barlow', sans-serif; font-size: 0.9rem; font-weight: 300; transition: border-color 0.25s; outline: none; -webkit-appearance: none; appearance: none; }
+  .form-group select { background-image: url("data:image/svg+xml,%3Csvg xmlns='[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2339FF14' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; background-color: var(--dark2); padding-right: 36px; }
+  .form-group select option { background: var(--dark2); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: rgba(57,255,20,0.5); }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+  .form-submit { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.22em; text-transform: uppercase; color: #0a0a0a; background: var(--green); border: none; padding: 16px 32px; cursor: pointer; transition: all 0.25s; width: 100%; clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%); }
+  .form-submit:hover { background: var(--green-dim); }
+  .form-note { font-size: 0.75rem; color: var(--gray); text-align: center; font-weight: 300; font-style: italic; }
+
+  /* ============ FOOTER ============ */
+  footer { background: var(--dark); border-top: 1px solid rgba(57,255,20,0.15); padding: 3rem 0; }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+  .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem; letter-spacing: 0.12em; color: var(--white); }
+  .footer-tagline { font-family: 'Barlow Condensed', sans-serif; font-size: 0.65rem; letter-spacing: 0.4em; text-transform: uppercase; color: var(--green); margin-top: 2px; }
+  .footer-copy { font-size: 0.78rem; color: var(--gray); font-weight: 300; }
+  .green-strip { height: 4px; background: var(--green); }
+
+  /* YouTube section */
+  #youtube iframe { border: none; }
+
+  /* ============ REVEAL ============ */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 1024px) {
+    .pilotos-grid { grid-template-columns: repeat(3, 1fr); }
+    .piloto-card-name span { font-size: clamp(0.8rem, 2.5vw, 1.1rem); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.2rem; height: 60px; }
+    .nav-links {
+      position: fixed; top: 60px; left: 0; right: 0;
+      background: var(--nav-scroll);
+      flex-direction: column; align-items: stretch;
+      padding: 1rem 0; gap: 0;
+      transform: translateY(calc(-100% - 60px));
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: transform 0.35s ease, opacity 0.35s ease, visibility 0.35s;
+      border-bottom: 2px solid rgba(57,255,20,0.2);
+      z-index: 999;
+    }
+    .nav-links.open { 
+      transform: translateY(0); 
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    .nav-links li { width: 100%; border-bottom: 1px solid var(--text-alpha-05); }
+    .nav-links li a { display: block; padding: 1rem 2rem; font-size: 0.85rem; letter-spacing: 0.2em; }
+    .nav-links li a:hover { background: rgba(57,255,20,0.05); }
+    .nav-links li a::after { display: none; }
+    .nav-links li:last-child { border-bottom: none; padding: 1rem 1.5rem; }
+    .nav-cta { display: block !important; width: 100%; text-align: center; padding: 12px 20px; margin: 0; clip-path: none; }
+    .hamburger { display: flex; }
+    .historia-grid, .media-intro, .contacto-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .metodo-grid, .packs-grid, .cursos-grid, .valor-grid { grid-template-columns: 1fr; }
+    .historia-stats { grid-template-columns: 1fr 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    section { padding: 70px 0; }
+
+    .pilotos-grid { grid-template-columns: repeat(2, 1fr); }
+    .piloto-card-name span { font-size: 0.85rem; }
+    .piloto-card-years { font-size: 0.62rem; bottom: 6px; right: 8px; }
+
+    .timeline-entries { grid-template-columns: 1fr; }
+
+    .te-popup { width: 260px; left: 50% !important; right: auto !important; transform: translateX(-50%) translateY(6px) !important; }
+    .timeline-entry.active .te-popup { transform: translateX(-50%) translateY(0) !important; }
+    .te-popup::after { left: 50% !important; right: auto !important; transform: translateX(-50%) !important; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 3rem; }
+    .pilotos-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">
+    <img class="am-logo-img" src="fotos/logos/am_logo.png" alt="Advanced Motorsport">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#historia">Historia</a></li>
+    <li><a href="#ingenieria">Ingenieria</a></li>
+    <li><a href="#capacitaciones">Capacitaciones</a></li>
+    <li><a href="#media">Media</a></li>
+    <li><a href="#pilotos">Pilotos</a></li>
+    <li><a href="#youtube">Youtube</a></li>
+    <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button id="themeToggle" class="theme-toggle" aria-label="Cambiar modo">
+      <svg class="icon-moon" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      </svg>
+      <svg class="icon-sun" xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      </svg>
+    </button>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-diagonal"></div>
+  <div class="hero-accent-bar"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">By Ayrton Mastrangelo</div>
+    <div class="hero-title">ADVANCED<br><span class="green">MOTORSPORT</span></div>
+    <div class="hero-subtitle-bar">Ingeniería &nbsp;·&nbsp; Media &nbsp;·&nbsp; Performance &nbsp;·&nbsp; Coaching</div>
+    <p class="hero-tagline">En el motorsport de alta competencia, la diferencia entre ganar y participar se mide en milésimas de segundo y decisiones basadas en datos.</p>
+    <div class="hero-buttons">
+      <a href="#ingenieria" class="btn-primary">AM Engineering</a>
+      <a href="#media" class="btn-secondary">AM Media</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<section id="historia" class="carbon">
+  <div class="container">
+    <div class="historia-grid reveal">
+      <div class="historia-text">
+        <div class="section-label">Nuestra historia</div>
+        <h2 class="section-title">FORJANDO<br><span class="green">CAMPEONES</span></h2>
+        <div class="green-line"></div>
+        <p>Advanced Motorsport nació de la convicción de que la <strong>ingeniería de precisión</strong> y el desarrollo humano son los pilares de la victoria.</p>
+        <p>Desde 2022, nos dedicamos exclusivamente a la optimización del rendimiento en vehículos de competición, combinando análisis técnico de vanguardia con una metodología integral de desarrollo del piloto.</p>
+        <p>No solo analizamos datos. Convertimos esa información en ventajas competitivas reales, medibles y sostenibles en el tiempo.</p>
+        <div class="historia-quote">
+          <p>"La diferencia entre ganar y participar se mide en milésimas. Nosotros trabajamos esas milésimas."</p>
+          <p class="author">— Ayrton Mastrangelo, CEO</p>
+        </div>
+      </div>
+      <div class="historia-stats">
+        <div class="h-stat"><div class="h-stat-num">16</div><div class="h-stat-label">Reconocimientos de alto nivel</div></div>
+        <div class="h-stat"><div class="h-stat-num">12</div><div class="h-stat-label">Campeonatos nacionales y regionales</div></div>
+        <div class="h-stat"><div class="h-stat-num">4</div><div class="h-stat-label">Victorias en trofeos importantes</div></div>
+        <div class="h-stat"><div class="h-stat-num">360°</div><div class="h-stat-label">Servicio integral por jornada</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="trayectoria">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Palmarés</div>
+      <h2 class="section-title">NUESTRA<br><span class="green">TRAYECTORIA</span></h2>
+      <div class="green-line"></div>
+    </div>
+
+    <div class="timeline reveal">
+
+      <div class="timeline-year">
+        <div class="timeline-year-label">2021</div>
+        <div class="timeline-entries">
+
+          <div class="timeline-entry">
+            <div class="te-pilot">Francisco Figueroa</div>
+            <div class="te-category">Junior MY10</div>
+            <div class="te-event">Campeonato Argentino de Karting</div>
+            <div class="te-popup">
+              <img class="te-popup-img" src="fotos/logros/francisco_figueroa_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
+              <div class="te-popup-bar"><span class="te-popup-date">06-08-2022</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="timeline-year">
+        <div class="timeline-year-label">2022</div>
+        <div class="timeline-entries">
+
+          <div class="timeline-entry">
+            <div class="te-pilot">Simón Bulbarella</div>
+            <div class="te-category">Junior MY10</div>
+            <div class="te-event">Campeonato Argentino de Karting</div>
+            <div class="te-popup">
+              <img class="te-popup-img" src="fotos/logros/simon_bulbarella_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
+              <div class="te-popup-bar"><span class="te-popup-date">07-08-2022</span></div>
+            </div>
+          </div>
+
+          <div class="timeline-entry">
+            <div class="te-pilot">Ignacio Vivian</div>
+            <div class="te-category">ProAm</div>
+            <div class="te-event">Campeonato Argentino de Karting</div>
+            <div class="te-popup">
+              <img class="te-popup-img" src="fotos/logros/ignacio_vivian_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
+              <div class="te-popup-bar"><span class="te-popup-date">07-08-2022</span></div>
+            </div>
+          </div>
+		  
+          <div class="timeline-entry">
+            <div class="te-pilot">Martin Saa</div>
+            <div class="te-category">Micro Max</div>
+            <div class="te-event">Rotax Max Buenos Aires Otoño</div>
+            <div class="te-popup">
+              <img class="te-popup-img" src="fotos/logros/martin_saa_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
+              <div class="te-popup-bar"><span class="te-popup-date">15-05-2022</span></div>
+            </div>
+          </div>
+
+          <div class="timeline-entry">
+            <div class="te-pilot">Ramiro Carreira</div>
+            <div class="te-category">Micro Max</div>
+            <div class="te-event">Rotax Max Buenos Aires Invierno</div>
+            <div class="te-popup">
+              <img class="te-popup-img" src="fotos/logros/ramiro_carreira_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
+              <div class="te-popup-bar"><span class="te-popup-date">25-09-2022</span></div>
+            </div>
+          </div>
+
+          <div class="timeline-entry">
+            <div class="te-pilot">Gustavo Carreira</div>
+            <div class="te-category">Master Max</div>
+            <div class="te-event">Rotax Max Buenos Aires Invierno</div>
+            <div class="te-popup">
+              <img class="te-popup-img" src="fotos/logros/gustavo_carreira_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
+              <div class="te-popup-bar"><span class="te-popup-date">25-09-2022</span></div>
+            </div>
+          </div>
+
+          <div class="timeline-entry">
+            <div class="te-pilot">Francesco Grimaldi</div>
             <div class="te-category">Senior Max</div>
             <div class="te-event">Rotax Max Gran Final Argentina</div>
             <div class="te-popup">
@@ -671,1074 +1336,4 @@
             <div class="te-category">Master Max</div>
             <div class="te-event">Rotax Max Gran Final Argentina</div>
             <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/gustavo_carreira_trophy_2.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">09-10-2022</span></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-		  
-      <div class="timeline-year">
-        <div class="timeline-year-label">2023</div>
-        <div class="timeline-entries">
-		
-          <div class="timeline-entry">
-            <div class="te-pilot">Santino Dore</div>
-            <div class="te-category">Junior 135cc</div>
-            <div class="te-event">Prokart Apertura</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/santino_dore_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">06-08-2023</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Julian Ramos</div>
-            <div class="te-category">General 135cc</div>
-            <div class="te-event">Prokart Apertura</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/julian_ramos_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">06-08-2023</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Santino Dore</div>
-            <div class="te-category">Junior 135cc</div>
-            <div class="te-event">Prokart Clausura</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/santino_dore_trophy_2.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">03-12-2023</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Julian Puglisi</div>
-            <div class="te-category">Master A</div>
-            <div class="te-event">APAK</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/julian_puglisi_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">10-12-2023</span></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="timeline-year">
-        <div class="timeline-year-label">2024</div>
-        <div class="timeline-entries">
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Joaquin Camporino Rossotti</div>
-            <div class="te-category">Junior 135cc</div>
-            <div class="te-event">Prokart</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/joaquin_camporino_rossotti_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">              
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">21-11-2024</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Santino Dore</div>
-            <div class="te-category">General 135cc</div>
-            <div class="te-event">Prokart</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/santino_dore_trophy_3.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">              
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">21-11-2024</span></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="timeline-year">
-        <div class="timeline-year-label">2025</div>
-        <div class="timeline-entries">
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Agustin Sepulveda</div>
-            <div class="te-category">OK</div>
-            <div class="te-event">Sudamericano de Karting FIA</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/agustin_sepulveda_trophy_1.jpg" alt="Agustin Sepulveda" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">27-07-2025</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Valentino Manta</div>
-            <div class="te-category">Junior Max</div>
-            <div class="te-event">Gran Final Argentina</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/valentino_manta_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">12-10-2025</span></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-    </div></div>
-</section>
-
-<section id="ingenieria" class="carbon">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">AM Engineering</div>
-      <h2 class="section-title">INGENIERÍA DE<br><span class="green">ALTO RENDIMIENTO</span></h2>
-      <div class="green-line"></div>
-      <p style="max-width:640px; color:var(--gray); font-size:0.95rem; line-height:1.8; font-weight:300; margin-bottom:3rem;">Ingeniería de pista, rendimiento y coaching especializado. Nuestro método integral combina ingeniería de vanguardia con desarrollo del piloto, ofreciendo un servicio 360° en cada jornada.</p>
-    </div>
-    <div class="reveal"><div class="services-heading">El Método AM — Pilares del servicio</div></div>
-    <div class="metodo-grid reveal">
-      <div class="metodo-card">
-        <div class="metodo-number">01</div>
-        <div class="metodo-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#39FF14" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-        <h3>Evaluación inicial personalizada</h3>
-        <p>Análisis del nivel actual, detección de áreas de mejora críticas y propuesta de configuración óptima para el vehículo.</p>
-      </div>
-      <div class="metodo-card">
-        <div class="metodo-number">02</div>
-        <div class="metodo-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#39FF14" stroke-width="1.8"><path d="M2 20h20M4 20V10l8-6 8 6v10"/></svg></div>
-        <h3>Sesiones teóricas y prácticas</h3>
-        <p>Conceptos avanzados de manejo deportivo, planificación de estrategia de fin de semana y estudio de dinámica del vehículo.</p>
-      </div>
-      <div class="metodo-card">
-        <div class="metodo-number">03</div>
-        <div class="metodo-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#39FF14" stroke-width="1.8"><path d="M3 3v18h18"/><path d="M7 16l4-4 4 4 4-8"/></svg></div>
-        <h3>Plan de progreso continuo</h3>
-        <p>Diseño de un plan de entrenamiento alineado con las metas profesionales del piloto, con objetivos claros y seguimiento evolutivo.</p>
-      </div>
-      <div class="metodo-card">
-        <div class="metodo-number">04</div>
-        <div class="metodo-icon"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#39FF14" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
-        <h3>Trazabilidad evolutiva</h3>
-        <p>Reportes Pre/Post Carrera detallados que documentan la progresión del piloto a lo largo de todo el programa.</p>
-      </div>
-    </div>
-    <div class="tech-section reveal">
-      <div class="tech-label">Tecnología &amp; Análisis de Precisión</div>
-      <p style="font-size:0.88rem; color:var(--gray); margin-bottom:1.5rem; font-weight:300; line-height:1.7;">Trabajamos con y asesoramos sobre los mejores sistemas de adquisición de datos y telemetría del mercado.</p>
-      <div class="tech-tags">
-        <span class="tech-tag">MoTeC</span><span class="tech-tag">AiM / MyChron</span><span class="tech-tag">Alfano / ADA</span><span class="tech-tag">UniPro</span><span class="tech-tag">Starlane</span><span class="tech-tag">Dakton</span><span class="tech-tag">Cosworth</span><span class="tech-tag">Telemetría On-Board</span><span class="tech-tag">Análisis de datos</span>
-      </div>
-    </div>
-    <div class="valor-grid reveal">
-      <div class="valor-item"><h4>Experiencia</h4><p>Equipo compuesto por pilotos, mecánicos e ingenieros con trayectoria real en el automovilismo.</p></div>
-      <div class="valor-item"><h4>Tecnología</h4><p>Utilizamos los mejores sistemas de análisis para asegurar la máxima calidad de información.</p></div>
-      <div class="valor-item"><h4>Confidencialidad</h4><p>La data de cada cliente es información privilegiada. Garantizamos total seguridad de sus set-ups.</p></div>
-    </div>
-  </div>
-</section>
-
-<section id="capacitaciones" style="background: var(--black); padding: 100px 0;">
-  <div class="container">
-
-    <div class="reveal">
-      <div class="section-label">AM Engineering</div>
-      <h2 class="section-title">CAPACITACIONES<br><span class="green">ONLINE</span></h2>
-      <div class="green-line"></div>
-      <p style="width:100%; color:var(--gray); font-size:0.95rem; line-height:1.8; font-weight:300; margin-bottom:3.5rem;">
-        Clases en vivo por videollamada, personalizadas según tu nivel y el sistema que usás. Aprendé a leer tus datos y a convertirlos en decisiones de set-up concretas.
-      </p>
-    </div>
-
-    <div class="cursos-grid reveal">
-
-      <div class="curso-card alfano-card">
-        <div style="display:flex; align-items:center; gap:14px; margin-bottom:1rem;">
-          <div style="width:44px; height:44px; background:rgba(255,215,0,0.08); border:1px solid rgba(255,215,0,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:4px;">
-            <img src="fotos/logos/alfano.png" alt="Logo Alfano" style="max-width:100%; max-height:100%; object-fit:contain;">
-          </div>
-          <div class="curso-device" style="margin-bottom:0; color:#FFD700;">Alfano / ADA</div>
-        </div>
-        <p>Capacitación en vivo para el uso profesional del software ADA de Alfano. Aprendé a configurar el dispositivo, interpretar los canales de datos, analizar trazados y aplicar los resultados directamente al set-up del kart.</p>
-        <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.6rem;">
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FFD700; font-size:0.9rem;">›</span> Configuración inicial del dispositivo
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FFD700; font-size:0.9rem;">›</span> Lectura e interpretación de canales
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FFD700; font-size:0.9rem;">›</span> Análisis de trazado y comparación de vueltas
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FFD700; font-size:0.9rem;">›</span> Aplicación de datos al set-up
-          </div>
-        </div>
-        <div style="margin-top:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
-          <span class="curso-badge" style="color:#FFD700; border-color:rgba(255,215,0,0.3);">Videollamada en vivo</span>
-          <a href="#contacto" style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#FFD700; text-decoration:none; font-weight:600;">Consultar →</a>
-        </div>
-      </div>
-
-      <div class="curso-card aim-card">
-        <div style="display:flex; align-items:center; gap:14px; margin-bottom:1rem;">
-          <div style="width:44px; height:44px; background:rgba(255,0,0,0.08); border:1px solid rgba(255,0,0,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:4px;">
-             <img src="fotos/logos/aim.png" alt="Logo AiM" style="max-width:100%; max-height:100%; object-fit:contain;">
-          </div>
-          <div class="curso-device" style="margin-bottom:0; color:#FF0000;">AiM / RS3</div>
-        </div>
-        <p>Formación especializada en el sistema MyChron y el software RS3 Analysis de AiM. Desde la descarga de datos hasta el análisis avanzado: aprendé a sacar conclusiones accionables de cada sesión en pista.</p>
-        <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.6rem;">
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FF0000; font-size:0.9rem;">›</span> Descarga y gestión de sesiones
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FF0000; font-size:0.9rem;">›</span> Análisis de velocidad y aceleración
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FF0000; font-size:0.9rem;">›</span> Comparación piloto vs referencia
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FF0000; font-size:0.9rem;">›</span> Identificación de zonas de mejora
-          </div>
-        </div>
-        <div style="margin-top:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
-          <span class="curso-badge" style="color:#FF0000; border-color:rgba(255,0,0,0.3);">Videollamada en vivo</span>
-          <a href="#contacto" style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#FF0000; text-decoration:none; font-weight:600;">Consultar →</a>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="reveal" style="margin-top:3.5rem; background:var(--dark2); border:1px solid rgba(57,255,20,0.12); padding:2rem 2.5rem; display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
-      <div style="flex:1; min-width:200px;">
-        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--green); margin-bottom:0.5rem;">¿Cómo funciona?</div>
-        <p style="font-size:0.88rem; color:var(--gray); line-height:1.7; font-weight:300;">Coordinamos día y horario por WhatsApp. La clase se hace por videollamada compartiendo pantalla. Podés tener el software abierto mientras aprendés en tiempo real.</p>
-      </div>
-      <div style="flex:1; min-width:200px;">
-        <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--green); margin-bottom:0.5rem;">¿Para quién es?</div>
-        <p style="font-size:0.88rem; color:var(--gray); line-height:1.7; font-weight:300;">Pilotos, mecánicos o ingenieros de cualquier nivel. Tanto si recién compraste el dispositivo como si ya lo usás y querés sacarle más provecho.</p>
-      </div>
-      <a href="#contacto" class="btn-primary" style="display:inline-block; white-space:nowrap; text-decoration:none; flex-shrink:0;">Consultar disponibilidad</a>
-    </div>
-
-  </div>
-</section>
-
-<section id="media">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">AM Media</div>
-      <h2 class="section-title">MANAGEMENT Y<br><span class="green">DISEÑO ESPECIALIZADO</span></h2>
-      <div class="green-line"></div>
-    </div>
-    <div class="media-intro reveal">
-      <div class="media-intro-text">
-        <p>AM Media es el brazo creativo de Advanced Motorsport. Nos especializamos en construir la imagen y presencia digital del piloto, hablando el lenguaje visual que las marcas y sponsors buscan.</p>
-        <p>Desde presentaciones de sponsorship hasta la gestión completa del contenido en redes sociales, cada pieza que creamos refleja la identidad real del piloto.</p>
-        <a href="#contacto" class="btn-primary" style="display:inline-block; margin-top:1rem;">Solicitar información</a>
-      </div>
-      <div>
-        <div class="services-heading">Nuestros trabajos</div>
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:rgba(57,255,20,0.15);">
-          <div style="background:var(--dark2); padding:1.4rem 1.2rem; text-align:center;"><div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--green);">Sponsorship Dossier</div></div>
-          <div style="background:var(--dark2); padding:1.4rem 1.2rem; text-align:center;"><div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--green);">Pro-Identity Dossier</div></div>
-          <div style="background:var(--dark2); padding:1.4rem 1.2rem; text-align:center;"><div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--green);">Diseño de Eventos</div></div>
-          <div style="background:var(--dark2); padding:1.4rem 1.2rem; text-align:center;"><div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.7rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--green);">Branding Personal</div></div>
-        </div>
-      </div>
-    </div>
-    <div class="reveal">
-      <div class="services-heading" style="margin-bottom:0.5rem;">Dossier</div>
-      <div class="service-list">
-        <div class="service-item"><div class="service-dot"></div><div><h4>Sponsorship Dossier</h4><p>Carpeta en formato pre-optimizado que garantiza que la información vital (trayectoria, calendario y logros) sea legible y directa para el sponsor.</p></div></div>
-        <div class="service-item"><div class="service-dot"></div><div><h4>Pro-Identity Dossier</h4><p>Identidad visual 100% personalizada desde cero, alineada con el estilo y personalidad del piloto. Psicología del color, jerarquía visual y métricas de rendimiento para captar la atención de directores de marketing.</p></div></div>
-      </div>
-      <div class="services-heading" style="margin-top:2rem; margin-bottom:0.5rem;">Redes Sociales</div>
-      <div class="service-list">
-        <div class="service-item"><div class="service-dot"></div><div><h4>Social Flash</h4><p>Imagen estética con edición High-End (corrección de color, encuadre, iluminación y limpieza visual) para que el auto o el piloto resalten en el feed.</p></div></div>
-        <div class="service-item"><div class="service-dot"></div><div><h4>Carousel Storytelling</h4><p>Secuencia de imágenes que cuentan una historia (resumen de carrera, behind the scenes). Al generar interacción de swipe, el algoritmo amplifica el alcance del perfil.</p></div></div>
-        <div class="service-item"><div class="service-dot"></div><div><h4>Live Update / Story</h4><p>Diseños ágiles en formato vertical 9:16 para comunicar en tiempo real: grilla de partida, resultados parciales o noticias urgentes.</p></div></div>
-      </div>
-    </div>
-    <div style="margin-top:4rem;" class="reveal">
-      <div class="services-heading">Packs de rendimiento</div>
-      <div class="packs-grid">
-        <div class="pack-card"><div class="pack-name">Pack</div><div class="pack-tier rookie">ROOKIE</div><div class="pack-tagline">Para mantener presencia</div><div class="pack-divider"></div><ul class="pack-features"><li>2 Publicaciones high-end</li><li>4 Historias (Formato 9:16)</li><li>Copywriting básico</li><li>Análisis y creación de identidad</li></ul></div>
-        <div class="pack-card featured"><div class="pack-badge">Más elegido</div><div class="pack-name">Pack</div><div class="pack-tier pole">POLE</div><div class="pack-tagline">Gestión profesional</div><div class="pack-divider"></div><ul class="pack-features"><li>4 Publicaciones high-end</li><li>8 Historias (pre y post-carrera)</li><li>Copywriting persuasivo</li><li>Planificación visual del feed</li><li>Análisis y creación de identidad</li></ul></div>
-        <div class="pack-card"><div class="pack-name">Pack</div><div class="pack-tier champion">CHAMPION</div><div class="pack-tagline">Gestión completa</div><div class="pack-divider"></div><ul class="pack-features"><li>6 Publicaciones high-end</li><li>12 Historias (Formato 9:16)</li><li>Copywriting persuasivo</li><li>Análisis de métricas post-carrera</li><li>Planificación visual del feed</li><li>Análisis y creación de identidad</li></ul></div>
-      </div>
-      <p style="font-size:0.78rem; color:var(--gray); text-align:center; margin-top:1rem; font-style:italic; font-weight:300;">Consultanos para recibir tu cotización personalizada.</p>
-    </div>
-  </div>
-</section>
-
-<section id="pilotos" class="carbon">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">Nuestros pilotos</div>
-      <h2 class="section-title">QUIENES<br><span class="green">CONFÍAN EN AM</span></h2>
-      <div class="green-line"></div>
-    </div>
-
-    <h3 class="services-heading reveal" style="color: var(--green); margin-bottom: 1rem; font-size: 1.2rem;">Pilotos Actuales</h3>
-    <div class="pilotos-grid reveal" style="margin-top: 0;">
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/ariel_stratievsky.jpg" alt="Ariel Stratievsky" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Ariel<br>Stratievsky</span></div>
-        <div class="piloto-card-years">2023 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/bruno_medeot.jpg" alt="Bruno Medeot" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Bruno<br>Medeot</span></div>
-        <div class="piloto-card-years">2024 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/cristian_gomez.jpg" alt="Cristian Gomez" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Cristian<br>Gomez</span></div>
-        <div class="piloto-card-years">2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/damian_galgani.jpg" alt="Damian Galgani" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Damian<br>Galgani</span></div>
-        <div class="piloto-card-years">2024 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/facundo_silvestre_pereda.jpg" alt="Facundo Silvestre Pereda" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Facundo<br>Silvestre Pereda</span></div>
-        <div class="piloto-card-years">2025 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/franco_gagliardi.jpg" alt="Franco Gagliardi" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Franco<br>Gagliardi</span></div>
-        <div class="piloto-card-years">2024 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/franco_gonzalez_manta.jpg" alt="Franco Gonzalez Manta" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Franco<br>Gonzalez Manta</span></div>
-        <div class="piloto-card-years">2025 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/giuliano_trani.jpg" alt="Giuliano Trani" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Giuliano<br>Trani</span></div>
-        <div class="piloto-card-years">2025 — 2026</div>
-      </div>
-
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/lautaro_garcia.jpg" alt="Lautaro Garcia" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Lautaro<br>Garcia</span></div>
-        <div class="piloto-card-years">2025 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/nicolas_forconi.jpg" alt="Nicolas Forconi" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Nicolas<br>Forconi</span></div>
-        <div class="piloto-card-years">2025 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/oreste_durante.jpg" alt="Oreste Durante" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Oreste<br>Durante</span></div>
-        <div class="piloto-card-years">2025 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/pedro_gonzalez_cono.jpg" alt="Pedro Gonzalez Cono" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Pedro<br>Gonzalez Cono</span></div>
-        <div class="piloto-card-years">2025 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/santiago_jara.jpg" alt="Santiago Jara" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Santiago<br>Jara</span></div>
-        <div class="piloto-card-years">2025 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/ticiano_corapi.jpg" alt="Ticiano Corapi" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Ticiano<br>Corapi</span></div>
-        <div class="piloto-card-years">2025 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/tiziano_garay.jpg" alt="Tiziano Garay" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Tiziano<br>Garay</span></div>
-        <div class="piloto-card-years">2025 — 2026</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/tomas_cordone.jpg" alt="Tomas Cordone" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Tomas<br>Cordone</span></div>
-        <div class="piloto-card-years">2023 — 2026</div>
-      </div>
-
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/valentino_manta.jpg" alt="Valentino Manta" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Valentino<br>Manta</span></div>
-        <div class="piloto-card-years">2023 — 2026</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
-      </div>
-
-    </div>
-
-    <h3 class="services-heading reveal" style="color: var(--gray); margin-top: 3rem; margin-bottom: 1rem; font-size: 1.2rem;">Egresados</h3>
-    <div class="pilotos-grid reveal" style="margin-top: 0;">
-
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/agustin_catania.jpg" alt="Agustin Catania" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Agustin<br>Catania</span></div>
-        <div class="piloto-card-years">2023</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/agustin_sepulveda.jpg" alt="Agustin Sepulveda" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Agustin<br>Sepulveda</span></div>
-        <div class="piloto-card-years">2025</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/agustin_tomas_pizarro.jpg" alt="Agustin Tomas Pizarro" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Agustin<br>Tomas Pizarro</span></div>
-        <div class="piloto-card-years">2024 — 2025</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/ariel_dominguez.jpg" alt="Ariel Dominguez" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Ariel<br>Dominguez</span></div>
-        <div class="piloto-card-years">2022</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/ayrton_chorne.jpg" alt="Ayrton Chorne" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Ayrton<br>Chorne</span></div>
-        <div class="piloto-card-years">2024</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/carlos_bozo.jpg" alt="Carlos Bozo" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Carlos<br>Bozo</span></div>
-        <div class="piloto-card-years">2025</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/dante_amorelli.jpg" alt="Dante Amorelli" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Dante<br>Amorelli</span></div>
-        <div class="piloto-card-years">2024 — 2025</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/dante_laroca.jpg" alt="Dante Laroca" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Dante<br>Laroca</span></div>
-        <div class="piloto-card-years">2023 — 2024</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/diego_alvaro.jpg" alt="Diego Alvaro" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Diego<br>Alvaro</span></div>
-        <div class="piloto-card-years">2023</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/fausto_arnaudo.jpg" alt="Fausto Arnaudo" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Fausto<br>Arnaudo</span></div>
-        <div class="piloto-card-years">2022</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/francesco_grimaldi.jpg" alt="Francesco Grimaldi" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Francesco<br>Grimaldi</span></div>
-        <div class="piloto-card-years">2022</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/francisco_figueroa.jpg" alt="Francisco Figueroa" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Francisco<br>Figueroa</span></div>
-        <div class="piloto-card-years">2022</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/gennaro_mottesi.jpg" alt="Gennaro Mottesi" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Gennaro<br>Mottesi</span></div>
-        <div class="piloto-card-years">2024 — 2025</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/gian_marco_giraudo.jpg" alt="Gian Marco Giraudo" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Gian Marco<br>Giraudo</span></div>
-        <div class="piloto-card-years">2025</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/gianni_franciosa.jpg" alt="Gianni Franciosa" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Gianni<br>Franciosa</span></div>
-        <div class="piloto-card-years">2025</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="2">
-        <img class="piloto-card-photo" src="fotos/pilotos/gustavo_carreira.jpg" alt="Gustavo Carreira" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Gustavo<br>Carreira</span></div>
-        <div class="piloto-card-years">2022</div>
-        <div class="piloto-stars" data-count="2"><span class="star-icon">★</span><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/ignacio_vivian.jpg" alt="Ignacio Vivian" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Ignacio<br>Vivian</span></div>
-        <div class="piloto-card-years">2022</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/joaquin_camporino_rossotti.jpg" alt="Joaquin Camporino Rossotti" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Joaquin<br>Camporino Rossotti</span></div>
-        <div class="piloto-card-years">2023 — 2024</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/julian_puglisi.jpg" alt="Julian Puglisi" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Julian<br>Puglisi</span></div>
-        <div class="piloto-card-years">2023</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/julian_ramos.jpg" alt="Julian Ramos" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Julian<br>Ramos</span></div>
-        <div class="piloto-card-years">2022 — 2023</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/lisandro_ricciardelli.jpg" alt="Lisandro Ricciardelli" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Lisandro<br>Ricciardelli</span></div>
-        <div class="piloto-card-years">2023</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/martin_bertolaccini.jpg" alt="Martin Bertolaccini" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Martin<br>Bertolaccini</span></div>
-        <div class="piloto-card-years">2022</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/martin_saa.jpg" alt="Martin Saa" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Martin<br>Saa</span></div>
-        <div class="piloto-card-years">2022</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/mateo_storni.jpg" alt="Mateo Storni" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Mateo<br>Storni</span></div>
-        <div class="piloto-card-years">2024</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/maximo_costanzo.jpg" alt="Maximo Costanzo" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Maximo<br>Costanzo</span></div>
-        <div class="piloto-card-years">2024</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/nicolas_manta.jpg" alt="Nicolas Manta" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Nicolas<br>Manta</span></div>
-        <div class="piloto-card-years">2023 — 2025</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/nicolas_orchese.jpg" alt="Nicolas Orchese" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Nicolas<br>Orchese</span></div>
-        <div class="piloto-card-years">2024 — 2025</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/nicolas_rolando.jpg" alt="Nicolas Rolando" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Nicolas<br>Rolando</span></div>
-        <div class="piloto-card-years">2022</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/pablo_moretta.jpg" alt="Pablo Moretta" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Pablo<br>Moretta</span></div>
-        <div class="piloto-card-years">2024</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/ramiro_amorelli.jpg" alt="Ramiro Amorelli" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Ramiro<br>Amorelli</span></div>
-        <div class="piloto-card-years">2024 — 2025</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/ramiro_carcano.jpg" alt="Ramiro Carcano" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Ramiro<br>Carcano</span></div>
-        <div class="piloto-card-years">2023</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/ramiro_carreira.jpg" alt="Ramiro Carreira" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Ramiro<br>Carreira</span></div>
-        <div class="piloto-card-years">2022</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/renato_longarzo.jpg" alt="Renato Longarzo" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Renato<br>Longarzo</span></div>
-        <div class="piloto-card-years">2022</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="3">
-        <img class="piloto-card-photo" src="fotos/pilotos/santino_dore.jpg" alt="Santino Dore" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Santino<br>Dore</span></div>
-        <div class="piloto-card-years">2022 — 2024</div>
-        <div class="piloto-stars" data-count="3"><span class="star-icon">★</span><span class="star-icon">★</span><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/santino_pesce.jpg" alt="Santino Pesce" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Santino<br>Pesce</span></div>
-        <div class="piloto-card-years">2025</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/sebastian_pernigotte.jpg" alt="Sebastian Pernigotte" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Sebastian<br>Pernigotte</span></div>
-        <div class="piloto-card-years">2022</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="1">
-        <img class="piloto-card-photo" src="fotos/pilotos/simon_bulbarella.jpg" alt="Simon Bulbarella" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Simon<br>Bulbarella</span></div>
-        <div class="piloto-card-years">2022</div>
-        <div class="piloto-stars" data-count="1"><span class="star-icon">★</span></div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/thiago_palotini.jpg" alt="Thiago Palotini" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Thiago<br>Palotini</span></div>
-        <div class="piloto-card-years">2024</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/thiago_strazzolini.jpg" alt="Thiago Strazzolini" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Thiago<br>Strazzolini</span></div>
-        <div class="piloto-card-years">2022</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/tomas_roca.jpg" alt="Tomas Roca" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Tomas<br>Roca</span></div>
-        <div class="piloto-card-years">2024</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/valentin_maschio.jpg" alt="Valentin Maschio" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Valentin<br>Maschio</span></div>
-        <div class="piloto-card-years">2023</div>
-      </div>
-      
-      <div class="piloto-card" data-logros="0">
-        <img class="piloto-card-photo" src="fotos/pilotos/vito_lipara.jpg" alt="Vito Lipara" onerror="this.style.display='none'">
-        <div class="piloto-card-overlay"></div>
-        <div class="piloto-card-name"><span>Vito<br>Lipara</span></div>
-        <div class="piloto-card-years">2024 — 2025</div>
-      </div>
-
-    </div><div style="text-align:center; margin-top:1rem;">
-      <p style="font-size:0.82rem; color:var(--gray); font-weight:300;">¿Querés ser parte? <a href="#contacto" style="color:var(--green); text-decoration:none; font-weight:600;">Contactanos →</a></p>
-    </div>
-  </div>
-</section>
-
-<section id="contacto">
-  <img class="contacto-am-watermark" src="fotos/logos/AM_watermark.png" alt="" aria-hidden="true">
-  <div class="container">
-    <div class="contacto-grid reveal">
-      <div class="contacto-left">
-        <div class="section-label">Contacto</div>
-        <h2>NO DEJES QUE TU IMAGEN SE QUEDE<br><span class="green">EN BOXES</span></h2>
-        <p>Hablemos sobre cómo Advanced Motorsport puede potenciar tu rendimiento en pista y tu imagen fuera de ella.</p>
-        <div class="contact-items">
-          <a href="mailto:amastrangelo.engineering@gmail.com" class="contact-item">
-            <div class="contact-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6" fill="none" stroke="#39FF14" stroke-width="1.8"/></svg></div>
-            <div><span class="contact-label">Email</span><span class="contact-value">amastrangelo.engineering@gmail.com</span></div>
-          </a>
-          <a href="https://instagram.com/advancedmotorsportengineering" target="_blank" class="contact-item">
-            <div class="contact-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" fill="var(--black)" stroke="#39FF14" stroke-width="1.5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#39FF14" stroke-width="2"/></svg></div>
-            <div><span class="contact-label">Instagram — Engineering</span><span class="contact-value">@advancedmotorsportengineering</span></div>
-          </a>
-          <a href="https://instagram.com/advancedmotorsportmedia" target="_blank" class="contact-item">
-            <div class="contact-icon"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" fill="var(--black)" stroke="#39FF14" stroke-width="1.5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="#39FF14" stroke-width="2"/></svg></div>
-            <div><span class="contact-label">Instagram — Media</span><span class="contact-value">@advancedmotorsportmedia</span></div>
-          </a>
-        </div>
-      </div>
-      <div>
-        <div class="services-heading">Envianos un mensaje</div>
-        <div class="contacto-form">
-          <div class="form-row">
-            <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre"></div>
-            <div class="form-group"><label>Email</label><input type="email" placeholder="tu@email.com"></div>
-          </div>
-          <div class="form-group">
-            <label>Servicio de interés</label>
-            <select>
-              <option value="" disabled selected>Seleccioná un servicio</option>
-              <optgroup label="AM Engineering">
-                <option>Ingeniería de pista</option>
-                <option>Coaching de rendimiento</option>
-                <option>Capacitación online (Alfano / ADA)</option>
-                <option>Capacitación online (AiM / RS3)</option>
-                <option>Análisis de telemetría</option>
-              </optgroup>
-              <optgroup label="AM Media">
-                <option>Sponsorship Dossier</option>
-                <option>Pro-Identity Dossier</option>
-                <option>Pack Rookie</option>
-                <option>Pack Pole</option>
-                <option>Pack Champion</option>
-                <option>Servicio individual (Social Flash / Story)</option>
-              </optgroup>
-            </select>
-          </div>
-          <div class="form-group"><label>Mensaje</label><textarea placeholder="Contanos sobre tu proyecto, categoría en la que competís, y lo que necesitás..."></textarea></div>
-          <button class="form-submit" onclick="handleSubmit(event)">Enviar mensaje →</button>
-          <p class="form-note">Respondemos dentro de las 24 hs hábiles</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="youtube" style="background: var(--dark); padding: 80px 0;">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">Canal de YouTube</div>
-      <h2 class="section-title">ÚLTIMO<br><span class="green">VIDEO</span></h2>
-      <div class="green-line"></div>
-    </div>
-    <div class="reveal" style="display:flex; flex-direction:column; align-items:center; gap:2rem;">
-
-      <div id="yt-container" style="width:100%; max-width:800px; aspect-ratio:16/9; border:1px solid rgba(57,255,20,0.2); background:var(--dark2); overflow:hidden; display:flex; align-items:center; justify-content:center;">
-        <div id="yt-loading" style="display:flex; flex-direction:column; align-items:center; gap:12px;">
-          <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
-            <circle cx="12" cy="12" r="10" stroke="rgba(57,255,20,0.2)" stroke-width="2"/>
-            <path d="M12 2a10 10 0 0 1 10 10" stroke="#39FF14" stroke-width="2" stroke-linecap="round">
-              <animateTransform attributeName="transform" type="rotate" from="0 12 12" to="360 12 12" dur="1s" repeatCount="indefinite"/>
-            </path>
-          </svg>
-          <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.2em; color:rgba(57,255,20,0.5); text-transform:uppercase;">Cargando video...</span>
-        </div>
-      </div>
-
-      <div id="yt-meta" style="text-align:center; display:none; max-width:600px;">
-        <div id="yt-title" style="font-family:'Barlow Condensed',sans-serif; font-size:1.1rem; font-weight:600; letter-spacing:0.06em; color:var(--white); margin-bottom:4px;"></div>
-        <div id="yt-date" style="font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.2em; color:var(--gray); text-transform:uppercase;"></div>
-      </div>
-
-      <a href="https://www.youtube.com/@advancedmotorsportengineering"
-         target="_blank" rel="noopener"
-         class="btn-primary"
-         style="display:inline-flex; align-items:center; gap:10px; text-decoration:none;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-        </svg>
-        Ver canal completo
-      </a>
-    </div>
-  </div>
-</section>
-
-<script>
-/* ============================================================
-   YOUTUBE — carga dinámica del último video via RSS público.
-   ============================================================ */
-(function () {
-  var CHANNEL_ID = 'UCp1KTSMxd6370OcEO-50Mxg';
-  var RSS_URL    = 'https://www.youtube.com/feeds/videos.xml?channel_id=' + CHANNEL_ID;
-  var PROXY      = 'https://api.allorigins.win/get?url=' + encodeURIComponent(RSS_URL);
-
-  function thumbUrl(id) { return 'https://img.youtube.com/vi/' + id + '/maxresdefault.jpg'; }
-  function thumbUrlFallback(id) { return 'https://img.youtube.com/vi/' + id + '/hqdefault.jpg'; }
-
-  function showVideoCard(videoId, title, pubRaw) {
-    var watchUrl = 'https://www.youtube.com/watch?v=' + videoId;
-    var c = document.getElementById('yt-container');
-
-    c.style.cursor = 'pointer';
-    c.style.position = 'relative';
-    c.innerHTML =
-      '<img id="yt-thumb" src="' + thumbUrl(videoId) + '" '
-      + 'onerror="this.src=\'' + thumbUrlFallback(videoId) + '\'" '
-      + 'style="width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0;" alt="' + title.replace(/"/g, '&quot;') + '">'
-      + '<div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.55) 0%,rgba(0,0,0,0.1) 60%);transition:background 0.25s;" id="yt-overlay"></div>'
-      + '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">'
-      +   '<div id="yt-play-btn" style="width:72px;height:72px;border-radius:50%;background:var(--yt-play);border:2px solid #39FF14;display:flex;align-items:center;justify-content:center;transition:transform 0.2s,background 0.2s;">'
-      +     '<svg width="28" height="28" viewBox="0 0 24 24" fill="#39FF14"><path d="M8 5v14l11-7z"/></svg>'
-      +   '</div>'
-      + '</div>';
-
-    c.addEventListener('mouseenter', function () {
-      var btn = document.getElementById('yt-play-btn');
-      if (btn) { btn.style.background = 'rgba(57,255,20,0.18)'; btn.style.transform = 'scale(1.1)'; }
-    });
-    c.addEventListener('mouseleave', function () {
-      var btn = document.getElementById('yt-play-btn');
-      if (btn) { btn.style.background = 'var(--yt-play)'; btn.style.transform = 'scale(1)'; }
-    });
-
-    c.addEventListener('click', function () { window.open(watchUrl, '_blank', 'noopener'); });
-
-    if (title) document.getElementById('yt-title').textContent = title;
-    if (pubRaw) {
-      var fecha = new Date(pubRaw);
-      document.getElementById('yt-date').textContent = fecha.toLocaleDateString('es-AR', { day: '2-digit', month: 'long', year: 'numeric' });
-    }
-    document.getElementById('yt-meta').style.display = 'block';
-  }
-
-  function showFallback() {
-    var c = document.getElementById('yt-container');
-    c.innerHTML =
-      '<a href="https://www.youtube.com/@advancedmotorsportengineering" target="_blank" rel="noopener" '
-      + 'style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;width:100%;height:100%;text-decoration:none;">'
-      + '<svg width="64" height="64" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="11" fill="rgba(255,0,0,0.12)" stroke="rgba(255,0,0,0.3)" stroke-width="1"/><path d="M8 5v14l11-7z" fill="#39FF14"/></svg>'
-      + '<span style="font-family:\'Barlow Condensed\',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:#39FF14;text-transform:uppercase;">Ver canal en YouTube</span>'
-      + '</a>';
-  }
-
-  fetch(PROXY)
-    .then(function (r) { return r.json(); })
-    .then(function (data) {
-      var parser = new DOMParser();
-      var xml    = parser.parseFromString(data.contents, 'text/xml');
-      var entry  = xml.querySelector('entry');
-      if (!entry) throw new Error('feed vacío');
-
-      var videoId = (entry.querySelector('videoId') || {}).textContent;
-      if (!videoId) {
-        var link = entry.querySelector('link') && entry.querySelector('link').getAttribute('href');
-        if (link) videoId = new URL(link).searchParams.get('v');
-      }
-      if (!videoId) throw new Error('videoId no encontrado');
-
-      var title  = (entry.querySelector('title') || {}).textContent || '';
-      var pubRaw = (entry.querySelector('published') || {}).textContent || '';
-
-      showVideoCard(videoId, title, pubRaw);
-    })
-    .catch(function (err) {
-      console.warn('YouTube RSS error:', err);
-      showFallback();
-    });
-})();
-</script>
-
-<div class="green-strip"></div>
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div>
-        <div class="footer-brand">ADVANCED MOTORSPORT</div>
-        <div class="footer-tagline">Taking you to the first place</div>
-      </div>
-      <div class="footer-copy">© 2025 Advanced Motorsport — By Ayrton Mastrangelo</div>
-    </div>
-  </div>
-</footer>
-
-<script>
-  // --- Nav: efecto al hacer scroll ---
-  const nav = document.getElementById('mainNav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  });
-
-  // --- Menú hamburguesa (mobile) ---
-  function toggleMenu() {
-    document.getElementById('navLinks').classList.toggle('open');
-  }
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.getElementById('navLinks').classList.remove('open');
-    });
-  });
-
-  // --- Theme Toggle logic con View Transitions ---
-  const themeToggleBtn = document.getElementById('themeToggle');
-
-  // Inicializar estado del theme guardado en localStorage
-  if (localStorage.getItem('am-theme') === 'light') {
-    document.documentElement.classList.add('light-mode');
-  }
-
-  themeToggleBtn.addEventListener('click', () => {
-    // Fallback si el navegador no soporta View Transitions (ej. navegadores antiguos)
-    if (!document.startViewTransition) {
-      document.documentElement.classList.toggle('light-mode');
-      saveTheme();
-      return;
-    }
-
-    // Efecto nativo de polígono a pantalla completa
-    document.startViewTransition(() => {
-      document.documentElement.classList.toggle('light-mode');
-      saveTheme();
-    });
-  });
-
-  function saveTheme() {
-    const isLight = document.documentElement.classList.contains('light-mode');
-    localStorage.setItem('am-theme', isLight ? 'light' : 'dark');
-  }
-
-  // --- Scroll reveal ---
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), 80);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  // --- Nav link activo ---
-  const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
-    navLinks.forEach(l => { l.style.color = l.getAttribute('href') === '#' + current ? 'var(--green)' : ''; });
-  });
-
-  // --- Formulario ---
-  function handleSubmit(e) {
-    e.preventDefault();
-    const btn = e.target;
-    btn.textContent = 'Mensaje enviado ✓';
-    btn.style.background = '#22cc08';
-    setTimeout(() => { btn.textContent = 'Enviar mensaje →'; btn.style.background = ''; }, 3000);
-  }
-
-  // --- Popup Trayectoria & Grilla Mobile ---
-  const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
-
-  document.querySelectorAll('.timeline-entry').forEach(entry => {
-    entry.addEventListener('click', function(e) {
-      if (!isTouchDevice()) return;
-      const isActive = this.classList.contains('active');
-      document.querySelectorAll('.timeline-entry.active').forEach(el => {
-        if (el !== this) el.classList.remove('active');
-      });
-      this.classList.toggle('active', !isActive);
-      if (!isActive) {
-        const closeHandler = (ev) => {
-          if (!this.contains(ev.target)) {
-            this.classList.remove('active');
-            document.removeEventListener('click', closeHandler);
-          }
-        };
-        setTimeout(() => document.addEventListener('click', closeHandler), 10);
-      }
-    });
-  });
-
-  document.querySelectorAll('.piloto-card').forEach(card => {
-    card.addEventListener('click', function() {
-      if (!isTouchDevice()) return;
-      const isActive = this.classList.contains('active');
-      document.querySelectorAll('.piloto-card.active').forEach(c => {
-        if (c !== this) c.classList.remove('active');
-      });
-      this.classList.toggle('active', !isActive);
-      if (!isActive) {
-        const closeHandler = (ev) => {
-          if (!this.contains(ev.target)) {
-            this.classList.remove('active');
-            document.removeEventListener('click', closeHandler);
-          }
-        };
-        setTimeout(() => document.addEventListener('click', closeHandler), 10);
-      }
-    });
-  });
-</script>
-
-</body>
-</html>
+              <img class="te-popup-img" src="fotos/logros/gustavo_carreira_trophy_2.jpg"
