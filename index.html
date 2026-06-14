@@ -26,12 +26,10 @@
   html { 
     scroll-behavior: smooth; 
     font-size: 16px; 
-    /* Soporte Firefox para Scrollbar */
     scrollbar-width: thin;
     scrollbar-color: #717171 var(--black);
   }
 
-  /* ============ YOUTUBE SCROLLBAR ============ */
   ::-webkit-scrollbar { width: 16px; }
   ::-webkit-scrollbar-track { background: var(--black); }
   ::-webkit-scrollbar-thumb {
@@ -223,9 +221,9 @@
   .valor-item h4 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green); margin-bottom: 0.6rem; }
   .valor-item p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; font-weight: 300; }
   
-  /* Cursos Grid */
-  .cursos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
-  .curso-card { background: var(--dark2); border: 1px solid rgba(57,255,20,0.15); padding: 2.5rem; position: relative; overflow: hidden; transition: all 0.3s; }
+  /* Cursos Grid (Compact) */
+  .cursos-grid { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 3.5rem; margin-top: 2rem; }
+  .curso-card { background: var(--dark2); border: 1px solid rgba(57,255,20,0.15); padding: 1.5rem 2.5rem; flex: 1; max-width: 320px; display: flex; align-items: center; justify-content: center; gap: 15px; position: relative; overflow: hidden; transition: all 0.3s; }
   .curso-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--green); transform: scaleX(0); transition: transform 0.3s ease; }
   .curso-card:hover { border-color: rgba(57,255,20,0.4); }
   .curso-card:hover::after { transform: scaleX(1); }
@@ -235,9 +233,7 @@
   .curso-card.aim-card { border-color: rgba(255,0,0,0.15); }
   .curso-card.aim-card::after { background: #FF0000; }
   .curso-card.aim-card:hover { border-color: rgba(255,0,0,0.5); }
-  .curso-device { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--green); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
-  .curso-card p { font-size: 0.88rem; color: var(--gray); line-height: 1.7; font-weight: 300; margin-bottom: 1.2rem; }
-  .curso-badge { display: inline-block; font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid rgba(57,255,20,0.3); padding: 4px 12px; }
+  .curso-device { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.08em; margin-bottom: 0; }
 
   /* ============ AM MEDIA ============ */
   #media { background: var(--black); }
@@ -809,86 +805,82 @@
       <div class="section-label">AM Engineering</div>
       <h2 class="section-title">CAPACITACIONES<br><span class="green">ONLINE</span></h2>
       <div class="green-line"></div>
-      <p style="width:100%; color:var(--gray); font-size:0.95rem; line-height:1.8; font-weight:300; margin-bottom:3.5rem;">
-        Clases en vivo por videollamada, personalizadas según tu nivel y el sistema que usás. Aprendé a leer tus datos y a convertirlos en decisiones de set-up concretas.
-      </p>
+      
+      <div style="max-width:100%; text-align:left; color:var(--gray); font-size:0.95rem; line-height:1.8; font-weight:300; margin-bottom:2rem;">
+        <p style="margin-bottom: 1.5rem;">Clases personalizadas según tu nivel y el sistema que utilices, diseñadas específicamente para ingenieros de pista, ingenieros de performance, jefes de equipo, mecánicos, pilotos y aficionados que buscan transformar sus datos en victorias. A través de este programa intensivo, te guiaremos desde los conceptos iniciales hasta técnicas profesionales avanzadas para exprimir cada milésima de segundo en pista, olvidarte de las conjeturas y tomar decisiones basadas en evidencia sólida.</p>
+        <p style="margin-bottom: 1.5rem;">Nuestro programa integral abarca:</p>
+        
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 2rem; color: var(--light);">
+          <div>
+            <strong style="color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase;">Módulo 1: Configuración Inicial y Buenas Prácticas ⚙️</strong>
+            <ul style="list-style: none; margin-top: 0.5rem; padding-left: 0.5rem;">
+              <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.3rem;"><span style="color: var(--green);">›</span> Ajuste y puesta a punto de sensores según tu vehículo y categoría.</li>
+              <li style="display: flex; align-items: flex-start; gap: 10px;"><span style="color: var(--green);">›</span> Procedimientos clave en boxes antes y después de cada tanda para garantizar la fiabilidad de la información limpia.</li>
+            </ul>
+          </div>
+          
+          <div>
+            <strong style="color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase;">Módulo 2: Dominando el Software 💻</strong>
+            <ul style="list-style: none; margin-top: 0.5rem; padding-left: 0.5rem;">
+              <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.3rem;"><span style="color: var(--green);">›</span> Interfaz, descarga y organización eficiente de tus sesiones.</li>
+              <li style="display: flex; align-items: flex-start; gap: 10px;"><span style="color: var(--green);">›</span> Herramientas, superposición de vueltas, creación de sectores y análisis de canales matemáticos en la suite que elijas (RS3 o ADA).</li>
+            </ul>
+          </div>
+
+          <div>
+            <strong style="color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase;">Módulo 3: Análisis Práctico (De la Teoría a la Pista) 🏎️</strong>
+            <ul style="list-style: none; margin-top: 0.5rem; padding-left: 0.5rem;">
+              <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.3rem;"><span style="color: var(--green);">›</span> Estudio de casos reales aplicados a la resolución de problemas de puesta a punto y técnicas de pilotaje.</li>
+              <li style="display: flex; align-items: flex-start; gap: 10px;"><span style="color: var(--green);">›</span> Mentoría directa sobre tus propios datos de telemetría para encontrar las décimas que marcan la diferencia.</li>
+            </ul>
+          </div>
+
+          <div>
+            <strong style="color: var(--white); font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; letter-spacing: 0.05em; text-transform: uppercase;">Módulo 4: Generando Valor y Variaciones 📊</strong>
+            <ul style="list-style: none; margin-top: 0.5rem; padding-left: 0.5rem;">
+              <li style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 0.3rem;"><span style="color: var(--green);">›</span> Interpretación de gráficas para decisiones concretas de set-up (chasis, motor, neumáticos) y estilo de conducción.</li>
+              <li style="display: flex; align-items: flex-start; gap: 10px;"><span style="color: var(--green);">›</span> Adaptación del análisis a diferentes condiciones de pista, tipos de competencia y fines de semana de carrera completos.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p>Al finalizar la capacitación, serás completamente capaz de configurar tu dispositivo, utilizar de forma eficiente el software correspondiente, analizar datos bajo un criterio profesional y transformarlos en tu mayor ventaja competitiva.</p>
+      </div>
     </div>
 
-    <div class="cursos-grid reveal">
-
-      <div class="curso-card alfano-card">
-        <div style="display:flex; align-items:center; gap:14px; margin-bottom:1rem;">
-          <div style="width:44px; height:44px; background:rgba(255,215,0,0.08); border:1px solid rgba(255,215,0,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:4px;">
-            <img src="fotos/logos/alfano.png" alt="Logo Alfano" style="max-width:100%; max-height:100%; object-fit:contain;">
-          </div>
-          <div class="curso-device" style="margin-bottom:0; color:#FFD700;">Alfano / ADA</div>
+    <div class="cursos-grid reveal" style="margin-bottom: 3.5rem;">
+      <div class="curso-card alfano-card" style="padding: 1.5rem 2.5rem; max-width: 320px; display: flex; align-items: center; justify-content: center; gap: 15px;">
+        <div style="width:40px; height:40px; background:rgba(255,215,0,0.08); border:1px solid rgba(255,215,0,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:4px;">
+          <img src="fotos/logos/alfano.png" alt="Logo Alfano" style="max-width:100%; max-height:100%; object-fit:contain;">
         </div>
-        <p>Capacitación en vivo para el uso profesional del software ADA de Alfano. Aprendé a configurar el dispositivo, interpretar los canales de datos, analizar trazados y aplicar los resultados directamente al set-up del kart.</p>
-        <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.6rem;">
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FFD700; font-size:0.9rem;">›</span> Configuración inicial del dispositivo
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FFD700; font-size:0.9rem;">›</span> Lectura e interpretación de canales
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FFD700; font-size:0.9rem;">›</span> Análisis de trazado y comparación de vueltas
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FFD700; font-size:0.9rem;">›</span> Aplicación de datos al set-up
-          </div>
-        </div>
-        <div style="margin-top:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
-          <span class="curso-badge" style="color:#FFD700; border-color:rgba(255,215,0,0.3);">Videollamada en vivo</span>
-          <a href="#contacto" style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#FFD700; text-decoration:none; font-weight:600;">Consultar →</a>
-        </div>
+        <div class="curso-device" style="margin-bottom:0; color:#FFD700; font-size: 1.8rem;">Alfano / ADA</div>
       </div>
 
-      <div class="curso-card aim-card">
-        <div style="display:flex; align-items:center; gap:14px; margin-bottom:1rem;">
-          <div style="width:44px; height:44px; background:rgba(255,0,0,0.08); border:1px solid rgba(255,0,0,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:4px;">
-             <img src="fotos/logos/aim.png" alt="Logo AiM" style="max-width:100%; max-height:100%; object-fit:contain;">
-          </div>
-          <div class="curso-device" style="margin-bottom:0; color:#FF0000;">AiM / RS3</div>
+      <div class="curso-card aim-card" style="padding: 1.5rem 2.5rem; max-width: 320px; display: flex; align-items: center; justify-content: center; gap: 15px;">
+        <div style="width:40px; height:40px; background:rgba(255,0,0,0.08); border:1px solid rgba(255,0,0,0.25); display:flex; align-items:center; justify-content:center; flex-shrink:0; padding:4px;">
+           <img src="fotos/logos/aim.png" alt="Logo AiM" style="max-width:100%; max-height:100%; object-fit:contain;">
         </div>
-        <p>Formación especializada en el sistema MyChron y el software RS3 Analysis de AiM. Desde la descarga de datos hasta el análisis avanzado: aprendé a sacar conclusiones accionables de cada sesión en pista.</p>
-        <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:0.6rem;">
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FF0000; font-size:0.9rem;">›</span> Descarga y gestión de sesiones
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FF0000; font-size:0.9rem;">›</span> Análisis de velocidad y aceleración
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FF0000; font-size:0.9rem;">›</span> Comparación piloto vs referencia
-          </div>
-          <div style="display:flex; align-items:center; gap:10px; font-family:'Barlow Condensed',sans-serif; font-size:0.8rem; letter-spacing:0.1em; color:var(--light); font-weight:300;">
-            <span style="color:#FF0000; font-size:0.9rem;">›</span> Identificación de zonas de mejora
-          </div>
-        </div>
-        <div style="margin-top:2rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
-          <span class="curso-badge" style="color:#FF0000; border-color:rgba(255,0,0,0.3);">Videollamada en vivo</span>
-          <a href="#contacto" style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#FF0000; text-decoration:none; font-weight:600;">Consultar →</a>
-        </div>
+        <div class="curso-device" style="margin-bottom:0; color:#FF0000; font-size: 1.8rem;">AiM / RS3</div>
       </div>
-
     </div>
 
-    <div class="reveal" style="margin-top:3.5rem; background:var(--dark2); border:1px solid rgba(57,255,20,0.12); padding:2rem 2.5rem; display:flex; align-items:center; gap:2rem; flex-wrap:wrap;">
+    <div class="reveal" style="background:var(--dark2); border:1px solid rgba(57,255,20,0.12); padding:2rem 2.5rem; display:flex; align-items:center; gap:2rem; flex-wrap:wrap; margin-bottom: 3rem;">
       <div style="flex:1; min-width:200px;">
         <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--green); margin-bottom:0.5rem;">¿Cómo funciona?</div>
-        <p style="font-size:0.88rem; color:var(--gray); line-height:1.7; font-weight:300;">Coordinamos día y horario por WhatsApp. La clase se hace por videollamada compartiendo pantalla. Podés tener el software abierto mientras aprendés en tiempo real.</p>
+        <p style="font-size:0.88rem; color:var(--gray); line-height:1.7; font-weight:300;">Coordinamos día y horario por WhatsApp. La clase se dicta en vivo por videollamada compartiendo pantalla, lo que te permite aprender en tiempo real y tener el software abierto en tu computadora simultáneamente.</p>
       </div>
       <div style="flex:1; min-width:200px;">
         <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--green); margin-bottom:0.5rem;">¿Para quién es?</div>
-        <p style="font-size:0.88rem; color:var(--gray); line-height:1.7; font-weight:300;">Pilotos, mecánicos o ingenieros de cualquier nivel. Tanto si recién compraste el dispositivo como si ya lo usás y querés sacarle más provecho.</p>
+        <p style="font-size:0.88rem; color:var(--gray); line-height:1.7; font-weight:300;">Pilotos, mecánicos, jefes o ingenieros de cualquier nivel. Tanto si recién compraste el dispositivo como si ya lo usás y querés sacarle el máximo provecho.</p>
       </div>
-      <a href="#contacto" class="btn-primary" style="display:inline-block; white-space:nowrap; text-decoration:none; flex-shrink:0;">Consultar disponibilidad</a>
+    </div>
+
+    <div class="reveal" style="text-align: center;">
+      <a href="#contacto" class="btn-primary" style="display:inline-block;">Consultar disponibilidad</a>
     </div>
 
   </div>
 </section>
-
 <section id="media">
   <div class="container">
     <div class="reveal">
