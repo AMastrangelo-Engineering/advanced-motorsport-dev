@@ -175,32 +175,148 @@
   .h-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--green); line-height: 1; margin-bottom: 0.3rem; }
   .h-stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
 
-  /* ============ TRAYECTORIA ============ */
-  #trayectoria { background: var(--black); }
-  .timeline { position: relative; padding-left: 2rem; }
-  .timeline::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--green), rgba(57,255,20,0.1)); }
-  .timeline-year { margin-bottom: 3rem; position: relative; }
-  .timeline-year-label { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--green); letter-spacing: 0.1em; margin-bottom: 1rem; position: relative; }
-  .timeline-year-label::before { content: ''; position: absolute; left: -2.55rem; top: 50%; transform: translateY(-50%); width: 10px; height: 10px; background: var(--green); border-radius: 50%; box-shadow: 0 0 12px var(--green); }
-  .timeline-entries { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; padding-left: 0.5rem; }
-  .timeline-entry { background: var(--dark2); border: 1px solid rgba(57,255,20,0.1); padding: 1rem 1.2rem; transition: border-color 0.25s, background 0.25s; position: relative; overflow: visible; cursor: pointer; }
-  .timeline-entry::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0; background: var(--green); transition: height 0.3s ease; }
-  .timeline-entry:hover, .timeline-entry.active { border-color: rgba(57,255,20,0.35); background: var(--dark3); }
-  .timeline-entry:hover::before, .timeline-entry.active::before { height: 100%; }
-  .te-pilot { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1rem; color: var(--white); letter-spacing: 0.05em; text-transform: uppercase; }
-  .te-category { font-family: 'Barlow', sans-serif; font-size: 0.78rem; color: var(--green); margin: 2px 0 4px; }
-  .te-event { font-family: 'Barlow', sans-serif; font-size: 0.78rem; color: var(--gray); font-weight: 300; }
-  .te-popup { position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%) translateY(6px); width: 300px; background: #0d0d0d; border: 1px solid rgba(57,255,20,0.4); z-index: 500; opacity: 0; pointer-events: none; transition: opacity 0.22s ease, transform 0.22s ease; box-shadow: 0 8px 32px rgba(0,0,0,0.7), 0 0 0 1px rgba(57,255,20,0.1); }
-  .timeline-entry:nth-child(3n) .te-popup, .timeline-entry:last-child .te-popup { left: auto; right: 0; transform: translateY(6px); }
-  .timeline-entry:hover .te-popup, .timeline-entry.active .te-popup { opacity: 1; pointer-events: auto; transform: translateX(-50%) translateY(0); }
-  .timeline-entry:nth-child(3n):hover .te-popup, .timeline-entry:nth-child(3n).active .te-popup, .timeline-entry:last-child:hover .te-popup, .timeline-entry:last-child.active .te-popup { transform: translateY(0); }
-  .te-popup-img { width: 100%; aspect-ratio: 3/2; object-fit: cover; display: block; }
-  .te-popup-no-img { width: 100%; aspect-ratio: 3/2; background: var(--dark3); display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 8px; }
-  .te-popup-no-img span { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(57,255,20,0.3); }
-  .te-popup-bar { padding: 8px 12px; display: flex; align-items: center; justify-content: flex-end; }
-  .te-popup-date { font-family: 'Barlow Condensed', sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; color: var(--green); text-transform: uppercase; }
-  .te-popup::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 8px solid rgba(57,255,20,0.4); }
-  .timeline-entry:nth-child(3n) .te-popup::after, .timeline-entry:last-child .te-popup::after { left: auto; right: 20px; transform: none; }
+  /* ============ NUEVA TRAYECTORIA VITRINA CENTRAL (CON 3D) ============ */
+  #trayectoria-vitrina { 
+    position: relative; 
+    width: 100%; 
+    min-height: 80vh;
+    background: var(--black); 
+    overflow: hidden; 
+    display: flex; 
+    flex-direction: column;
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+  .trayectoria-header {
+    position: relative;
+    z-index: 10;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 2rem;
+  }
+  #arch-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-grow: 1;
+    margin-top: 2rem;
+  }
+  
+  /* Perspectiva añadida para activar el espacio 3D */
+  #arch-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    height: 450px;
+    perspective: 1200px; 
+  }
+  
+  #arch-image-mask {
+    position: absolute;
+    inset: 0;
+    background: var(--dark2);
+    clip-path: ellipse(50% 100% at 50% 100%);
+    border-bottom: 1px solid rgba(57,255,20,0.3);
+    transition: clip-path 0.3s;
+    overflow: hidden;
+  }
+  
+  /* Estados dentro del mask */
+  #arch-default {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    text-align: center;
+    transition: opacity 0.4s ease;
+  }
+  #arch-default img {
+    height: 60px;
+    opacity: 0.3;
+    filter: drop-shadow(0 0 10px rgba(57,255,20,0.2));
+  }
+  #arch-default h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    letter-spacing: 0.25em;
+    color: var(--white);
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+  #arch-default h3 span { color: var(--green); }
+
+  #arch-active {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  #arch-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .arch-no-img {
+    width: 100%;
+    height: 100%;
+    background: var(--dark3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(57,255,20,0.3);
+  }
+  #arch-active-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.7) 60%, transparent 100%);
+    padding: 3rem 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Agregado para centrar elementos flex */
+    text-align: center;  /* Agregado para centrar el texto multilínea */
+    gap: 0.3rem;
+  }
+  #arch-active-fecha { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; letter-spacing: 0.2em; color: var(--green); text-transform: uppercase; }
+  #arch-active-piloto { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--white); line-height: 1; margin: 0; }
+  #arch-active-categoria { font-family: 'Barlow', sans-serif; font-size: 1rem; color: var(--light); font-weight: 300; }
+  #arch-active-desc { font-family: 'Barlow', sans-serif; font-size: 0.85rem; color: var(--gray); font-weight: 300; font-style: italic; margin-top: 0.2rem; display: none; }
+
+  /* Elemento estrella base con soporte 3D */
+  .star-node {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    z-index: 20;
+    transform-style: preserve-3d;
+    transition: filter 0.3s ease;
+  }
+  .star-node:hover {
+    filter: drop-shadow(0 0 20px #39FF14) brightness(1.3);
+  }
+  
+  /* Capas para dar volumen (extrusión) */
+  .star-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
 
   /* ============ INGENIERIA ============ */
   #ingenieria { background: var(--dark); }
@@ -418,7 +534,6 @@
     .nav-links li a::after { display: none; }
     .nav-links li:last-child { border-bottom: none; padding: 1rem 1.5rem; }
     
-    /* Cancelar Text Roll en mobile para el menú deplegable */
     .roll-link { display: block; overflow: visible; align-items: stretch; }
     .roll-wrapper { display: inline-flex; }
 
@@ -430,18 +545,10 @@
     .form-row { grid-template-columns: 1fr; }
     section { padding: 70px 0; }
 
-    /* Grilla pilotos */
     .pilotos-grid { grid-template-columns: repeat(2, 1fr); }
     .piloto-card-name span { font-size: 0.85rem; }
     .piloto-card-years { font-size: 0.62rem; bottom: 6px; right: 8px; }
 
-    /* Timeline entries */
-    .timeline-entries { grid-template-columns: 1fr; }
-    .te-popup { width: 260px; left: 50% !important; right: auto !important; transform: translateX(-50%) translateY(6px) !important; }
-    .timeline-entry.active .te-popup { transform: translateX(-50%) translateY(0) !important; }
-    .te-popup::after { left: 50% !important; right: auto !important; transform: translateX(-50%) !important; }
-
-    /* Media Acordeón Mobile */
     .media-accordion { flex-direction: column; height: 750px; }
     .acc-item { align-items: flex-start; justify-content: flex-end; padding: 1.5rem; }
     .acc-item:hover, .acc-item.active { flex: 2; }
@@ -449,11 +556,29 @@
       writing-mode: horizontal-tb; transform: none; 
       bottom: 20px; left: 20px; font-size: 1.2rem; white-space: normal;
     }
+    
+    /* Responsive Curva - Rotación vertical hacia la izquierda */
+    #arch-container {
+      width: 90vw;
+      height: 60vh;
+      margin: 0 auto;
+    }
+    #arch-image-mask {
+      /* Arco sobre el lado izquierdo, recto a la derecha */
+      clip-path: ellipse(100% 50% at 100% 50%);
+    }
+    .star-node {
+      width: 35px;
+      height: 35px;
+    }
+    #arch-active-piloto { font-size: 1.6rem; }
+    #arch-active-categoria { font-size: 0.85rem; }
   }
 
   @media (max-width: 480px) {
     .hero-title { font-size: 3rem; }
     .pilotos-grid { grid-template-columns: repeat(2, 1fr); }
+    #arch-active-info { padding: 2rem 1.5rem 1rem; }
   }
 </style>
 </head>
@@ -524,228 +649,38 @@
   </div>
 </section>
 
-<section id="trayectoria">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-label">Palmarés</div>
-      <h2 class="section-title">NUESTRA<br><span class="green">TRAYECTORIA</span></h2>
-      <div class="green-line"></div>
-    </div>
+<section id="trayectoria-vitrina">
+  <div class="trayectoria-header reveal">
+    <div class="section-label">Palmarés</div>
+    <h2 class="section-title">NUESTRA<br><span class="green">TRAYECTORIA</span></h2>
+    <div class="green-line"></div>
+  </div>
 
-    <div class="timeline reveal">
-
-      <div class="timeline-year">
-        <div class="timeline-year-label">2021</div>
-        <div class="timeline-entries">
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Francisco Figueroa</div>
-            <div class="te-category">Junior MY10</div>
-            <div class="te-event">Campeonato Argentino de Karting</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/francisco_figueroa_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">06-08-2022</span></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="timeline-year">
-        <div class="timeline-year-label">2022</div>
-        <div class="timeline-entries">
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Simón Bulbarella</div>
-            <div class="te-category">Junior MY10</div>
-            <div class="te-event">Campeonato Argentino de Karting</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/simon_bulbarella_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">07-08-2022</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Ignacio Vivian</div>
-            <div class="te-category">ProAm</div>
-            <div class="te-event">Campeonato Argentino de Karting</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/ignacio_vivian_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">07-08-2022</span></div>
-            </div>
-          </div>
-          
-          <div class="timeline-entry">
-            <div class="te-pilot">Martin Saa</div>
-            <div class="te-category">Micro Max</div>
-            <div class="te-event">Rotax Max Buenos Aires Otoño</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/martin_saa_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">15-05-2022</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Ramiro Carreira</div>
-            <div class="te-category">Micro Max</div>
-            <div class="te-event">Rotax Max Buenos Aires Invierno</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/ramiro_carreira_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">25-09-2022</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Gustavo Carreira</div>
-            <div class="te-category">Master Max</div>
-            <div class="te-event">Rotax Max Buenos Aires Invierno</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/gustavo_carreira_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">25-09-2022</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Francesco Grimaldi</div>
-            <div class="te-category">Senior Max</div>
-            <div class="te-event">Rotax Max Gran Final Argentina</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/francesco_grimaldi_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">09-10-2022</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Gustavo Carreira</div>
-            <div class="te-category">Master Max</div>
-            <div class="te-event">Rotax Max Gran Final Argentina</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/gustavo_carreira_trophy_2.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">09-10-2022</span></div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-          
-      <div class="timeline-year">
-        <div class="timeline-year-label">2023</div>
-        <div class="timeline-entries">
+  <div id="arch-wrapper" class="reveal">
+    <div id="arch-container">
+      
+      <div id="arch-image-mask">
         
-          <div class="timeline-entry">
-            <div class="te-pilot">Santino Dore</div>
-            <div class="te-category">Junior 135cc</div>
-            <div class="te-event">Prokart Apertura</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/santino_dore_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">06-08-2023</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Julian Ramos</div>
-            <div class="te-category">General 135cc</div>
-            <div class="te-event">Prokart Apertura</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/julian_ramos_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">06-08-2023</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Santino Dore</div>
-            <div class="te-category">Junior 135cc</div>
-            <div class="te-event">Prokart Clausura</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/santino_dore_trophy_2.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">03-12-2023</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Julian Puglisi</div>
-            <div class="te-category">Master A</div>
-            <div class="te-event">APAK</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/julian_puglisi_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">10-12-2023</span></div>
-            </div>
-          </div>
-
+        <div id="arch-default">
+          <img src="fotos/logos/am_logo.png" alt="AM Logo">
+          <h3>16 RECONOCIMIENTOS<br><span>NACIONALES E INTERNACIONALES</span></h3>
         </div>
-      </div>
-
-      <div class="timeline-year">
-        <div class="timeline-year-label">2024</div>
-        <div class="timeline-entries">
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Joaquin Camporino Rossotti</div>
-            <div class="te-category">Junior 135cc</div>
-            <div class="te-event">Prokart</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/joaquin_camporino_rossotti_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">              
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">21-11-2024</span></div>
-            </div>
+        
+        <div id="arch-active">
+          <img id="arch-img" src="" alt="Logro" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div id="arch-no-img" class="arch-no-img" style="display:none;">Foto próximamente</div>
+          
+          <div id="arch-active-info">
+             <span id="arch-active-fecha"></span>
+             <h3 id="arch-active-piloto"></h3>
+             <span id="arch-active-categoria"></span>
+             <p id="arch-active-desc"></p>
           </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Santino Dore</div>
-            <div class="te-category">General 135cc</div>
-            <div class="te-event">Prokart</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/santino_dore_trophy_3.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">              
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">21-11-2024</span></div>
-            </div>
-          </div>
-
         </div>
+
       </div>
-
-      <div class="timeline-year">
-        <div class="timeline-year-label">2025</div>
-        <div class="timeline-entries">
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Agustin Sepulveda</div>
-            <div class="te-category">OK</div>
-            <div class="te-event">Sudamericano de Karting FIA</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/agustin_sepulveda_trophy_1.jpg" alt="Agustin Sepulveda" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">27-07-2025</span></div>
-            </div>
-          </div>
-
-          <div class="timeline-entry">
-            <div class="te-pilot">Valentino Manta</div>
-            <div class="te-category">Junior Max</div>
-            <div class="te-event">Gran Final Argentina</div>
-            <div class="te-popup">
-              <img class="te-popup-img" src="fotos/logros/valentino_manta_trophy_1.jpg" alt="Valentino Manta - Gran Final Argentina" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="te-popup-no-img" style="display:none;"><span>Foto próximamente</span></div>
-              <div class="te-popup-bar"><span class="te-popup-date">12-10-2025</span></div>
-            </div>
-          </div>
-
-        </div>
       </div>
-
-    </div></div>
+  </div>
 </section>
 
 <section id="ingenieria" class="carbon">
@@ -881,6 +816,7 @@
 
   </div>
 </section>
+
 <section id="media">
   <div class="container">
     <div class="reveal">
@@ -898,7 +834,7 @@
 
     <div class="media-accordion reveal">
       
-      <div class="acc-item" data-images='["fotos/media/sponsorship_1.jpg", "fotos/media/sponsorship_2.jpg", "fotos/media/sponsorship_3.jpg", "fotos/media/sponsorship_4.jpg"]'>
+      <div class="acc-item" data-images='["fotos/media/sponsorship_1.jpg", "fotos/media/sponsorship_2.jpg", "fotos/media/sponsorship_3.jpg"]'>
         <div class="acc-bg acc-bg-1"></div>
         <div class="acc-bg acc-bg-2" style="opacity: 0"></div>
         <div class="acc-overlay"></div>
@@ -931,7 +867,7 @@
         </div>
       </div>
 
-      <div class="acc-item" data-images='["fotos/media/carousel_1.jpg", "fotos/media/carousel_2.jpg", "fotos/media/carousel_3.jpg", "fotos/media/carousel_4.jpg"]'>
+      <div class="acc-item" data-images='["fotos/media/carousel_1.jpg", "fotos/media/carousel_2.jpg", "fotos/media/carousel_3.jpg", "fotos/media/carousel_4.jpg", "fotos/media/carousel_5.jpg", "fotos/media/carousel_6.jpg"]'>
         <div class="acc-bg acc-bg-1"></div>
         <div class="acc-bg acc-bg-2" style="opacity: 0"></div>
         <div class="acc-overlay"></div>
@@ -942,7 +878,7 @@
         </div>
       </div>
 
-      <div class="acc-item" data-images='["fotos/media/live_update_1.jpg", "fotos/media/live_update_2.jpg", "fotos/media/live_update_3.jpg", "fotos/media/live_update_4.jpg"]'>
+      <div class="acc-item" data-images='["fotos/media/live_update_1.jpg"]'>
         <div class="acc-bg acc-bg-1"></div>
         <div class="acc-bg acc-bg-2" style="opacity: 0"></div>
         <div class="acc-overlay"></div>
@@ -1662,8 +1598,8 @@
 
   const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
 
-  // --- Interactiviad Palmares y Pilotos ---
-  document.querySelectorAll('.timeline-entry, .piloto-card').forEach(entry => {
+  // --- Interactiviad Pilotos ---
+  document.querySelectorAll('.piloto-card').forEach(entry => {
     entry.addEventListener('click', function(e) {
       if (!isTouchDevice()) return;
       const isActive = this.classList.contains('active');
@@ -1684,7 +1620,7 @@
   });
 
   /* ====================================================
-     NUEVO: Text Roll Animation (Req 1)
+     Text Roll Animation
   ==================================================== */
   document.querySelectorAll('.nav-links a:not(.nav-cta)').forEach(link => {
     const text = link.textContent;
@@ -1718,7 +1654,7 @@
   });
 
   /* ====================================================
-     NUEVO: Acordeón Cross-Fade Animado (Req 3)
+     Acordeón Cross-Fade Animado
   ==================================================== */
   document.querySelectorAll('.acc-item').forEach(item => {
     const images = JSON.parse(item.getAttribute('data-images') || '[]');
@@ -1769,6 +1705,162 @@
     });
   });
 
+  /* ====================================================
+     Lógica Vitrina 3D (Extrusión + Senoidal)
+  ==================================================== */
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.getElementById('arch-container');
+    const mask = document.getElementById('arch-image-mask');
+    const defaultView = document.getElementById('arch-default');
+    const activeView = document.getElementById('arch-active');
+    
+    const imgEl = document.getElementById('arch-img');
+    const noImgEl = document.getElementById('arch-no-img');
+    const fechaEl = document.getElementById('arch-active-fecha');
+    const pilotoEl = document.getElementById('arch-active-piloto');
+    const categoriaEl = document.getElementById('arch-active-categoria');
+    const descEl = document.getElementById('arch-active-desc');
+
+    const logros = [
+      { piloto: "Francisco Figueroa", cat: "Junior MY10 - Campeonato Argentino de Karting", fecha: "06-08-2022", img: "fotos/logros/francisco_figueroa_trophy_1.jpg" },
+      { piloto: "Simón Bulbarella", cat: "Junior MY10 - Campeonato Argentino de Karting", fecha: "07-08-2022", img: "fotos/logros/simon_bulbarella_trophy_1.jpg" },
+      { piloto: "Ignacio Vivian", cat: "ProAm - Campeonato Argentino de Karting", fecha: "07-08-2022", img: "fotos/logros/ignacio_vivian_trophy_1.jpg" },
+      { piloto: "Martin Saa", cat: "Micro Max - Rotax Max Buenos Aires Otoño", fecha: "15-05-2022", img: "fotos/logros/martin_saa_trophy_1.jpg" },
+      { piloto: "Ramiro Carreira", cat: "Micro Max - Rotax Max Buenos Aires Invierno", fecha: "25-09-2022", img: "fotos/logros/ramiro_carreira_trophy_1.jpg" },
+      { piloto: "Gustavo Carreira", cat: "Master Max - Rotax Max Buenos Aires Invierno", fecha: "25-09-2022", img: "fotos/logros/gustavo_carreira_trophy_1.jpg" },
+      { piloto: "Francesco Grimaldi", cat: "Senior Max - Rotax Max Gran Final Argentina", fecha: "09-10-2022", img: "fotos/logros/francesco_grimaldi_trophy_1.jpg" },
+      { piloto: "Gustavo Carreira", cat: "Master Max - Rotax Max Gran Final Argentina", fecha: "09-10-2022", img: "fotos/logros/gustavo_carreira_trophy_2.jpg" },
+      { piloto: "Santino Dore", cat: "Junior 135cc - Prokart Apertura", fecha: "06-08-2023", img: "fotos/logros/santino_dore_trophy_1.jpg" },
+      { piloto: "Julian Ramos", cat: "General 135cc - Prokart Apertura", fecha: "06-08-2023", img: "fotos/logros/julian_ramos_trophy_1.jpg" },
+      { piloto: "Santino Dore", cat: "Junior 135cc - Prokart Clausura", fecha: "03-12-2023", img: "fotos/logros/santino_dore_trophy_2.jpg" },
+      { piloto: "Julian Puglisi", cat: "Master A - APAK", fecha: "10-12-2023", img: "fotos/logros/julian_puglisi_trophy_1.jpg" },
+      { piloto: "Joaquin C. Rossotti", cat: "Junior 135cc - Prokart", fecha: "21-11-2024", img: "fotos/logros/joaquin_camporino_rossotti_trophy_1.jpg" },
+      { piloto: "Santino Dore", cat: "General 135cc - Prokart", fecha: "21-11-2024", img: "fotos/logros/santino_dore_trophy_3.jpg" },
+      { piloto: "Agustin Sepulveda", cat: "OK - Sudamericano de Karting FIA", fecha: "27-07-2025", img: "fotos/logros/agustin_sepulveda_trophy_1.jpg", desc: "Liderando el campeonato de forma dominante hasta incidente de carrera." },
+      { piloto: "Valentino Manta", cat: "Junior Max - Gran Final Argentina", fecha: "12-10-2025", img: "fotos/logros/valentino_manta_trophy_1.jpg" }
+    ];
+
+    const numStars = logros.length;
+    const starsElements = [];
+
+    // Polígono base optimizado (sin drop-shadow interno masivo)
+    const singleSVG = `
+      <svg viewBox="0 0 100 100" style="width:100%; height:100%; overflow: visible;">
+        <polygon points="50,50 50,0 61.7,36" fill="#051a05" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 50,0 38.3,36" fill="#0a2a0a" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 97.5,36 61.7,36" fill="#0a2a0a" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 97.5,36 68.5,57" fill="#051a05" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 79.3,95 68.5,57" fill="#0a2a0a" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 79.3,95 50,75" fill="#051a05" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 20.7,95 50,75" fill="#0a2a0a" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 20.7,95 31.5,57" fill="#051a05" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 2.5,36 31.5,57" fill="#0a2a0a" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 2.5,36 38.3,36" fill="#051a05" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+    `;
+
+    // Multiplicamos las capas en el eje Z para generar volumen real (extrusión)
+    const extrudedStarHTML = `
+      <div class="star-layer" style="transform: translateZ(4px); filter: drop-shadow(0 0 5px rgba(57,255,20,0.5));">${singleSVG}</div>
+      <div class="star-layer" style="transform: translateZ(2px); filter: brightness(0.6);">${singleSVG}</div>
+      <div class="star-layer" style="transform: translateZ(0px); filter: brightness(0.3);">${singleSVG}</div>
+      <div class="star-layer" style="transform: translateZ(-2px); filter: brightness(0.1);">${singleSVG}</div>
+    `;
+
+    function buildStars() {
+      // Limpiar estrellas existentes al redimensionar
+      starsElements.forEach(star => star.remove());
+      starsElements.length = 0;
+      
+      const W = mask.offsetWidth;
+      const H = mask.offsetHeight;
+      const isMobile = window.innerWidth <= 768;
+
+      for (let i = 0; i < numStars; i++) {
+        let x, y;
+        
+        if (!isMobile) {
+          // Domo Horizontal
+          let angle = Math.PI - (i * (Math.PI / (numStars - 1)));
+          x = (W / 2) + (W / 2) * Math.cos(angle);
+          y = H - H * Math.sin(angle);
+        } else {
+          // Arco Vertical
+          let angle = -Math.PI/2 + (i * (Math.PI / (numStars - 1)));
+          x = W - W * Math.cos(angle);
+          y = (H / 2) + (H / 2) * Math.sin(angle);
+        }
+
+        let star = document.createElement('div');
+        star.className = 'star-node';
+        star.innerHTML = extrudedStarHTML; 
+        
+        star.style.left = `${x}px`;
+        star.style.top = `${y}px`;
+        
+        const triggerEvent = () => {
+          defaultView.style.opacity = '0';
+          activeView.style.opacity = '1';
+          
+          const data = logros[i];
+          if(data.img) {
+             imgEl.src = data.img;
+             imgEl.style.display = 'block';
+             noImgEl.style.display = 'none';
+          } else {
+             imgEl.style.display = 'none';
+             noImgEl.style.display = 'flex';
+          }
+          
+          fechaEl.textContent = data.fecha;
+          pilotoEl.textContent = data.piloto;
+          categoriaEl.textContent = data.cat;
+          
+          if(data.desc){
+            descEl.textContent = data.desc;
+            descEl.style.display = 'block';
+          } else {
+            descEl.style.display = 'none';
+          }
+        };
+
+        star.addEventListener('mouseenter', triggerEvent);
+        star.addEventListener('click', triggerEvent);
+
+        container.appendChild(star);
+        starsElements.push(star);
+      }
+    }
+
+    setTimeout(buildStars, 100);
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(buildStars, 250);
+    });
+
+    document.getElementById('trayectoria-vitrina').addEventListener('mouseleave', () => {
+      if(!isTouchDevice()) {
+        defaultView.style.opacity = '1';
+        activeView.style.opacity = '0';
+      }
+    });
+
+    // Rotación 3D Senoidal - Límite de 40 grados para que nunca desaparezcan
+    window.addEventListener('scroll', () => {
+      let scrollY = window.scrollY;
+      starsElements.forEach((star, index) => {
+        let phase = index * 0.5; 
+        // Límite sobre el eje vertical (Y) a max 40°
+        let rotationY = Math.sin((scrollY * 0.004) + phase) * 40; 
+        // Rotación sutil en el eje X para revelar la extrusión
+        let rotationX = Math.cos((scrollY * 0.003) + phase) * 15; 
+        
+        star.style.transform = `translate(-50%, -50%) rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
+      });
+    });
+  });
 </script>
 
 </body>
