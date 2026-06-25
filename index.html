@@ -175,17 +175,16 @@
   .h-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--green); line-height: 1; margin-bottom: 0.3rem; }
   .h-stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
 
-  /* ============ NUEVA TRAYECTORIA VITRINA CENTRAL (CON 3D) ============ */
+  /* ============ NUEVA TRAYECTORIA VITRINA CENTRAL (COLUMNA VERTICAL) ============ */
   #trayectoria-vitrina { 
     position: relative; 
     width: 100%; 
-    min-height: 80vh;
     background: var(--black); 
     overflow: hidden; 
     display: flex; 
     flex-direction: column;
     padding-top: 80px;
-    padding-bottom: 60px;
+    padding-bottom: 80px;
   }
   .trayectoria-header {
     position: relative;
@@ -195,121 +194,71 @@
     width: 100%;
     padding: 0 2rem;
   }
-  #arch-wrapper {
-    position: relative;
+  
+  .trayectoria-vertical-list {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    margin: 1rem auto 0;
+    height: 1000px; /* Altura total del acordeón para albergar 16 items */
+    gap: 6px;
+    padding: 0 2rem;
+  }
+  
+  .trayectoria-row {
+    display: flex;
+    flex-direction: row;
     align-items: center;
-    width: 100%;
-    flex-grow: 1;
-    margin-top: 2rem;
-  }
-  
-  /* Perspectiva añadida para activar el espacio 3D */
-  #arch-container {
-    position: relative;
-    width: 100%;
-    max-width: 900px;
-    height: 450px;
-    perspective: 1200px; 
-  }
-  
-  #arch-image-mask {
-    position: absolute;
-    inset: 0;
+    flex: 1;
+    border-radius: 8px;
     background: var(--dark2);
-    clip-path: ellipse(50% 100% at 50% 100%);
-    border-bottom: 1px solid rgba(57,255,20,0.3);
-    transition: clip-path 0.3s;
     overflow: hidden;
-  }
-  
-  /* Estados dentro del mask */
-  #arch-default {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 2rem;
-    text-align: center;
-    transition: opacity 0.4s ease;
-  }
-  #arch-default img {
-    height: 60px;
-    opacity: 0.3;
-    filter: drop-shadow(0 0 10px rgba(57,255,20,0.2));
-  }
-  #arch-default h3 {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.2rem, 3vw, 1.8rem);
-    letter-spacing: 0.25em;
-    color: var(--white);
-    text-transform: uppercase;
-    line-height: 1.4;
-  }
-  #arch-default h3 span { color: var(--green); }
-
-  #arch-active {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  #arch-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .arch-no-img {
-    width: 100%;
-    height: 100%;
-    background: var(--dark3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: rgba(57,255,20,0.3);
-  }
-  #arch-active-info {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.7) 60%, transparent 100%);
-    padding: 3rem 2rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Agregado para centrar elementos flex */
-    text-align: center;  /* Agregado para centrar el texto multilínea */
-    gap: 0.3rem;
-  }
-  #arch-active-fecha { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; letter-spacing: 0.2em; color: var(--green); text-transform: uppercase; }
-  #arch-active-piloto { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: var(--white); line-height: 1; margin: 0; }
-  #arch-active-categoria { font-family: 'Barlow', sans-serif; font-size: 1rem; color: var(--light); font-weight: 300; }
-  #arch-active-desc { font-family: 'Barlow', sans-serif; font-size: 0.85rem; color: var(--gray); font-weight: 300; font-style: italic; margin-top: 0.2rem; display: none; }
-
-  /* Elemento estrella base con soporte 3D */
-  .star-node {
-    position: absolute;
-    width: 45px;
-    height: 45px;
     cursor: pointer;
-    z-index: 20;
+    transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s;
+    border: 1px solid rgba(57,255,20,0.05);
+  }
+  .trayectoria-row:hover {
+    flex: 4; /* Expansión estilo acordeón */
+    background: var(--dark);
+    border-color: rgba(57,255,20,0.2);
+  }
+
+  .t-row-star-container {
+    width: 80px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: var(--black);
+    z-index: 10;
+    border-right: 1px solid rgba(57,255,20,0.1);
+    perspective: 800px;
+  }
+
+  /* Elemento estrella base modificado con variables CSS para controlar colores */
+  .star-node {
+    --star-stroke: var(--green);
+    --star-fill-dark: #051a05;
+    --star-fill-light: #0a2a0a;
+    --star-shadow: rgba(57,255,20,0.5);
+    
+    position: relative;
+    width: 40px;
+    height: 40px;
     transform-style: preserve-3d;
-    transition: filter 0.3s ease;
+    transform: rotateY(-15deg);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  .star-node:hover {
-    filter: drop-shadow(0 0 20px #39FF14) brightness(1.3);
+  .trayectoria-row:hover .star-node {
+    --star-stroke: #FFD700;
+    --star-fill-dark: #332b00;
+    --star-fill-light: #4c4000;
+    --star-shadow: rgba(255,215,0,0.6);
+    transform: rotateY(15deg) scale(1.15); /* Rotación a 15° derecha (Total 30°) */
   }
-  
-  /* Capas para dar volumen (extrusión) */
+
   .star-layer {
     position: absolute;
     inset: 0;
@@ -317,6 +266,147 @@
     height: 100%;
     transform-style: preserve-3d;
   }
+  .star-layer svg polygon {
+    transition: fill 0.6s ease, stroke 0.6s ease;
+  }
+
+  .t-row-img-frame {
+    position: relative;
+    flex-grow: 1;
+    height: 100%;
+    overflow: hidden;
+    background: var(--dark3);
+  }
+
+  .t-row-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    opacity: 0.4;
+    filter: grayscale(100%);
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .trayectoria-row:hover .t-row-bg-img {
+    opacity: 1;
+    filter: grayscale(0%);
+  }
+
+  .t-row-no-img {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--dark3);
+    color: rgba(57,255,20,0.2);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* Degradado Izquierdo (Requisito 20% negro hacia transparente) */
+  .t-row-gradient-left {
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 60%;
+    background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, transparent 100%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Degradado Derecho (Para legibilidad de textos en el margen derecho) */
+  .t-row-gradient-right {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to left, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    z-index: 2;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+  }
+  .trayectoria-row:hover .t-row-gradient-right {
+    opacity: 1;
+  }
+
+  /* Título visible al estar colapsado */
+  .t-row-title-collapsed {
+    position: absolute;
+    left: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+    z-index: 3;
+    pointer-events: none;
+  }
+  .trayectoria-row:hover .t-row-title-collapsed {
+    opacity: 0;
+  }
+
+  /* Contenido expandido sobre la derecha */
+  .t-row-desc {
+    position: absolute;
+    right: 30px;
+    bottom: 20px;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all 0.4s ease;
+    pointer-events: none;
+  }
+  .trayectoria-row:hover .t-row-desc {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.2s;
+  }
+
+  .t-fecha { 
+    font-family: 'Barlow Condensed', sans-serif; 
+    font-size: 0.8rem; 
+    letter-spacing: 0.2em; 
+    color: var(--green); 
+    text-transform: uppercase; 
+    margin-bottom: 2px;
+  }
+  .trayectoria-row:hover .t-fecha { color: #FFD700; transition: color 0.6s; } /* Dorado en hover */
+  
+  .t-piloto { 
+    font-family: 'Bebas Neue', sans-serif; 
+    font-size: 2.2rem; 
+    color: var(--white); 
+    line-height: 1; 
+    margin: 0 0 5px 0; 
+  }
+  .t-cat { 
+    font-family: 'Barlow', sans-serif; 
+    font-size: 0.95rem; 
+    color: var(--light); 
+    font-weight: 300; 
+  }
+  .t-extra { 
+    font-family: 'Barlow', sans-serif; 
+    font-size: 0.8rem; 
+    color: var(--gray); 
+    font-weight: 300; 
+    font-style: italic; 
+    margin-top: 8px;
+    max-width: 400px;
+  }
+
 
   /* ============ INGENIERIA ============ */
   #ingenieria { background: var(--dark); }
@@ -557,28 +647,33 @@
       bottom: 20px; left: 20px; font-size: 1.2rem; white-space: normal;
     }
     
-    /* Responsive Curva - Rotación vertical hacia la izquierda */
-    #arch-container {
-      width: 90vw;
-      height: 60vh;
-      margin: 0 auto;
+    /* Responsive Vitrina Vertical */
+    .trayectoria-vertical-list {
+      height: 1300px;
+      padding: 0 1rem;
     }
-    #arch-image-mask {
-      /* Arco sobre el lado izquierdo, recto a la derecha */
-      clip-path: ellipse(100% 50% at 100% 50%);
+    .t-row-star-container {
+      width: 45px;
     }
     .star-node {
-      width: 35px;
-      height: 35px;
+      width: 30px;
+      height: 30px;
     }
-    #arch-active-piloto { font-size: 1.6rem; }
-    #arch-active-categoria { font-size: 0.85rem; }
+    .t-row-desc {
+      right: 15px;
+      bottom: 15px;
+    }
+    .t-piloto { font-size: 1.6rem; margin-bottom: 2px; }
+    .t-cat { font-size: 0.85rem; }
+    .t-extra { font-size: 0.75rem; max-width: 200px; }
+    .t-row-title-collapsed { left: 15px; font-size: 0.9rem; }
   }
 
   @media (max-width: 480px) {
     .hero-title { font-size: 3rem; }
     .pilotos-grid { grid-template-columns: repeat(2, 1fr); }
-    #arch-active-info { padding: 2rem 1.5rem 1rem; }
+    .trayectoria-vertical-list { height: 1500px; }
+    .t-extra { display: none; } /* Ocultar texto extra en móviles muy pequeños para legibilidad */
   }
 </style>
 </head>
@@ -656,31 +751,8 @@
     <div class="green-line"></div>
   </div>
 
-  <div id="arch-wrapper" class="reveal">
-    <div id="arch-container">
-      
-      <div id="arch-image-mask">
-        
-        <div id="arch-default">
-          <img src="fotos/logos/am_logo.png" alt="AM Logo">
-          <h3>16 RECONOCIMIENTOS<br><span>NACIONALES E INTERNACIONALES</span></h3>
-        </div>
-        
-        <div id="arch-active">
-          <img id="arch-img" src="" alt="Logro" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-          <div id="arch-no-img" class="arch-no-img" style="display:none;">Foto próximamente</div>
-          
-          <div id="arch-active-info">
-             <span id="arch-active-fecha"></span>
-             <h3 id="arch-active-piloto"></h3>
-             <span id="arch-active-categoria"></span>
-             <p id="arch-active-desc"></p>
-          </div>
-        </div>
-
-      </div>
-      </div>
-  </div>
+  <div class="trayectoria-vertical-list reveal" id="trayectoria-list">
+    </div>
 </section>
 
 <section id="ingenieria" class="carbon">
@@ -1706,20 +1778,11 @@
   });
 
   /* ====================================================
-     Lógica Vitrina 3D (Extrusión + Senoidal)
+     Lógica Vitrina 3D (Columna Vertical Acordeón)
   ==================================================== */
   document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById('arch-container');
-    const mask = document.getElementById('arch-image-mask');
-    const defaultView = document.getElementById('arch-default');
-    const activeView = document.getElementById('arch-active');
-    
-    const imgEl = document.getElementById('arch-img');
-    const noImgEl = document.getElementById('arch-no-img');
-    const fechaEl = document.getElementById('arch-active-fecha');
-    const pilotoEl = document.getElementById('arch-active-piloto');
-    const categoriaEl = document.getElementById('arch-active-categoria');
-    const descEl = document.getElementById('arch-active-desc');
+    const container = document.getElementById('trayectoria-list');
+    if (!container) return;
 
     const logros = [
       { piloto: "Francisco Figueroa", cat: "Junior MY10 - Campeonato Argentino de Karting", fecha: "06-08-2022", img: "fotos/logros/francisco_figueroa_trophy_1.jpg" },
@@ -1740,125 +1803,71 @@
       { piloto: "Valentino Manta", cat: "Junior Max - Gran Final Argentina", fecha: "12-10-2025", img: "fotos/logros/valentino_manta_trophy_1.jpg" }
     ];
 
-    const numStars = logros.length;
-    const starsElements = [];
-
-    // Polígono base optimizado (sin drop-shadow interno masivo)
+    // Polígono base optimizado, delegando los fills y strokes a variables CSS 
     const singleSVG = `
       <svg viewBox="0 0 100 100" style="width:100%; height:100%; overflow: visible;">
-        <polygon points="50,50 50,0 61.7,36" fill="#051a05" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 50,0 38.3,36" fill="#0a2a0a" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 97.5,36 61.7,36" fill="#0a2a0a" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 97.5,36 68.5,57" fill="#051a05" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 79.3,95 68.5,57" fill="#0a2a0a" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 79.3,95 50,75" fill="#051a05" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 20.7,95 50,75" fill="#0a2a0a" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 20.7,95 31.5,57" fill="#051a05" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 2.5,36 31.5,57" fill="#0a2a0a" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 2.5,36 38.3,36" fill="#051a05" stroke="#39FF14" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 50,0 61.7,36" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 50,0 38.3,36" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 97.5,36 61.7,36" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 97.5,36 68.5,57" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 79.3,95 68.5,57" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 79.3,95 50,75" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 20.7,95 50,75" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 20.7,95 31.5,57" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 2.5,36 31.5,57" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 2.5,36 38.3,36" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
       </svg>
     `;
 
-    // Multiplicamos las capas en el eje Z para generar volumen real (extrusión)
+    // Capas de volumen
     const extrudedStarHTML = `
-      <div class="star-layer" style="transform: translateZ(4px); filter: drop-shadow(0 0 5px rgba(57,255,20,0.5));">${singleSVG}</div>
+      <div class="star-layer" style="transform: translateZ(4px); filter: drop-shadow(0 0 5px var(--star-shadow));">${singleSVG}</div>
       <div class="star-layer" style="transform: translateZ(2px); filter: brightness(0.6);">${singleSVG}</div>
       <div class="star-layer" style="transform: translateZ(0px); filter: brightness(0.3);">${singleSVG}</div>
       <div class="star-layer" style="transform: translateZ(-2px); filter: brightness(0.1);">${singleSVG}</div>
     `;
 
-    function buildStars() {
-      // Limpiar estrellas existentes al redimensionar
-      starsElements.forEach(star => star.remove());
-      starsElements.length = 0;
-      
-      const W = mask.offsetWidth;
-      const H = mask.offsetHeight;
-      const isMobile = window.innerWidth <= 768;
+    logros.forEach(data => {
+      const row = document.createElement('div');
+      row.className = 'trayectoria-row';
 
-      for (let i = 0; i < numStars; i++) {
-        let x, y;
-        
-        if (!isMobile) {
-          // Domo Horizontal
-          let angle = Math.PI - (i * (Math.PI / (numStars - 1)));
-          x = (W / 2) + (W / 2) * Math.cos(angle);
-          y = H - H * Math.sin(angle);
-        } else {
-          // Arco Vertical
-          let angle = -Math.PI/2 + (i * (Math.PI / (numStars - 1)));
-          x = W - W * Math.cos(angle);
-          y = (H / 2) + (H / 2) * Math.sin(angle);
+      const imgHtml = data.img 
+        ? `<img src="${data.img}" class="t-row-bg-img" alt="${data.piloto}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+           <div class="t-row-no-img" style="display:none;">Foto próximamente</div>`
+        : `<div class="t-row-no-img">Foto próximamente</div>`;
+
+      const extraDescHtml = data.desc ? `<p class="t-extra">${data.desc}</p>` : '';
+
+      row.innerHTML = `
+        <div class="t-row-star-container">
+           <div class="star-node">${extrudedStarHTML}</div>
+        </div>
+        <div class="t-row-img-frame">
+           ${imgHtml}
+           <div class="t-row-gradient-left"></div>
+           <div class="t-row-gradient-right"></div>
+           
+           <div class="t-row-title-collapsed">${data.piloto}</div>
+           
+           <div class="t-row-desc">
+              <span class="t-fecha">${data.fecha}</span>
+              <h3 class="t-piloto">${data.piloto}</h3>
+              <span class="t-cat">${data.cat}</span>
+              ${extraDescHtml}
+           </div>
+        </div>
+      `;
+
+      // Evento para compatibilidad táctil
+      row.addEventListener('click', function() {
+        if (isTouchDevice()) {
+          const isActive = row.classList.contains('active');
+          document.querySelectorAll('.trayectoria-row.active').forEach(i => i.classList.remove('active'));
+          if (!isActive) row.classList.add('active');
         }
-
-        let star = document.createElement('div');
-        star.className = 'star-node';
-        star.innerHTML = extrudedStarHTML; 
-        
-        star.style.left = `${x}px`;
-        star.style.top = `${y}px`;
-        
-        const triggerEvent = () => {
-          defaultView.style.opacity = '0';
-          activeView.style.opacity = '1';
-          
-          const data = logros[i];
-          if(data.img) {
-             imgEl.src = data.img;
-             imgEl.style.display = 'block';
-             noImgEl.style.display = 'none';
-          } else {
-             imgEl.style.display = 'none';
-             noImgEl.style.display = 'flex';
-          }
-          
-          fechaEl.textContent = data.fecha;
-          pilotoEl.textContent = data.piloto;
-          categoriaEl.textContent = data.cat;
-          
-          if(data.desc){
-            descEl.textContent = data.desc;
-            descEl.style.display = 'block';
-          } else {
-            descEl.style.display = 'none';
-          }
-        };
-
-        star.addEventListener('mouseenter', triggerEvent);
-        star.addEventListener('click', triggerEvent);
-
-        container.appendChild(star);
-        starsElements.push(star);
-      }
-    }
-
-    setTimeout(buildStars, 100);
-
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(buildStars, 250);
-    });
-
-    document.getElementById('trayectoria-vitrina').addEventListener('mouseleave', () => {
-      if(!isTouchDevice()) {
-        defaultView.style.opacity = '1';
-        activeView.style.opacity = '0';
-      }
-    });
-
-    // Rotación 3D Senoidal - Límite de 40 grados para que nunca desaparezcan
-    window.addEventListener('scroll', () => {
-      let scrollY = window.scrollY;
-      starsElements.forEach((star, index) => {
-        let phase = index * 0.5; 
-        // Límite sobre el eje vertical (Y) a max 40°
-        let rotationY = Math.sin((scrollY * 0.004) + phase) * 40; 
-        // Rotación sutil en el eje X para revelar la extrusión
-        let rotationX = Math.cos((scrollY * 0.003) + phase) * 15; 
-        
-        star.style.transform = `translate(-50%, -50%) rotateX(${rotationX}deg) rotateY(${rotationY}deg)`;
       });
+
+      container.appendChild(row);
     });
   });
 </script>
