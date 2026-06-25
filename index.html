@@ -175,7 +175,7 @@
   .h-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--green); line-height: 1; margin-bottom: 0.3rem; }
   .h-stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
 
-  /* ============ NUEVA TRAYECTORIA VITRINA CENTRAL (COLUMNA VERTICAL) ============ */
+  /* ============ NUEVA TRAYECTORIA VITRINA (ACORDEÓN HORIZONTAL) ============ */
   #trayectoria-vitrina { 
     position: relative; 
     width: 100%; 
@@ -195,21 +195,21 @@
     padding: 0 2rem;
   }
   
-  .trayectoria-vertical-list {
+  .trayectoria-horizontal-list {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     width: 100%;
     max-width: 1200px;
-    margin: 1rem auto 0;
-    height: 1000px; /* Altura total del acordeón para albergar 16 items */
-    gap: 6px;
+    margin: 2rem auto 0;
+    height: 550px;
+    gap: 4px;
     padding: 0 2rem;
   }
   
   .trayectoria-row {
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
+    position: relative;
     flex: 1;
     border-radius: 8px;
     background: var(--dark2);
@@ -218,61 +218,25 @@
     transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s;
     border: 1px solid rgba(57,255,20,0.05);
   }
-  .trayectoria-row:hover {
-    flex: 4; /* Expansión estilo acordeón */
+  
+  /* UX sutil hover inactivo */
+  .trayectoria-row:not(.active):hover .t-row-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(57,255,20,0.25) 100%);
+  }
+  .trayectoria-row:not(.active):hover .star-node {
+    filter: drop-shadow(0 0 8px rgba(57,255,20,0.8));
+  }
+
+  .trayectoria-row.active {
+    flex: 20; 
     background: var(--dark);
     border-color: rgba(57,255,20,0.2);
   }
 
-  .t-row-star-container {
-    width: 80px;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    background: var(--black);
-    z-index: 10;
-    border-right: 1px solid rgba(57,255,20,0.1);
-    perspective: 800px;
-  }
-
-  /* Elemento estrella base modificado con variables CSS para controlar colores */
-  .star-node {
-    --star-stroke: var(--green);
-    --star-fill-dark: #051a05;
-    --star-fill-light: #0a2a0a;
-    --star-shadow: rgba(57,255,20,0.5);
-    
-    position: relative;
-    width: 40px;
-    height: 40px;
-    transform-style: preserve-3d;
-    transform: rotateY(-15deg);
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  }
-  .trayectoria-row:hover .star-node {
-    --star-stroke: #FFD700;
-    --star-fill-dark: #332b00;
-    --star-fill-light: #4c4000;
-    --star-shadow: rgba(255,215,0,0.6);
-    transform: rotateY(15deg) scale(1.15); /* Rotación a 15° derecha (Total 30°) */
-  }
-
-  .star-layer {
+  .t-row-img-frame {
     position: absolute;
     inset: 0;
     width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-  }
-  .star-layer svg polygon {
-    transition: fill 0.6s ease, stroke 0.6s ease;
-  }
-
-  .t-row-img-frame {
-    position: relative;
-    flex-grow: 1;
     height: 100%;
     overflow: hidden;
     background: var(--dark3);
@@ -289,7 +253,7 @@
     filter: grayscale(100%);
     transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  .trayectoria-row:hover .t-row-bg-img {
+  .trayectoria-row.active .t-row-bg-img {
     opacity: 1;
     filter: grayscale(0%);
   }
@@ -308,69 +272,106 @@
     text-transform: uppercase;
   }
 
-  /* Degradado Izquierdo (Requisito 20% negro hacia transparente) */
-  .t-row-gradient-left {
-    position: absolute;
-    top: 0; bottom: 0; left: 0;
-    width: 60%;
-    background: linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.85) 20%, transparent 100%);
-    z-index: 2;
-    pointer-events: none;
-  }
-
-  /* Degradado Derecho (Para legibilidad de textos en el margen derecho) */
-  .t-row-gradient-right {
+  /* Degradados dinámicos */
+  .t-row-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to left, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.1) 100%);
+    transition: background 0.6s ease;
     z-index: 2;
-    opacity: 0;
     pointer-events: none;
-    transition: opacity 0.6s ease;
   }
-  .trayectoria-row:hover .t-row-gradient-right {
-    opacity: 1;
+  .trayectoria-row.active .t-row-overlay {
+    background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
   }
 
-  /* Título visible al estar colapsado */
-  .t-row-title-collapsed {
+  .t-row-star-container {
     position: absolute;
-    left: 25px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35px;
+    height: 35px;
+    z-index: 10;
+    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    pointer-events: none;
+  }
+  .trayectoria-row.active .t-row-star-container {
+    left: 20px;
+    transform: none;
+  }
+
+  .star-node {
+    --star-stroke: var(--green);
+    --star-fill-dark: #051a05;
+    --star-fill-light: #0a2a0a;
+    --star-shadow: rgba(57,255,20,0.5);
+    
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateY(-15deg);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease;
+  }
+  .trayectoria-row.active .star-node {
+    --star-stroke: #FFD700;
+    --star-fill-dark: #332b00;
+    --star-fill-light: #4c4000;
+    --star-shadow: rgba(255,215,0,0.6);
+    transform: rotateY(15deg) scale(1.15); 
+  }
+
+  .star-layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+  .star-layer svg polygon {
+    transition: fill 0.6s ease, stroke 0.6s ease;
+  }
+
+  .t-row-title-vertical {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%) rotate(180deg);
+    writing-mode: vertical-rl;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 1.1rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: rgba(255,255,255,0.4);
+    color: var(--white);
     text-transform: uppercase;
-    transition: opacity 0.3s ease;
     white-space: nowrap;
     z-index: 3;
+    transition: opacity 0.3s ease;
     pointer-events: none;
   }
-  .trayectoria-row:hover .t-row-title-collapsed {
+  .trayectoria-row.active .t-row-title-vertical {
     opacity: 0;
   }
 
-  /* Contenido expandido sobre la derecha */
   .t-row-desc {
     position: absolute;
-    right: 30px;
     bottom: 20px;
+    left: 20px;
     z-index: 5;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
+    align-items: flex-start;
+    text-align: left;
     opacity: 0;
-    transform: translateX(20px);
+    transform: translateY(20px);
     transition: all 0.4s ease;
     pointer-events: none;
+    max-width: 80%;
   }
-  .trayectoria-row:hover .t-row-desc {
+  .trayectoria-row.active .t-row-desc {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0);
     transition-delay: 0.2s;
   }
 
@@ -382,7 +383,7 @@
     text-transform: uppercase; 
     margin-bottom: 2px;
   }
-  .trayectoria-row:hover .t-fecha { color: #FFD700; transition: color 0.6s; } /* Dorado en hover */
+  .trayectoria-row.active .t-fecha { color: #FFD700; transition: color 0.6s; } 
   
   .t-piloto { 
     font-family: 'Bebas Neue', sans-serif; 
@@ -404,7 +405,6 @@
     font-weight: 300; 
     font-style: italic; 
     margin-top: 8px;
-    max-width: 400px;
   }
 
 
@@ -445,7 +445,6 @@
   #media { background: var(--black); }
   .media-intro-text p { font-size: 1rem; color: var(--light); line-height: 1.8; font-weight: 300; margin-bottom: 1.5rem; max-width: 100%; text-align: left; }
 
-  /* Acordeón ExpandOnHover */
   .media-accordion {
     display: flex;
     width: 100%;
@@ -466,7 +465,7 @@
     justify-content: flex-end;
     align-items: center;
   }
-  .acc-item:hover, .acc-item.active { flex: 4; }
+  .acc-item.active { flex: 4; }
   
   .acc-bg {
     position: absolute; inset: 0;
@@ -478,11 +477,13 @@
     background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 100%);
     transition: background 0.4s ease; z-index: 2;
   }
-  .acc-item:hover .acc-overlay, .acc-item.active .acc-overlay {
+  .acc-item:not(.active):hover .acc-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(57,255,20,0.2) 100%);
+  }
+  .acc-item.active .acc-overlay {
     background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(57,255,20,0.1) 100%);
   }
   
-  /* Título vertical en reposo (Desktop) */
   .acc-title-vertical {
     z-index: 5;
     position: absolute;
@@ -498,9 +499,8 @@
     white-space: nowrap;
     transition: opacity 0.3s ease;
   }
-  .acc-item:hover .acc-title-vertical, .acc-item.active .acc-title-vertical { opacity: 0; }
+  .acc-item.active .acc-title-vertical { opacity: 0; }
 
-  /* Contenido expandido horizontal */
   .acc-content {
     z-index: 5;
     position: absolute; bottom: 20px; left: 20px; right: 20px;
@@ -508,7 +508,7 @@
     opacity: 0; transform: translateY(20px);
     transition: all 0.4s ease; pointer-events: none;
   }
-  .acc-item:hover .acc-content, .acc-item.active .acc-content {
+  .acc-item.active .acc-content {
     opacity: 1; transform: translateY(0); transition-delay: 0.2s;
   }
   .acc-title-horiz {
@@ -545,16 +545,24 @@
   .piloto-card-name span { font-family: 'Bebas Neue', sans-serif; font-size: clamp(0.9rem, 2vw, 1.3rem); letter-spacing: 0.08em; color: var(--white); line-height: 1.1; transition: color 0.3s, transform 0.3s; }
   .piloto-card-years { position: absolute; bottom: 10px; right: 12px; font-family: 'Barlow Condensed', sans-serif; font-size: 0.68rem; letter-spacing: 0.15em; color: rgba(57,255,20,0.7); z-index: 4; transition: color 0.3s; }
   .piloto-card::before { content: ''; position: absolute; inset: 0; border: 1px solid rgba(57,255,20,0.1); z-index: 5; transition: border-color 0.3s; pointer-events: none; }
-  .piloto-card:hover .piloto-card-photo, .piloto-card.active .piloto-card-photo { filter: grayscale(0%); opacity: 1; }
-  .piloto-card:hover .piloto-card-overlay, .piloto-card.active .piloto-card-overlay { opacity: 1; }
-  .piloto-card:hover .piloto-card-name span, .piloto-card.active .piloto-card-name span { color: var(--green); transform: translateY(-8px); }
-  .piloto-card:hover .piloto-card-years, .piloto-card.active .piloto-card-years { color: var(--green); }
-  .piloto-card:hover::before, .piloto-card.active::before { border-color: rgba(57,255,20,0.5); }
+  
+  /* UX Sutil hover inactivo */
+  .piloto-card:not(.active):hover .piloto-card-photo { filter: grayscale(50%); opacity: 1; }
+  .piloto-card:not(.active):hover .piloto-card-overlay { opacity: 0.6; }
+  .piloto-card:not(.active):hover::before { border-color: rgba(57,255,20,0.3); }
+
+  /* Estado expandido activo */
+  .piloto-card.active .piloto-card-photo { filter: grayscale(0%); opacity: 1; }
+  .piloto-card.active .piloto-card-overlay { opacity: 1; }
+  .piloto-card.active .piloto-card-name span { color: var(--green); transform: translateY(-8px); }
+  .piloto-card.active .piloto-card-years { color: var(--green); }
+  .piloto-card.active::before { border-color: rgba(57,255,20,0.5); }
+  .piloto-card.active .star-icon { color: #DAA520; }
+  
   .piloto-card.no-photo { background: var(--dark2); }
   .piloto-card.no-photo::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(57,255,20,0.025) 3px, rgba(57,255,20,0.025) 4px); z-index: 0; }
   .piloto-stars { position: absolute; top: 8px; right: 8px; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; z-index: 5; }
   .star-icon { font-size: 11px; color: #777; line-height: 1; transition: color 0.35s ease; text-shadow: 0 1px 3px rgba(0,0,0,0.8); }
-  .piloto-card:hover .star-icon, .piloto-card.active .star-icon { color: #DAA520; }
 
   /* ============ CONTACTO ============ */
   #contacto { background: var(--black); position: relative; overflow: hidden; }
@@ -641,39 +649,46 @@
 
     .media-accordion { flex-direction: column; height: 750px; }
     .acc-item { align-items: flex-start; justify-content: flex-end; padding: 1.5rem; }
-    .acc-item:hover, .acc-item.active { flex: 2; }
+    .acc-item.active { flex: 2; }
     .acc-title-vertical { 
       writing-mode: horizontal-tb; transform: none; 
       bottom: 20px; left: 20px; font-size: 1.2rem; white-space: normal;
     }
     
-    /* Responsive Vitrina Vertical */
-    .trayectoria-vertical-list {
-      height: 1300px;
-      padding: 0 1rem;
+    /* Responsive Vitrina Horizontal apilada */
+    .trayectoria-horizontal-list {
+      flex-direction: column;
+      height: 1200px;
     }
     .t-row-star-container {
-      width: 45px;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
     }
-    .star-node {
-      width: 30px;
-      height: 30px;
+    .trayectoria-row.active .t-row-star-container {
+      top: 20px;
+      left: 20px;
+      transform: none;
     }
-    .t-row-desc {
-      right: 15px;
-      bottom: 15px;
+    .t-row-title-vertical {
+      writing-mode: horizontal-tb;
+      transform: none;
+      bottom: 50%;
+      left: 70px;
+      transform: translateY(50%);
+      white-space: normal;
+      font-size: 1rem;
     }
-    .t-piloto { font-size: 1.6rem; margin-bottom: 2px; }
-    .t-cat { font-size: 0.85rem; }
-    .t-extra { font-size: 0.75rem; max-width: 200px; }
-    .t-row-title-collapsed { left: 15px; font-size: 0.9rem; }
+    .trayectoria-row.active .t-row-overlay {
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+    }
   }
 
   @media (max-width: 480px) {
     .hero-title { font-size: 3rem; }
     .pilotos-grid { grid-template-columns: repeat(2, 1fr); }
-    .trayectoria-vertical-list { height: 1500px; }
-    .t-extra { display: none; } /* Ocultar texto extra en móviles muy pequeños para legibilidad */
+    .trayectoria-horizontal-list { height: 1400px; }
+    .t-extra { display: none; } 
   }
 </style>
 </head>
@@ -751,7 +766,7 @@
     <div class="green-line"></div>
   </div>
 
-  <div class="trayectoria-vertical-list reveal" id="trayectoria-list">
+  <div class="trayectoria-horizontal-list reveal" id="trayectoria-list">
     </div>
 </section>
 
@@ -1652,7 +1667,6 @@
     let current = '';
     sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
     navLinks.forEach(l => { 
-      // Ignorar el CTA para no pintarlo
       if(!l.classList.contains('nav-cta')){
         l.style.color = l.getAttribute('href') === '#' + current ? 'var(--green)' : ''; 
       }
@@ -1668,31 +1682,8 @@
     setTimeout(() => { btn.textContent = 'Enviar mensaje →'; btn.style.background = ''; }, 3000);
   }
 
-  const isTouchDevice = () => window.matchMedia('(hover: none)').matches;
-
-  // --- Interactiviad Pilotos ---
-  document.querySelectorAll('.piloto-card').forEach(entry => {
-    entry.addEventListener('click', function(e) {
-      if (!isTouchDevice()) return;
-      const isActive = this.classList.contains('active');
-      document.querySelectorAll(`.${this.className.split(' ')[0]}.active`).forEach(el => {
-        if (el !== this) el.classList.remove('active');
-      });
-      this.classList.toggle('active', !isActive);
-      if (!isActive) {
-        const closeHandler = (ev) => {
-          if (!this.contains(ev.target)) {
-            this.classList.remove('active');
-            document.removeEventListener('click', closeHandler);
-          }
-        };
-        setTimeout(() => document.addEventListener('click', closeHandler), 10);
-      }
-    });
-  });
-
   /* ====================================================
-     Text Roll Animation
+     Text Roll Animation (Nav Links)
   ==================================================== */
   document.querySelectorAll('.nav-links a:not(.nav-cta)').forEach(link => {
     const text = link.textContent;
@@ -1726,60 +1717,16 @@
   });
 
   /* ====================================================
-     Acordeón Cross-Fade Animado
+     Renderizado Inicial Media y Trayectoria
   ==================================================== */
   document.querySelectorAll('.acc-item').forEach(item => {
     const images = JSON.parse(item.getAttribute('data-images') || '[]');
     const bg1 = item.querySelector('.acc-bg-1');
-    const bg2 = item.querySelector('.acc-bg-2');
-    
-    let currentIndex = images.length > 0 ? Math.floor(Math.random() * images.length) : 0;
-    let interval;
-    let activeBg = 1;
-
     if (images.length > 0) {
-      bg1.style.backgroundImage = `url('${images[currentIndex]}')`;
+      bg1.style.backgroundImage = `url('${images[0]}')`;
     }
-
-    item.addEventListener('mouseenter', () => {
-      if (images.length > 1) {
-        interval = setInterval(() => {
-          currentIndex = (currentIndex + 1) % images.length;
-          const nextImg = `url('${images[currentIndex]}')`;
-          
-          if (activeBg === 1) {
-            bg2.style.backgroundImage = nextImg;
-            bg2.style.opacity = 1;
-            bg1.style.opacity = 0;
-            activeBg = 2;
-          } else {
-            bg1.style.backgroundImage = nextImg;
-            bg1.style.opacity = 1;
-            bg2.style.opacity = 0;
-            activeBg = 1;
-          }
-        }, 1000); 
-      }
-    });
-
-    item.addEventListener('mouseleave', () => {
-      clearInterval(interval);
-    });
-
-    item.addEventListener('click', () => {
-      if (isTouchDevice()) {
-        const isActive = item.classList.contains('active');
-        document.querySelectorAll('.acc-item.active').forEach(i => i.classList.remove('active'));
-        if (!isActive) {
-          item.classList.add('active');
-        }
-      }
-    });
   });
 
-  /* ====================================================
-     Lógica Vitrina 3D (Columna Vertical Acordeón)
-  ==================================================== */
   document.addEventListener("DOMContentLoaded", () => {
     const container = document.getElementById('trayectoria-list');
     if (!container) return;
@@ -1803,7 +1750,6 @@
       { piloto: "Valentino Manta", cat: "Junior Max - Gran Final Argentina", fecha: "12-10-2025", img: "fotos/logros/valentino_manta_trophy_1.jpg" }
     ];
 
-    // Polígono base optimizado, delegando los fills y strokes a variables CSS 
     const singleSVG = `
       <svg viewBox="0 0 100 100" style="width:100%; height:100%; overflow: visible;">
         <polygon points="50,50 50,0 61.7,36" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
@@ -1819,7 +1765,6 @@
       </svg>
     `;
 
-    // Capas de volumen
     const extrudedStarHTML = `
       <div class="star-layer" style="transform: translateZ(4px); filter: drop-shadow(0 0 5px var(--star-shadow));">${singleSVG}</div>
       <div class="star-layer" style="transform: translateZ(2px); filter: brightness(0.6);">${singleSVG}</div>
@@ -1839,15 +1784,14 @@
       const extraDescHtml = data.desc ? `<p class="t-extra">${data.desc}</p>` : '';
 
       row.innerHTML = `
-        <div class="t-row-star-container">
-           <div class="star-node">${extrudedStarHTML}</div>
-        </div>
         <div class="t-row-img-frame">
            ${imgHtml}
-           <div class="t-row-gradient-left"></div>
-           <div class="t-row-gradient-right"></div>
+           <div class="t-row-overlay"></div>
+           <div class="t-row-star-container">
+              <div class="star-node">${extrudedStarHTML}</div>
+           </div>
            
-           <div class="t-row-title-collapsed">${data.piloto}</div>
+           <div class="t-row-title-vertical">${data.piloto}</div>
            
            <div class="t-row-desc">
               <span class="t-fecha">${data.fecha}</span>
@@ -1857,19 +1801,84 @@
            </div>
         </div>
       `;
-
-      // Evento para compatibilidad táctil
-      row.addEventListener('click', function() {
-        if (isTouchDevice()) {
-          const isActive = row.classList.contains('active');
-          document.querySelectorAll('.trayectoria-row.active').forEach(i => i.classList.remove('active'));
-          if (!isActive) row.classList.add('active');
-        }
-      });
-
       container.appendChild(row);
     });
   });
+
+  /* ====================================================
+     Lógica de Selección y Cierre Universal (Global Click)
+  ==================================================== */
+  document.addEventListener('click', (e) => {
+    // 1. TRAYECTORIA
+    const isTrayectoriaRow = e.target.closest('.trayectoria-row');
+    document.querySelectorAll('.trayectoria-row').forEach(el => {
+      if (el !== isTrayectoriaRow) el.classList.remove('active');
+    });
+    if (isTrayectoriaRow) {
+      isTrayectoriaRow.classList.toggle('active');
+    }
+
+    // 2. AM MEDIA
+    const isAccItem = e.target.closest('.acc-item');
+    document.querySelectorAll('.acc-item').forEach(el => {
+      if (el !== isAccItem) {
+        el.classList.remove('active');
+        if (el.intervalId) {
+          clearInterval(el.intervalId);
+          el.intervalId = null;
+        }
+      }
+    });
+    if (isAccItem) {
+      const wasActive = isAccItem.classList.contains('active');
+      isAccItem.classList.toggle('active');
+      
+      // Control de la animación cross-fade solo si está activo
+      if (!wasActive) {
+        const images = JSON.parse(isAccItem.getAttribute('data-images') || '[]');
+        if (images.length > 1) {
+          isAccItem.intervalId = setInterval(() => {
+            let currentIndex = isAccItem.currentIndex || 0;
+            let activeBg = isAccItem.activeBg || 1;
+            
+            currentIndex = (currentIndex + 1) % images.length;
+            isAccItem.currentIndex = currentIndex;
+            const nextImg = `url('${images[currentIndex]}')`;
+            
+            const bg1 = isAccItem.querySelector('.acc-bg-1');
+            const bg2 = isAccItem.querySelector('.acc-bg-2');
+            
+            if (activeBg === 1) {
+              bg2.style.backgroundImage = nextImg;
+              bg2.style.opacity = 1;
+              bg1.style.opacity = 0;
+              isAccItem.activeBg = 2;
+            } else {
+              bg1.style.backgroundImage = nextImg;
+              bg1.style.opacity = 1;
+              bg2.style.opacity = 0;
+              isAccItem.activeBg = 1;
+            }
+          }, 1000);
+        }
+      } else {
+        if (isAccItem.intervalId) {
+          clearInterval(isAccItem.intervalId);
+          isAccItem.intervalId = null;
+        }
+      }
+    }
+
+    // 3. PILOTOS
+    const isPilotoCard = e.target.closest('.piloto-card');
+    document.querySelectorAll('.piloto-card').forEach(el => {
+      if (el !== isPilotoCard) el.classList.remove('active');
+    });
+    if (isPilotoCard) {
+      isPilotoCard.classList.toggle('active');
+    }
+  });
+
 </script>
 
 </body>
