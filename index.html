@@ -151,7 +151,7 @@
 
   /* ============ COMMON ============ */
   section { padding: 100px 0; }
-  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; position: relative; }
   .section-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.4em; text-transform: uppercase; color: var(--green); margin-bottom: 1rem; display: flex; align-items: center; gap: 12px; }
   .section-label::before { content: ''; display: block; width: 3px; height: 16px; background: var(--green); flex-shrink: 0; }
   .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4rem); letter-spacing: 0.04em; line-height: 1; margin-bottom: 1.5rem; }
@@ -175,17 +175,15 @@
   .h-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; color: var(--green); line-height: 1; margin-bottom: 0.3rem; }
   .h-stat-label { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray); }
 
-  /* ============ NUEVA TRAYECTORIA VITRINA (ACORDEÓN HORIZONTAL) ============ */
+  /* ============ NUEVA TRAYECTORIA VITRINA CARRUSEL ============ */
   #trayectoria-vitrina { 
     position: relative; 
     width: 100%; 
     background: var(--black); 
-    overflow: hidden; 
-    display: flex; 
-    flex-direction: column;
     padding-top: 80px;
-    padding-bottom: 80px;
+    padding-bottom: 40px; /* Reducido para dar espacio al timeline */
   }
+
   .trayectoria-header {
     position: relative;
     z-index: 10;
@@ -194,217 +192,191 @@
     width: 100%;
     padding: 0 2rem;
   }
-  
-  .trayectoria-horizontal-list {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
+
+  /* Contenedor de estrellas planas arriba */
+  #t-stars-nav {
     max-width: 1200px;
-    margin: 2rem auto 0;
-    height: 550px;
-    gap: 4px;
+    margin: 1rem auto 2rem;
     padding: 0 2rem;
-  }
-  
-  .trayectoria-row {
     display: flex;
-    flex-direction: column;
+    justify-content: flex-start;
+    gap: 8px;
+    flex-wrap: wrap;
+    z-index: 10;
     position: relative;
-    flex: 1;
-    border-radius: 8px;
+  }
+  .flat-star {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    fill: none;
+    stroke: var(--gray);
+    stroke-width: 1.5;
+    transition: all 0.3s ease;
+  }
+  .flat-star:hover {
+    stroke: #FFD700;
+    transform: scale(1.15);
+  }
+  .flat-star.active {
+    fill: #FFD700;
+    stroke: #FFD700;
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 8px rgba(255,215,0,0.6));
+  }
+
+  /* Contenedor del Carrusel Full Width */
+  #t-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    min-height: 450px;
+    max-height: 700px;
     background: var(--dark2);
     overflow: hidden;
-    cursor: pointer;
-    transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1), background 0.4s;
-    border: 1px solid rgba(57,255,20,0.05);
+  }
+
+  .t-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    pointer-events: none;
+  }
+  .t-slide.active {
+    opacity: 1;
+    z-index: 2;
+    pointer-events: auto;
   }
   
-  /* UX sutil hover inactivo */
-  .trayectoria-row:not(.active):hover .t-row-overlay {
-    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(57,255,20,0.25) 100%);
-  }
-  .trayectoria-row:not(.active):hover .star-node {
-    filter: drop-shadow(0 0 8px rgba(57,255,20,0.8));
-  }
-
-  .trayectoria-row.active {
-    flex: 20; 
-    background: var(--dark);
-    border-color: rgba(57,255,20,0.2);
-  }
-
-  .t-row-img-frame {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: var(--dark3);
-  }
-
-  .t-row-bg-img {
-    position: absolute;
-    inset: 0;
+  .t-slide-bg {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
-    opacity: 0.4;
-    filter: grayscale(100%);
-    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
   }
-  .trayectoria-row.active .t-row-bg-img {
-    opacity: 1;
-    filter: grayscale(0%);
-  }
-
-  .t-row-no-img {
-    position: absolute;
-    inset: 0;
+  
+  .t-slide-no-img {
+    width: 100%;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     background: var(--dark3);
-    color: rgba(57,255,20,0.2);
+    color: rgba(57,255,20,0.3);
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.8rem;
+    font-size: 1rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
   }
 
-  /* Degradados dinámicos */
-  .t-row-overlay {
+  /* Tarjeta de información flotante para asegurar legibilidad */
+  .t-slide-info-box {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.1) 100%);
-    transition: background 0.6s ease;
-    z-index: 2;
-    pointer-events: none;
+    bottom: 40px;
+    /* Calcula para que quede alineado al grid contenedor original */
+    left: max(2rem, calc((100vw - 1200px) / 2 + 2rem));
+    background: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(8px);
+    border-left: 3px solid var(--green);
+    padding: 1.5rem 2rem;
+    max-width: 90%;
+    width: 500px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.5s ease 0.3s;
   }
-  .trayectoria-row.active .t-row-overlay {
-    background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+  .t-slide.active .t-slide-info-box {
+    transform: translateY(0);
+    opacity: 1;
   }
 
-  .t-row-star-container {
+  .t-slide-fecha {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.2em;
+    color: var(--green);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .t-slide-piloto {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+  .t-slide-cat {
+    font-family: 'Barlow', sans-serif;
+    font-size: 1rem;
+    color: var(--light);
+    font-weight: 300;
+  }
+  .t-slide-desc {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.85rem;
+    color: var(--gray);
+    font-weight: 300;
+    font-style: italic;
+    margin-top: 0.8rem;
+  }
+
+  /* Línea de tiempo inferior */
+  #t-timeline-container {
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    padding: 0 2rem;
+    position: relative;
+    height: 40px;
+  }
+  #t-timeline-track {
     position: absolute;
-    top: 15px;
+    top: 50%;
+    left: 2rem;
+    right: 2rem;
+    height: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+    transform: translateY(-50%);
+  }
+  #t-timeline-progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: var(--green);
+    width: 0%;
+    border-radius: 2px;
+    transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    box-shadow: 0 0 10px rgba(57,255,20,0.5);
+    z-index: 2;
+  }
+  /* Marcadores dinámicos */
+  .tl-tick-year {
+    position: absolute;
+    width: 2px;
+    height: 14px;
+    background: var(--white);
+    top: -5px;
+    z-index: 1;
+  }
+  .tl-tick-year span {
+    position: absolute;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 35px;
-    height: 35px;
-    z-index: 10;
-    transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    pointer-events: none;
-  }
-  .trayectoria-row.active .t-row-star-container {
-    left: 20px;
-    transform: none;
-  }
-
-  .star-node {
-    --star-stroke: var(--green);
-    --star-fill-dark: #051a05;
-    --star-fill-light: #0a2a0a;
-    --star-shadow: rgba(57,255,20,0.5);
-    
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-    transform: rotateY(-15deg);
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s ease;
-  }
-  .trayectoria-row.active .star-node {
-    --star-stroke: #FFD700;
-    --star-fill-dark: #332b00;
-    --star-fill-light: #4c4000;
-    --star-shadow: rgba(255,215,0,0.6);
-    transform: rotateY(15deg) scale(1.15); 
-  }
-
-  .star-layer {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
-  }
-  .star-layer svg polygon {
-    transition: fill 0.6s ease, stroke 0.6s ease;
-  }
-
-  .t-row-title-vertical {
-    position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%) rotate(180deg);
-    writing-mode: vertical-rl;
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 0.75rem;
     letter-spacing: 0.1em;
-    color: var(--white);
-    text-transform: uppercase;
-    white-space: nowrap;
-    z-index: 3;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
+    color: var(--light);
   }
-  .trayectoria-row.active .t-row-title-vertical {
-    opacity: 0;
-  }
-
-  .t-row-desc {
+  .tl-tick-month {
     position: absolute;
-    bottom: 20px;
-    left: 20px;
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s ease;
-    pointer-events: none;
-    max-width: 80%;
-  }
-  .trayectoria-row.active .t-row-desc {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.2s;
-  }
-
-  .t-fecha { 
-    font-family: 'Barlow Condensed', sans-serif; 
-    font-size: 0.8rem; 
-    letter-spacing: 0.2em; 
-    color: var(--green); 
-    text-transform: uppercase; 
-    margin-bottom: 2px;
-  }
-  .trayectoria-row.active .t-fecha { color: #FFD700; transition: color 0.6s; } 
-  
-  .t-piloto { 
-    font-family: 'Bebas Neue', sans-serif; 
-    font-size: 2.2rem; 
-    color: var(--white); 
-    line-height: 1; 
-    margin: 0 0 5px 0; 
-  }
-  .t-cat { 
-    font-family: 'Barlow', sans-serif; 
-    font-size: 0.95rem; 
-    color: var(--light); 
-    font-weight: 300; 
-  }
-  .t-extra { 
-    font-family: 'Barlow', sans-serif; 
-    font-size: 0.8rem; 
-    color: var(--gray); 
-    font-weight: 300; 
-    font-style: italic; 
-    margin-top: 8px;
+    width: 1px;
+    height: 6px;
+    background: rgba(255,255,255,0.25);
+    top: -1px;
+    z-index: 1;
   }
 
 
@@ -654,41 +626,22 @@
       writing-mode: horizontal-tb; transform: none; 
       bottom: 20px; left: 20px; font-size: 1.2rem; white-space: normal;
     }
-    
-    /* Responsive Vitrina Horizontal apilada */
-    .trayectoria-horizontal-list {
-      flex-direction: column;
-      height: 1200px;
+
+    .t-slide-info-box {
+      left: 1rem;
+      right: 1rem;
+      width: auto;
+      max-width: none;
+      padding: 1rem 1.5rem;
+      bottom: 20px;
     }
-    .t-row-star-container {
-      top: 50%;
-      left: 20px;
-      transform: translateY(-50%);
-    }
-    .trayectoria-row.active .t-row-star-container {
-      top: 20px;
-      left: 20px;
-      transform: none;
-    }
-    .t-row-title-vertical {
-      writing-mode: horizontal-tb;
-      transform: none;
-      bottom: 50%;
-      left: 70px;
-      transform: translateY(50%);
-      white-space: normal;
-      font-size: 1rem;
-    }
-    .trayectoria-row.active .t-row-overlay {
-      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
-    }
+    .t-slide-piloto { font-size: 1.8rem; }
+    .t-slide-cat { font-size: 0.9rem; }
   }
 
   @media (max-width: 480px) {
     .hero-title { font-size: 3rem; }
     .pilotos-grid { grid-template-columns: repeat(2, 1fr); }
-    .trayectoria-horizontal-list { height: 1400px; }
-    .t-extra { display: none; } 
   }
 </style>
 </head>
@@ -766,10 +719,19 @@
     <div class="green-line"></div>
   </div>
 
-  <div class="trayectoria-horizontal-list reveal" id="trayectoria-list">
-    </div>
-</section>
+  <div id="t-stars-nav" class="reveal">
+     </div>
 
+  <div id="t-carousel-wrapper" class="reveal">
+     </div>
+
+  <div id="t-timeline-container" class="reveal">
+    <div id="t-timeline-track">
+      <div id="t-timeline-progress"></div>
+      <div id="t-timeline-markers"></div>
+    </div>
+  </div>
+</section>
 <section id="ingenieria" class="carbon">
   <div class="container">
     <div class="reveal">
@@ -1717,7 +1679,7 @@
   });
 
   /* ====================================================
-     Renderizado Inicial Media y Trayectoria
+     Renderizado Inicial Media
   ==================================================== */
   document.querySelectorAll('.acc-item').forEach(item => {
     const images = JSON.parse(item.getAttribute('data-images') || '[]');
@@ -1727,15 +1689,22 @@
     }
   });
 
+
+  /* ====================================================
+     LÓGICA CARRUSEL Y TIMELINE (TRAYECTORIA)
+  ==================================================== */
   document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById('trayectoria-list');
-    if (!container) return;
+    // ----------------------------------------------------
+    // CONSTANTE DE TIEMPO: AQUÍ MODIFICAS LOS 7 SEGUNDOS
+    // (7000 milisegundos = 7 Segundos)
+    // ----------------------------------------------------
+    const AUTOPLAY_INTERVAL_MS = 7000;
 
     const logros = [
+      { piloto: "Martin Saa", cat: "Micro Max - Rotax Max Buenos Aires Otoño", fecha: "15-05-2022", img: "fotos/logros/martin_saa_trophy_1.jpg" },
       { piloto: "Francisco Figueroa", cat: "Junior MY10 - Campeonato Argentino de Karting", fecha: "06-08-2022", img: "fotos/logros/francisco_figueroa_trophy_1.jpg" },
       { piloto: "Simón Bulbarella", cat: "Junior MY10 - Campeonato Argentino de Karting", fecha: "07-08-2022", img: "fotos/logros/simon_bulbarella_trophy_1.jpg" },
       { piloto: "Ignacio Vivian", cat: "ProAm - Campeonato Argentino de Karting", fecha: "07-08-2022", img: "fotos/logros/ignacio_vivian_trophy_1.jpg" },
-      { piloto: "Martin Saa", cat: "Micro Max - Rotax Max Buenos Aires Otoño", fecha: "15-05-2022", img: "fotos/logros/martin_saa_trophy_1.jpg" },
       { piloto: "Ramiro Carreira", cat: "Micro Max - Rotax Max Buenos Aires Invierno", fecha: "25-09-2022", img: "fotos/logros/ramiro_carreira_trophy_1.jpg" },
       { piloto: "Gustavo Carreira", cat: "Master Max - Rotax Max Buenos Aires Invierno", fecha: "25-09-2022", img: "fotos/logros/gustavo_carreira_trophy_1.jpg" },
       { piloto: "Francesco Grimaldi", cat: "Senior Max - Rotax Max Gran Final Argentina", fecha: "09-10-2022", img: "fotos/logros/francesco_grimaldi_trophy_1.jpg" },
@@ -1746,79 +1715,155 @@
       { piloto: "Julian Puglisi", cat: "Master A - APAK", fecha: "10-12-2023", img: "fotos/logros/julian_puglisi_trophy_1.jpg" },
       { piloto: "Joaquin C. Rossotti", cat: "Junior 135cc - Prokart", fecha: "21-11-2024", img: "fotos/logros/joaquin_camporino_rossotti_trophy_1.jpg" },
       { piloto: "Santino Dore", cat: "General 135cc - Prokart", fecha: "21-11-2024", img: "fotos/logros/santino_dore_trophy_3.jpg" },
-      { piloto: "Agustin Sepulveda", cat: "OK - Sudamericano de Karting FIA", fecha: "27-07-2025", img: "fotos/logros/agustin_sepulveda_trophy_1.jpg", desc: "Liderando el campeonato de forma dominante hasta incidente de carrera." },
+      { piloto: "Agustin Sepulveda", cat: "OK - Sudamericano de Karting FIA", fecha: "27-07-2025", img: "fotos/logros/agustin_sepulveda_trophy_1.jpg"},
       { piloto: "Valentino Manta", cat: "Junior Max - Gran Final Argentina", fecha: "12-10-2025", img: "fotos/logros/valentino_manta_trophy_1.jpg" }
     ];
 
-    const singleSVG = `
-      <svg viewBox="0 0 100 100" style="width:100%; height:100%; overflow: visible;">
-        <polygon points="50,50 50,0 61.7,36" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 50,0 38.3,36" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 97.5,36 61.7,36" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 97.5,36 68.5,57" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 79.3,95 68.5,57" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 79.3,95 50,75" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 20.7,95 50,75" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 20.7,95 31.5,57" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 2.5,36 31.5,57" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
-        <polygon points="50,50 2.5,36 38.3,36" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+    const starNav = document.getElementById('t-stars-nav');
+    const carousel = document.getElementById('t-carousel-wrapper');
+    const progress = document.getElementById('t-timeline-progress');
+    const markers = document.getElementById('t-timeline-markers');
+
+    if (!starNav || !carousel) return;
+
+    // Timeline Boundaries
+    const startDate = new Date(2022, 0, 1).getTime(); // Enero 1, 2022
+    const endDate = Date.now(); // Hoy
+    const totalDuration = endDate - startDate;
+
+    // Parser DD-MM-YYYY a milisegundos
+    function parseDate(dateStr) {
+      const [d, m, y] = dateStr.split('-');
+      return new Date(y, m - 1, d).getTime();
+    }
+
+    // Calcula el % en la línea de tiempo
+    function getPercent(dateStr) {
+      const time = parseDate(dateStr);
+      let pct = ((time - startDate) / totalDuration) * 100;
+      return Math.max(0, Math.min(100, pct)); // Evita que se salga del 0-100%
+    }
+
+    // SVG Estrella Plana (2D)
+    const flatStarSVG = `
+      <svg viewBox="0 0 24 24" class="flat-star">
+        <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" stroke-linejoin="round"/>
       </svg>
     `;
 
-    const extrudedStarHTML = `
-      <div class="star-layer" style="transform: translateZ(4px); filter: drop-shadow(0 0 5px var(--star-shadow));">${singleSVG}</div>
-      <div class="star-layer" style="transform: translateZ(2px); filter: brightness(0.6);">${singleSVG}</div>
-      <div class="star-layer" style="transform: translateZ(0px); filter: brightness(0.3);">${singleSVG}</div>
-      <div class="star-layer" style="transform: translateZ(-2px); filter: brightness(0.1);">${singleSVG}</div>
-    `;
+    // 1. Construir las estrellas selectoras y los slides de fotos
+    const slideElements = [];
+    const starElements = [];
 
-    logros.forEach(data => {
-      const row = document.createElement('div');
-      row.className = 'trayectoria-row';
+    logros.forEach((data, index) => {
+      // Estrella
+      const starWrap = document.createElement('div');
+      starWrap.innerHTML = flatStarSVG;
+      const starNode = starWrap.firstElementChild;
+      
+      starNode.addEventListener('click', () => {
+        goToSlide(index);
+      });
+      starNav.appendChild(starNode);
+      starElements.push(starNode);
+
+      // Slide 
+      const slide = document.createElement('div');
+      slide.className = 't-slide';
 
       const imgHtml = data.img 
-        ? `<img src="${data.img}" class="t-row-bg-img" alt="${data.piloto}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-           <div class="t-row-no-img" style="display:none;">Foto próximamente</div>`
-        : `<div class="t-row-no-img">Foto próximamente</div>`;
+        ? `<img src="${data.img}" class="t-slide-bg" alt="${data.piloto}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+           <div class="t-slide-no-img" style="display:none;">Foto próximamente</div>`
+        : `<div class="t-slide-no-img">Foto próximamente</div>`;
 
-      const extraDescHtml = data.desc ? `<p class="t-extra">${data.desc}</p>` : '';
+      const extraDescHtml = data.desc ? `<p class="t-slide-desc">${data.desc}</p>` : '';
 
-      row.innerHTML = `
-        <div class="t-row-img-frame">
-           ${imgHtml}
-           <div class="t-row-overlay"></div>
-           <div class="t-row-star-container">
-              <div class="star-node">${extrudedStarHTML}</div>
-           </div>
-           
-           <div class="t-row-title-vertical">${data.piloto}</div>
-           
-           <div class="t-row-desc">
-              <span class="t-fecha">${data.fecha}</span>
-              <h3 class="t-piloto">${data.piloto}</h3>
-              <span class="t-cat">${data.cat}</span>
-              ${extraDescHtml}
-           </div>
+      slide.innerHTML = `
+        ${imgHtml}
+        <div class="t-slide-info-box">
+          <div class="t-slide-fecha">${data.fecha}</div>
+          <h3 class="t-slide-piloto">${data.piloto}</h3>
+          <div class="t-slide-cat">${data.cat}</div>
+          ${extraDescHtml}
         </div>
       `;
-      container.appendChild(row);
+      carousel.appendChild(slide);
+      slideElements.push(slide);
     });
-  });
 
-  /* ====================================================
-     Lógica de Selección y Cierre Universal (Global Click)
-  ==================================================== */
-  document.addEventListener('click', (e) => {
-    // 1. TRAYECTORIA
-    const isTrayectoriaRow = e.target.closest('.trayectoria-row');
-    document.querySelectorAll('.trayectoria-row').forEach(el => {
-      if (el !== isTrayectoriaRow) el.classList.remove('active');
-    });
-    if (isTrayectoriaRow) {
-      isTrayectoriaRow.classList.toggle('active');
+    // 2. Construir marcas de la Línea de Tiempo (Años y Meses)
+    const currentYear = new Date().getFullYear();
+    for (let y = 2022; y <= currentYear; y++) {
+      // Marca de Año
+      let yTime = new Date(y, 0, 1).getTime();
+      if (yTime <= endDate) {
+        let pct = ((yTime - startDate) / totalDuration) * 100;
+        let tick = document.createElement('div');
+        tick.className = 'tl-tick-year';
+        tick.style.left = `${pct}%`;
+        tick.innerHTML = `<span>${y}</span>`;
+        markers.appendChild(tick);
+      }
+      
+      // Marcas de Meses (Pequeñas)
+      for (let m = 1; m < 12; m++) {
+        let mTime = new Date(y, m, 1).getTime();
+        if (mTime <= endDate) {
+           let mPct = ((mTime - startDate) / totalDuration) * 100;
+           let mTick = document.createElement('div');
+           mTick.className = 'tl-tick-month';
+           mTick.style.left = `${mPct}%`;
+           markers.appendChild(mTick);
+        }
+      }
     }
 
-    // 2. AM MEDIA
+    // 3. Lógica del Autoplay
+    let currentIndex = 0;
+    let autoplayTimer;
+
+    function goToSlide(index) {
+      // Reset estilos viejos
+      slideElements[currentIndex].classList.remove('active');
+      starElements[currentIndex].classList.remove('active');
+
+      currentIndex = index;
+
+      // Aplicar estilos nuevos
+      slideElements[currentIndex].classList.add('active');
+      starElements[currentIndex].classList.add('active');
+
+      // Mover línea verde
+      const targetPct = getPercent(logros[currentIndex].fecha);
+      progress.style.width = `${targetPct}%`;
+
+      // Reiniciar timer (pausa de 7 seg tras clic)
+      resetTimer();
+    }
+
+    function nextSlide() {
+      let next = (currentIndex + 1) % logros.length;
+      goToSlide(next);
+    }
+
+    function resetTimer() {
+      clearInterval(autoplayTimer);
+      autoplayTimer = setInterval(nextSlide, AUTOPLAY_INTERVAL_MS);
+    }
+
+    // Iniciar con la primera imagen
+    if (logros.length > 0) {
+      goToSlide(0);
+    }
+
+  });
+
+
+  /* ====================================================
+     Lógica de Selección y Cierre Universal (Global Click para Pilotos y Media)
+  ==================================================== */
+  document.addEventListener('click', (e) => {
+    // AM MEDIA
     const isAccItem = e.target.closest('.acc-item');
     document.querySelectorAll('.acc-item').forEach(el => {
       if (el !== isAccItem) {
@@ -1869,7 +1914,7 @@
       }
     }
 
-    // 3. PILOTOS
+    // PILOTOS
     const isPilotoCard = e.target.closest('.piloto-card');
     document.querySelectorAll('.piloto-card').forEach(el => {
       if (el !== isPilotoCard) el.classList.remove('active');
