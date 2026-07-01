@@ -414,13 +414,12 @@
   .split-logger-container {
     display: flex;
     width: 100%;
-    height: 380px;
-    border-radius: 12px;
-    border: 1px solid rgba(57,255,20,0.3);
+    max-width: 800px;
+    aspect-ratio: 1.6; /* Proporción ideal para los Data Loggers */
+    margin: 2rem auto 3rem;
+    border: none;
+    background: transparent;
     overflow: hidden;
-    margin: 3.5rem auto 3rem;
-    max-width: 900px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   }
   .split-half {
     flex: 1;
@@ -428,41 +427,57 @@
     transition: flex 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     cursor: pointer;
     overflow: hidden;
-    background: var(--dark3);
+    background: transparent;
   }
   .split-half:hover {
     flex: 1.6;
   }
   .split-alfano {
-    border-right: 2px solid var(--green);
+    border-right: 2px solid var(--green); /* Línea verde divisora exacta en el centro */
   }
-  .split-half img {
-    width: 100%;
+  
+  /* Las imágenes tienen 200% de ancho del contenedor padre (la mitad).
+     Esto asegura que se corten matemáticamente por su centro exacto sin importar cómo se escale el flex */
+  .split-alfano img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200%;
     height: 100%;
-    object-fit: cover;
+    max-width: none;
+    object-fit: contain;
+    object-position: center;
     transition: transform 0.6s ease, filter 0.6s ease;
     filter: brightness(0.6) grayscale(20%);
+    transform-origin: 50% 50%;
   }
+  .split-aim img {
+    position: absolute;
+    top: 0;
+    left: -100%; /* Desplaza la imagen a la izquierda para mostrar solo la mitad derecha */
+    width: 200%;
+    height: 100%;
+    max-width: none;
+    object-fit: contain;
+    object-position: center;
+    transition: transform 0.6s ease, filter 0.6s ease;
+    filter: brightness(0.6) grayscale(20%);
+    transform-origin: 50% 50%;
+  }
+  
+  /* Resalte en hover */
   .split-half:hover img {
     transform: scale(1.05);
     filter: brightness(1) grayscale(0%);
   }
   
-  /* Anclaje de imágenes para que se unan en el centro */
-  .split-alfano img { object-position: left center; }
-  .split-aim img { object-position: right center; }
-
   .split-logger-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0,0.4);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background 0.6s ease;
-  }
-  .split-half:hover .split-logger-overlay {
-    background: rgba(0,0,0,0.1);
+    pointer-events: none; /* Para que el ratón interactúe fluidamente con la caja */
   }
   .curso-device {
     font-family: 'Bebas Neue', sans-serif;
@@ -708,7 +723,6 @@
     .t-slide-piloto { font-size: 1.8rem; }
     .t-slide-cat { font-size: 0.9rem; }
     
-    .split-logger-container { height: 220px; }
     .curso-device { font-size: 1.5rem; }
     
     /* El paneo en móviles cambia a movimiento horizontal (Left to Right) */
@@ -790,7 +804,6 @@
   </div>
 </section>
 
-<!-- ================= NUEVA SECCIÓN TRAYECTORIA CARRUSEL + TIMELINE ================= -->
 <section id="trayectoria-vitrina">
   <div class="trayectoria-header reveal">
     <div class="section-label">Palmarés</div>
@@ -798,17 +811,12 @@
     <div class="green-line"></div>
   </div>
 
-  <!-- Contenedor superior de estrellas planas (Selector extendido al 100% del ancho) -->
   <div id="t-stars-nav" class="reveal">
-     <!-- Inyectado vía JS -->
-  </div>
+     </div>
 
-  <!-- Carrusel Ancho Total -->
   <div id="t-carousel-wrapper" class="reveal">
-     <!-- Slides inyectados vía JS -->
-  </div>
+     </div>
 
-  <!-- Línea de Tiempo Dinámica Inferior -->
   <div id="t-timeline-container" class="reveal">
     <div id="t-timeline-track">
       <div id="t-timeline-progress"></div>
@@ -816,8 +824,6 @@
     </div>
   </div>
 </section>
-<!-- ================= FIN SECCIÓN TRAYECTORIA ================= -->
-
 <section id="ingenieria" class="carbon">
   <div class="container">
     <div class="reveal">
@@ -918,7 +924,6 @@
       </div>
     </div>
 
-    <!-- ================= NUEVA VISTA SPLIT-SCREEN (DATA LOGGERS) ================= -->
     <div class="split-logger-container reveal">
       <div class="split-half split-alfano">
         <img src="fotos/logos/alfano-data-logger.png" alt="Alfano Data Logger">
@@ -933,8 +938,7 @@
         </div>
       </div>
     </div>
-    <!-- ================= FIN VISTA SPLIT-SCREEN ================= -->
-
+    
     <div class="reveal" style="background:var(--dark2); border:1px solid rgba(57,255,20,0.12); padding:2rem 2.5rem; display:flex; align-items:center; gap:2rem; flex-wrap:wrap; margin-bottom: 3rem;">
       <div style="flex:1; min-width:200px;">
         <div style="font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.75rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--green); margin-bottom:0.5rem;">¿Cómo funciona?</div>
@@ -1766,7 +1770,7 @@
   });
 
   /* ====================================================
-     Renderizado Inicial Media
+     Renderizado Inicial Media y Trayectoria
   ==================================================== */
   document.querySelectorAll('.acc-item').forEach(item => {
     const images = JSON.parse(item.getAttribute('data-images') || '[]');
@@ -1776,16 +1780,9 @@
     }
   });
 
-
-  /* ====================================================
-     LÓGICA CARRUSEL Y TIMELINE (TRAYECTORIA)
-  ==================================================== */
   document.addEventListener("DOMContentLoaded", () => {
-    // ----------------------------------------------------
-    // CONSTANTE DE TIEMPO: AQUÍ MODIFICAS LOS 7 SEGUNDOS
-    // (7000 milisegundos = 7 Segundos)
-    // ----------------------------------------------------
-    const AUTOPLAY_INTERVAL_MS = 7000;
+    const container = document.getElementById('trayectoria-list');
+    if (!container) return;
 
     const logros = [
       { piloto: "Martin Saa", cat: "Micro Max - Rotax Max Buenos Aires Otoño", fecha: "15-05-2022", img: "fotos/logros/martin_saa_trophy_1.jpg" },
@@ -1806,151 +1803,75 @@
       { piloto: "Valentino Manta", cat: "Junior Max - Gran Final Argentina", fecha: "12-10-2025", img: "fotos/logros/valentino_manta_trophy_1.jpg" }
     ];
 
-    const starNav = document.getElementById('t-stars-nav');
-    const carousel = document.getElementById('t-carousel-wrapper');
-    const progress = document.getElementById('t-timeline-progress');
-    const markers = document.getElementById('t-timeline-markers');
-
-    if (!starNav || !carousel) return;
-
-    // Timeline Boundaries
-    const startDate = new Date(2022, 0, 1).getTime(); // Enero 1, 2022
-    const endDate = Date.now(); // Hoy
-    const totalDuration = endDate - startDate;
-
-    // Parser DD-MM-YYYY a milisegundos
-    function parseDate(dateStr) {
-      const [d, m, y] = dateStr.split('-');
-      return new Date(y, m - 1, d).getTime();
-    }
-
-    // Calcula el % en la línea de tiempo
-    function getPercent(dateStr) {
-      const time = parseDate(dateStr);
-      let pct = ((time - startDate) / totalDuration) * 100;
-      return Math.max(0, Math.min(100, pct)); // Evita que se salga del 0-100%
-    }
-
-    // SVG Estrella Plana (2D)
-    const flatStarSVG = `
-      <svg viewBox="0 0 24 24" class="flat-star">
-        <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26" stroke-linejoin="round"/>
+    const singleSVG = `
+      <svg viewBox="0 0 100 100" style="width:100%; height:100%; overflow: visible;">
+        <polygon points="50,50 50,0 61.7,36" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 50,0 38.3,36" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 97.5,36 61.7,36" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 97.5,36 68.5,57" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 79.3,95 68.5,57" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 79.3,95 50,75" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 20.7,95 50,75" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 20.7,95 31.5,57" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 2.5,36 31.5,57" fill="var(--star-fill-light)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
+        <polygon points="50,50 2.5,36 38.3,36" fill="var(--star-fill-dark)" stroke="var(--star-stroke)" stroke-width="1.5" stroke-linejoin="round"/>
       </svg>
     `;
 
-    // 1. Construir las estrellas selectoras y los slides de fotos
-    const slideElements = [];
-    const starElements = [];
+    const extrudedStarHTML = `
+      <div class="star-layer" style="transform: translateZ(4px); filter: drop-shadow(0 0 5px var(--star-shadow));">${singleSVG}</div>
+      <div class="star-layer" style="transform: translateZ(2px); filter: brightness(0.6);">${singleSVG}</div>
+      <div class="star-layer" style="transform: translateZ(0px); filter: brightness(0.3);">${singleSVG}</div>
+      <div class="star-layer" style="transform: translateZ(-2px); filter: brightness(0.1);">${singleSVG}</div>
+    `;
 
-    logros.forEach((data, index) => {
-      // Estrella
-      const starWrap = document.createElement('div');
-      starWrap.innerHTML = flatStarSVG;
-      const starNode = starWrap.firstElementChild;
-      
-      starNode.addEventListener('click', () => {
-        goToSlide(index);
-      });
-      starNav.appendChild(starNode);
-      starElements.push(starNode);
-
-      // Slide 
-      const slide = document.createElement('div');
-      slide.className = 't-slide';
+    logros.forEach(data => {
+      const row = document.createElement('div');
+      row.className = 'trayectoria-row';
 
       const imgHtml = data.img 
-        ? `<img src="${data.img}" class="t-slide-bg" alt="${data.piloto}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-           <div class="t-slide-no-img" style="display:none;">Foto próximamente</div>`
-        : `<div class="t-slide-no-img">Foto próximamente</div>`;
+        ? `<img src="${data.img}" class="t-row-bg-img" alt="${data.piloto}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+           <div class="t-row-no-img" style="display:none;">Foto próximamente</div>`
+        : `<div class="t-row-no-img">Foto próximamente</div>`;
 
-      const extraDescHtml = data.desc ? `<p class="t-slide-desc">${data.desc}</p>` : '';
+      const extraDescHtml = data.desc ? `<p class="t-extra">${data.desc}</p>` : '';
 
-      slide.innerHTML = `
-        ${imgHtml}
-        <div class="t-slide-info-box">
-          <div class="t-slide-fecha">${data.fecha}</div>
-          <h3 class="t-slide-piloto">${data.piloto}</h3>
-          <div class="t-slide-cat">${data.cat}</div>
-          ${extraDescHtml}
+      row.innerHTML = `
+        <div class="t-row-img-frame">
+           ${imgHtml}
+           <div class="t-row-overlay"></div>
+           <div class="t-row-star-container">
+              <div class="star-node">${extrudedStarHTML}</div>
+           </div>
+           
+           <div class="t-row-title-vertical">${data.piloto}</div>
+           
+           <div class="t-row-desc">
+              <span class="t-fecha">${data.fecha}</span>
+              <h3 class="t-piloto">${data.piloto}</h3>
+              <span class="t-cat">${data.cat}</span>
+              ${extraDescHtml}
+           </div>
         </div>
       `;
-      carousel.appendChild(slide);
-      slideElements.push(slide);
+      container.appendChild(row);
     });
-
-    // 2. Construir marcas de la Línea de Tiempo (Años y Meses)
-    const currentYear = new Date().getFullYear();
-    for (let y = 2022; y <= currentYear; y++) {
-      // Marca de Año
-      let yTime = new Date(y, 0, 1).getTime();
-      if (yTime <= endDate) {
-        let pct = ((yTime - startDate) / totalDuration) * 100;
-        let tick = document.createElement('div');
-        tick.className = 'tl-tick-year';
-        tick.style.left = `${pct}%`;
-        tick.innerHTML = `<span>${y}</span>`;
-        markers.appendChild(tick);
-      }
-      
-      // Marcas de Meses (Pequeñas)
-      for (let m = 1; m < 12; m++) {
-        let mTime = new Date(y, m, 1).getTime();
-        if (mTime <= endDate) {
-           let mPct = ((mTime - startDate) / totalDuration) * 100;
-           let mTick = document.createElement('div');
-           mTick.className = 'tl-tick-month';
-           mTick.style.left = `${mPct}%`;
-           markers.appendChild(mTick);
-        }
-      }
-    }
-
-    // 3. Lógica del Autoplay
-    let currentIndex = 0;
-    let autoplayTimer;
-
-    function goToSlide(index) {
-      // Reset estilos viejos
-      slideElements[currentIndex].classList.remove('active');
-      starElements[currentIndex].classList.remove('active');
-
-      currentIndex = index;
-
-      // Aplicar estilos nuevos
-      slideElements[currentIndex].classList.add('active');
-      starElements[currentIndex].classList.add('active');
-
-      // Mover línea verde
-      const targetPct = getPercent(logros[currentIndex].fecha);
-      progress.style.width = `${targetPct}%`;
-
-      // Reiniciar timer (pausa de 7 seg tras clic)
-      resetTimer();
-    }
-
-    function nextSlide() {
-      let next = (currentIndex + 1) % logros.length;
-      goToSlide(next);
-    }
-
-    function resetTimer() {
-      clearInterval(autoplayTimer);
-      autoplayTimer = setInterval(nextSlide, AUTOPLAY_INTERVAL_MS);
-    }
-
-    // Iniciar con la primera imagen
-    if (logros.length > 0) {
-      goToSlide(0);
-    }
-
   });
 
-
   /* ====================================================
-     Lógica de Selección y Cierre Universal (Global Click para Pilotos y Media)
+     Lógica de Selección y Cierre Universal (Global Click)
   ==================================================== */
   document.addEventListener('click', (e) => {
-    // AM MEDIA
+    // 1. TRAYECTORIA
+    const isTrayectoriaRow = e.target.closest('.trayectoria-row');
+    document.querySelectorAll('.trayectoria-row').forEach(el => {
+      if (el !== isTrayectoriaRow) el.classList.remove('active');
+    });
+    if (isTrayectoriaRow) {
+      isTrayectoriaRow.classList.toggle('active');
+    }
+
+    // 2. AM MEDIA
     const isAccItem = e.target.closest('.acc-item');
     document.querySelectorAll('.acc-item').forEach(el => {
       if (el !== isAccItem) {
@@ -2001,7 +1922,7 @@
       }
     }
 
-    // PILOTOS
+    // 3. PILOTOS
     const isPilotoCard = e.target.closest('.piloto-card');
     document.querySelectorAll('.piloto-card').forEach(el => {
       if (el !== isPilotoCard) el.classList.remove('active');
@@ -2015,3 +1936,5 @@
 
 </body>
 </html>
+
+}
