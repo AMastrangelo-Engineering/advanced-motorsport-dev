@@ -1,4 +1,4 @@
-<!-- v2.18 -->
+<!-- v2.19 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -437,38 +437,24 @@
     border-right: 2px solid var(--green); /* Línea verde divisora exacta en el centro */
   }
   
-  /* Las imágenes tienen 200% de ancho del contenedor padre (la mitad).
-     Esto asegura que se corten matemáticamente por su centro exacto sin importar cómo se escale el flex */
-  .split-alfano img {
+  /* La imagen se muestra siempre completa dentro de su panel (sin recortes).
+     object-fit: contain + height: 100% aseguran que ambos data loggers
+     se vean a la misma altura, sin importar cómo cambie el ancho del panel al hacer hover. */
+  .split-half img {
     position: absolute;
     top: 0;
     left: 0;
-    width: 200%;
+    width: 100%;
     height: 100%;
     max-width: none;
     object-fit: contain;
     object-position: center;
-    transition: transform 0.6s ease, filter 0.6s ease;
+    transition: filter 0.6s ease;
     filter: brightness(0.6) grayscale(20%);
-    transform-origin: 50% 50%;
-  }
-  .split-aim img {
-    position: absolute;
-    top: 0;
-    left: -100%; /* Desplaza la imagen a la izquierda para mostrar solo la mitad derecha */
-    width: 200%;
-    height: 100%;
-    max-width: none;
-    object-fit: contain;
-    object-position: center;
-    transition: transform 0.6s ease, filter 0.6s ease;
-    filter: brightness(0.6) grayscale(20%);
-    transform-origin: 50% 50%;
   }
   
-  /* Resalte en hover */
+  /* Resalte en hover: solo cambia el brillo/color, sin zoom que recorte el PNG */
   .split-half:hover img {
-    transform: scale(1.05);
     filter: brightness(1) grayscale(0%);
   }
   
