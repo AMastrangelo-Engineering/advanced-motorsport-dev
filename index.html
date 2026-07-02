@@ -1,4 +1,4 @@
-<!-- v2.19 -->
+<!-- v2.20 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -268,7 +268,7 @@
   }
 
   .t-slide.active .t-slide-bg {
-    animation: panDesktop 15s ease-in-out infinite alternate;
+    animation: panDesktop var(--pan-duration, 7000ms) ease-in-out forwards;
   }
   
   .t-slide-no-img {
@@ -721,7 +721,7 @@
     
     /* El paneo en móviles cambia a movimiento horizontal (Left to Right) */
     .t-slide.active .t-slide-bg {
-       animation: panMobile 15s ease-in-out infinite alternate;
+       animation: panMobile var(--pan-duration, 7000ms) ease-in-out forwards;
     }
   }
 
@@ -1923,6 +1923,10 @@
       starElements[currentIndex].classList.remove('active');
 
       currentIndex = index;
+
+      // Sincroniza la duración del paneo de la imagen con el intervalo real de autoplay,
+      // así el desplazamiento vertical siempre termina justo cuando cambia el logro
+      slideElements[currentIndex].style.setProperty('--pan-duration', `${AUTOPLAY_INTERVAL_MS}ms`);
 
       // Aplicar estilos nuevos
       slideElements[currentIndex].classList.add('active');
